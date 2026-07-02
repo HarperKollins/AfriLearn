@@ -1,0 +1,9 @@
+.git
+.gitignore
+.env
+tmp
+*.log
+*.exe
+.idea
+.vscode
+README.md

@@ -1,7 +1,7 @@
 # AfriLearn Curriculum API
 
 > The foundational data layer for African educational technology & AI Tutors.  
-> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NUC CCMAS (100L-500L) · NBTE Polytechnics (ND/HND) · Developer API Keys · AI Tutor LLM Prompts · Interactive Swagger UI (`/docs`)** — structured as APIs.
+> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NUC CCMAS (100L-500L) · NBTE Polytechnics (ND/HND) · Developer API Keys · AI Tutor LLM Prompts · Interactive Swagger UI (`/docs`) · Docker & Cloud Ready** — structured as APIs.
 
 ---
 
@@ -24,38 +24,37 @@ curl -H "X-API-Key: afr_live_demo_9f8e2b7a" http://localhost:8080/api/v1/curricu
 
 ## Quick Start
 
-### 1. Prerequisites
-- Go 1.21+
-- PostgreSQL (or free [Neon.tech](https://neon.tech) cloud DB)
-
-### 2. Clone and install
+### Local Go Setup
 ```bash
 git clone https://github.com/HarperKollins/AfriLearn.git
 cd eduscrape
 go mod tidy
-```
-
-### 3. Configure environment
-```bash
 cp .env.example .env
-# Edit .env with your database connection string (DB_URL)
-```
-
-### 4. Deploy database schema
-```bash
 go run cmd/migrate/main.go
-```
-
-### 5. Ingest curriculum datasets
-```bash
 go run cmd/seeder/main.go
-```
-
-### 6. Start the API server & open docs
-```bash
 go run cmd/api/main.go
 # Open http://localhost:8080/docs in your browser
 ```
+
+---
+
+## 🐳 Docker & Cloud Production Deployment
+
+### 1. Run with Docker Compose
+```bash
+docker-compose up -d --build
+```
+
+### 2. Build & Run Docker Image Manually
+```bash
+docker build -t afrilearn-api .
+docker run -p 8080:8080 -e DB_URL="<your_neon_db_url>" afrilearn-api
+```
+
+### 3. 1-Click Deploy on Render.com
+1. Connect your GitHub repository (`HarperKollins/AfriLearn`) to [Render.com](https://render.com).
+2. Render automatically detects `render.yaml` and deploys the web service with free SSL!
+3. Add your `DB_URL` environment variable under Render dashboard settings.
 
 ---
 
@@ -102,4 +101,5 @@ http://localhost:8080/api/v1
 - **PostgreSQL (Neon)** — Relational storage with JSON array batching optimization (`pq.Array`)
 - **API Key Auth** — In-memory cached key authentication & background usage metering (`internal/middleware/auth.go`)
 - **OpenAPI 3.0 Docs** — Embedded Swagger UI documentation playground (`internal/handlers/docs.go`)
+- **Docker Multi-Stage** — Minimal Alpine production container (`Dockerfile`, `docker-compose.yml`, `render.yaml`)
 - **Scraper Engine** — Modular `Scraper` interface pattern (`internal/scraper`)

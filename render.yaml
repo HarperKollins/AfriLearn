@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: afrilearn-curriculum-api
+    env: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: APP_ENV
+        value: production
+      - key: DB_URL
+        sync: false
+    healthCheckPath: /health
