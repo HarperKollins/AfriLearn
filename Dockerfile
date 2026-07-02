@@ -3,6 +3,9 @@ FROM golang:1.21-alpine AS builder
 
 WORKDIR /app
 
+# Enable automatic Go toolchain resolution
+ENV GOTOOLCHAIN=auto
+
 # Install git and SSL certs
 RUN apk add --no-cache git ca-certificates
 
