@@ -5,7 +5,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- ============================================================
--- EXAM BOARDS & INSTITUTIONS (WAEC, JAMB, NECO, BECE, NERDC, NUC, UNILAG, etc.)
+-- EXAM BOARDS & INSTITUTIONS (WAEC, JAMB, NECO, BECE, NERDC, NUC, EBSU, FUNAI, UNEC, UNN, etc.)
 -- ============================================================
 CREATE TABLE IF NOT EXISTS exam_boards (
     id          UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -100,26 +100,34 @@ CREATE INDEX IF NOT EXISTS idx_subtopics_topic      ON subtopics(topic_id);
 CREATE INDEX IF NOT EXISTS idx_objectives_subtopic  ON learning_objectives(subtopic_id);
 
 -- ============================================================
--- SEED DATA - Exam Boards & Higher Ed Bodies / Institutions
+-- SEED DATA - Exam Boards & Higher Ed Bodies / Nigerian Universities
 -- ============================================================
 INSERT INTO exam_boards (slug, name, full_name, country, description, website) VALUES
+    -- Secondary Exam Boards
     ('bece',    'BECE',    'Basic Education Certificate Examination',   'Nigeria', 'The national exam for Junior Secondary School graduation (JSS3).', 'https://neco.gov.ng'),
     ('waec',    'WAEC',    'West African Examinations Council',         'Nigeria', 'The body that conducts the WASSCE across West Africa.',            'https://waec.org.ng'),
     ('jamb',    'JAMB',    'Joint Admissions and Matriculation Board',  'Nigeria', 'The body responsible for university entrance exams in Nigeria.',     'https://jamb.gov.ng'),
     ('neco',    'NECO',    'National Examinations Council',             'Nigeria', 'The national body that conducts SSCE and BECE exams in Nigeria.',   'https://neco.gov.ng'),
     ('nerdc',   'NERDC',   'Nigerian Educational Research & Dev Council','Nigeria', 'The statutory body that develops the national curriculum.',       'https://nerdc.gov.ng'),
+
+    -- Tertiary Regulatory Bodies
     ('nuc',     'NUC',     'National Universities Commission (CCMAS)',  'Nigeria', 'Regulates university education and sets the 70% core CCMAS standards for all 270+ Nigerian universities.', 'https://nuc.edu.ng'),
     ('nbte',    'NBTE',    'National Board for Technical Education',    'Nigeria', 'Regulates polytechnic and monotechnic ND/HND education in Nigeria.', 'https://nbte.gov.ng'),
+
+    -- South-East & Federal/State Universities
+    ('ebsu',    'EBSU',    'Ebonyi State University',                   'Nigeria', 'State university located in Abakaliki, Ebonyi State.',            'https://ebsu.edu.ng'),
+    ('funai',   'AE-FUNAI','Alex Ekwueme Federal University, Ndufu-Alike','Nigeria','Federal university located in Ikwo, Ebonyi State.',             'https://funai.edu.ng'),
+    ('unn',     'UNN',     'University of Nigeria, Nsukka',             'Nigeria', 'First autonomous federal university located in Nsukka, Enugu State.', 'https://unn.edu.ng'),
+    ('unec',    'UNEC',    'University of Nigeria, Enugu Campus',       'Nigeria', 'Enugu campus of UNN housing Law, Business Admin, and Medical Sciences.', 'https://unn.edu.ng'),
     ('unilag',  'UNILAG',  'University of Lagos',                       'Nigeria', 'Premier federal university in Yaba, Lagos State.',                'https://unilag.edu.ng'),
     ('ui',      'UI',      'University of Ibadan',                      'Nigeria', 'Nigeria''s first federal university located in Ibadan, Oyo State.', 'https://ui.edu.ng'),
     ('oau',     'OAU',     'Obafemi Awolowo University',                'Nigeria', 'Premier federal university located in Ile-Ife, Osun State.',       'https://oauife.edu.ng'),
-    ('unn',     'UNN',     'University of Nigeria, Nsukka',             'Nigeria', 'First autonomous federal university located in Nsukka, Enugu State.', 'https://unn.edu.ng'),
     ('abu',     'ABU',     'Ahmadu Bello University',                   'Nigeria', 'Premier federal university located in Zaria, Kaduna State.',        'https://abu.edu.ng'),
     ('covenant','CU',      'Covenant University',                       'Nigeria', 'Leading private university located in Ota, Ogun State.',          'https://covenantuniversity.edu.ng')
 ON CONFLICT (slug) DO NOTHING;
 
 -- ============================================================
--- SEED DATA - Subjects & University Degree Programs (All 17 NUC Disciplines)
+-- SEED DATA - Subjects & University Degree Programs
 -- ============================================================
 INSERT INTO subjects (slug, name, description, category) VALUES
     -- Senior Secondary Subjects

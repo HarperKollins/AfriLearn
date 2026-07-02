@@ -53,7 +53,7 @@ func main() {
 		scraper.NewJAMBEconomicsScraper(),
 		scraper.NewJAMBGovernmentScraper(),
 
-		// NUC CCMAS (University Higher Education Degrees - 100L to 500L)
+		// NUC CCMAS (University National Core Standards - 100L to 500L)
 		scraper.NewNUCComputerScienceScraper(),
 		scraper.NewNUCMedicineScraper(),
 		scraper.NewNUCElectricalEngScraper(),
@@ -63,6 +63,12 @@ func main() {
 		scraper.NewNUCNursingScraper(),
 		scraper.NewNUCMechanicalEngScraper(),
 		scraper.NewNUCMassCommScraper(),
+
+		// Individual University Curricula (EBSU, AE-FUNAI, UNEC, UNN)
+		scraper.NewEBSUComputerScienceScraper(),
+		scraper.NewFUNAIComputerScienceScraper(),
+		scraper.NewUNECLawScraper(),
+		scraper.NewUNNComputerScienceScraper(),
 	}
 
 	for i, s := range scrapers {
@@ -73,7 +79,7 @@ func main() {
 	}
 
 	log.Println("------------------------------------------------------------")
-	log.Println("✅ All 28 Curricula Ingested Successfully!")
+	log.Println("✅ All 32 Curricula Ingested Successfully!")
 	log.Println()
 	log.Println("   BECE (JSS1-3):")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/bece/mathematics")
@@ -87,14 +93,15 @@ func main() {
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/jamb/mathematics")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/jamb/physics")
 	log.Println()
-	log.Println("   NUC CCMAS University Degrees (100L - 500L):")
+	log.Println("   NUC CCMAS National Degrees (100L - 500L):")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/computer-science")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/medicine-and-surgery")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/electrical-engineering")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/law")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/accounting")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/business-administration")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/nursing-science")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/mechanical-engineering")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/mass-communication")
+	log.Println()
+	log.Println("   Individual University Curricula (EBSU, FUNAI, UNEC, UNN):")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/ebsu/computer-science")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/funai/computer-science")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/unec/law")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/unn/computer-science")
 }

@@ -1,7 +1,7 @@
 # AfriLearn Curriculum API
 
 > The foundational data layer for African educational technology.  
-> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NUC CCMAS University Degrees (100L-500L)** — structured as APIs.
+> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NUC CCMAS (100L-500L) · Nigerian Universities (EBSU, FUNAI, UNEC, UNN)** — structured as APIs.
 
 ---
 
@@ -10,6 +10,12 @@
 An infrastructure API that exposes official Nigerian/African curriculum data as clean, structured JSON endpoints. Built for EdTech developers, AI tutor companies, universities, schools, and educational platforms.
 
 ```
+# Specific University Curricula (EBSU, FUNAI, UNEC, UNN)
+GET /api/v1/curriculum/ebsu/computer-science
+GET /api/v1/curriculum/funai/computer-science
+GET /api/v1/curriculum/unec/law
+GET /api/v1/curriculum/unn/computer-science
+
 # University Higher Education (NUC CCMAS Standards - 100L to 500L)
 GET /api/v1/curriculum/nuc/computer-science
 GET /api/v1/curriculum/nuc/medicine-and-surgery
@@ -84,24 +90,30 @@ http://localhost:8080/api/v1
 | GET | `/api/v1/` | API info and endpoint index |
 | GET | `/api/v1/subjects` | List all 43 subjects & degree programs across all 17 NUC disciplines |
 | GET | `/api/v1/subjects/:slug` | Get subject by slug |
-| GET | `/api/v1/exam-boards` | List all 13 exam boards & higher ed institutions (BECE, WAEC, JAMB, NUC, UNILAG, UI, OAU, UNN, ABU, Covenant) |
+| GET | `/api/v1/exam-boards` | List all 16 exam boards & universities (BECE, WAEC, JAMB, NUC, EBSU, FUNAI, UNEC, UNN, UNILAG, UI, OAU, ABU, Covenant) |
 | GET | `/api/v1/curriculum/:board/:subject` | Full curriculum tree with topics, subtopics & objectives |
 | GET | `/api/v1/search?q=:query` | Search topics across all exam boards and university degrees |
 
 ---
 
-## Currently Available Curricula (28 Live Datasets)
+## Currently Available Curricula (32 Live Datasets)
 
-### University Higher Education (NUC CCMAS Standards - 100L to 500L)
-- **B.Sc. Computer Science** (`nuc/computer-science`) — 100L to 400L (COS 101, COS 102, CSC 201, CSC 301 Data Structures, CSC 302 DBMS, CSC 399 SIWES, CSC 401 AI, CSC 499 Thesis)
-- **M.B.B.S. Medicine & Surgery** (`nuc/medicine-and-surgery`) — 100L to 500L Pre-Med, Anatomy/Biochemistry (1st Professional MBBS), Pathology/Pharmacology (2nd MBBS), Clinical Rotations & MDCN Board
-- **B.Eng. Electrical & Electronic Engineering** (`nuc/electrical-engineering`) — 100L to 500L Circuit Theory, Electromagnetics, Microprocessors, Power Systems, Telecommunications, COREN Design
-- **LL.B. Bachelor of Laws** (`nuc/law`) — 100L to 500L Legal System, Constitutional Law, Contracts, Criminal Law, Torts, Land Law, Equity & Trusts, Evidence, CAMA Company Law, LL.B. Thesis
-- **B.Sc. Accounting** (`nuc/accounting`) — 100L to 400L Financial Accounting, Cost Accounting, Management Accounting, Auditing, IFRS, Taxation & ICAN Standards
-- **B.Sc. Business Administration** (`nuc/business-administration`) — 100L to 400L Principles of Management, Organizational Behavior, Marketing, HRM, Strategic Management & CSR
-- **B.N.Sc. Nursing Science** (`nuc/nursing-science`) — 100L to 500L Anatomy, Physiology, Fundamentals of Nursing, Medical-Surgical Nursing, Midwifery, Mental Health & Community Health Nursing
-- **B.Eng. Mechanical Engineering** (`nuc/mechanical-engineering`) — 100L to 500L Thermodynamics, Fluid Mechanics, Machine Design, Heat Transfer, Mechatronics, CAD/CAM & COREN Design
-- **B.Sc. Mass Communication** (`nuc/mass-communication`) — 100L to 400L Mass Comm History, News Writing, Public Relations, Advertising, Radio/TV Broadcasting, Media Law & Digital Media
+### Nigerian Universities (EBSU, FUNAI, UNEC, UNN)
+- **Ebonyi State University, Abakaliki (EBSU)** — `ebsu/computer-science` (Faculty of Physical Sciences)
+- **Alex Ekwueme Federal University, Ndufu-Alike (AE-FUNAI)** — `funai/computer-science` (Faculty of Science)
+- **University of Nigeria, Enugu Campus (UNEC)** — `unec/law` (Faculty of Law, Enugu Campus)
+- **University of Nigeria, Nsukka (UNN)** — `unn/computer-science` (Faculty of Physical Sciences, Nsukka)
+
+### National Universities Commission (NUC CCMAS Standards - 100L to 500L)
+- **B.Sc. Computer Science** (`nuc/computer-science`)
+- **M.B.B.S. Medicine & Surgery** (`nuc/medicine-and-surgery`)
+- **B.Eng. Electrical & Electronic Engineering** (`nuc/electrical-engineering`)
+- **LL.B. Bachelor of Laws** (`nuc/law`)
+- **B.Sc. Accounting** (`nuc/accounting`)
+- **B.Sc. Business Administration** (`nuc/business-administration`)
+- **B.N.Sc. Nursing Science** (`nuc/nursing-science`)
+- **B.Eng. Mechanical Engineering** (`nuc/mechanical-engineering`)
+- **B.Sc. Mass Communication** (`nuc/mass-communication`)
 
 ### Junior Secondary School (BECE / JSS1 - JSS3)
 - **BECE Mathematics** (`bece/mathematics`)
