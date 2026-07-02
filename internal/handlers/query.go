@@ -523,12 +523,21 @@ func orchestrateLLMPrompt(intent ParsedIntent) (map[string]interface{}, error) {
 		return nil, fmt.Errorf("no curriculum found for %s/%s", intent.Board, intent.Subject)
 	}
 
+	var levelRule string
+	switch strings.ToLower(intent.Board) {
+	case "bece", "nerdc":
+		levelRule = "Explain concepts strictly at Junior Secondary (JSS1-JSS3) depth. Use simple word equations (e.g., Carbon dioxide + Water -> Glucose + Oxygen) and avoid advanced balanced chemical formulas unless requested."
+	case "waec", "neco", "jamb":
+		levelRule = "Explain concepts at Senior Secondary (SS1-SS3 / UTME) depth using standard scientific notation, balanced equations, and exam marking rules."
+	default:
+		levelRule = "Explain concepts matching university / polytechnic degree standards."
+	}
+
 	sysPrompt := fmt.Sprintf(
-		"You are an expert AI Tutor for %s (%s) %s. "+
-			"You have comprehensive knowledge of all %d official topics. "+
-			"Teach clearly, use Nigerian examples, and follow the official curriculum order: %s.",
-		boardFull, strings.ToUpper(intent.Board), subjectName,
-		len(topicNames), strings.Join(topicNames[:min(10, len(topicNames))], ", "),
+		"You are an expert AI Tutor for %s (%s) %s (%s level). %s "+
+			"Teach clearly, use relevant Nigerian examples, and follow the official syllabus topics: %s.",
+		boardFull, strings.ToUpper(intent.Board), subjectName, level, levelRule,
+		strings.Join(topicNames[:min(10, len(topicNames))], ", "),
 	)
 
 	return map[string]interface{}{

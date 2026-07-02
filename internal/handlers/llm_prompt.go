@@ -152,13 +152,22 @@ func GetLLMPrompt(c *gin.Context) {
 		}
 	}
 
-	// 5. Generate LLM Prompt & Context Window
+	// Level-specific instruction rules
+	var levelRule string
+	switch strings.ToLower(board.Slug) {
+	case "bece", "nerdc":
+		levelRule = "Stricly use simple, beginner-friendly explanations appropriate for Junior Secondary (JSS1-JSS3) students. Use simple word equations (e.g. Carbon Dioxide + Water -> Glucose + Oxygen) instead of balanced chemical formulas unless explicitly requested. Focus on foundational concepts without overloading with senior secondary or university details."
+	case "waec", "neco", "jamb":
+		levelRule = "Provide comprehensive Senior Secondary (SS1-SS3 / UTME) depth aligned with WAEC/NECO marking schemes. Use standard scientific notation, balanced chemical equations, and exam-style practice questions."
+	default:
+		levelRule = "Provide advanced university-level / polytechnic-level depth matching the official NUC/NBTE degree benchmarks."
+	}
+
 	systemPrompt := fmt.Sprintf(
 		"You are an expert AI Tutor specialized in the official %s (%s) %s curriculum (%s level). "+
 			"Your primary instruction is to explain concepts, solve practice problems, and guide students strictly aligned with "+
-			"the official %s syllabus standards. Always provide clear, step-by-step explanations with relevant African examples "+
-			"and past examination practice questions where applicable.",
-		board.Name, board.FullName, subject.Name, curr.Level, board.Name,
+			"the official %s syllabus standards. %s Always provide clear, step-by-step explanations with relevant African examples.",
+		board.Name, board.FullName, subject.Name, curr.Level, board.Name, levelRule,
 	)
 
 	var topicsSummaryBuilder strings.Builder
