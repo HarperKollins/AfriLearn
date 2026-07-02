@@ -66,49 +66,130 @@ type ParsedIntent struct {
 }
 
 var boardKeywords = map[string]string{
-	"waec": "waec", "west african": "waec",
-	"jamb": "jamb", "utme": "jamb", "joint admission": "jamb",
-	"bece": "bece", "jss": "bece", "junior": "bece",
-	"neco": "neco",
-	"nuc":  "nuc", "university degree": "nuc", "degree": "nuc",
-	"nbte": "nbte", "polytechnic": "nbte",
+	// Explicit board names
+	"waec": "waec", "west african": "waec", "ssce": "waec", "o level": "waec", "o-level": "waec",
+	"jamb": "jamb", "utme": "jamb", "joint admission": "jamb", "post utme": "jamb",
+	"bece": "bece", "jss": "bece", "junior secondary": "bece", "junior school": "bece",
+	"neco": "neco", "neco ssce": "neco",
+	"nuc": "nuc", "university degree": "nuc", "university level": "nuc",
+	"nbte": "nbte", "polytechnic": "nbte", "poly": "nbte",
 	"yabatech": "yabatech", "yaba": "yabatech",
 	"imt": "imt", "institute of management": "imt",
 	"unilag": "unilag", "university of lagos": "unilag",
 	"unn": "unn", "university of nigeria nsukka": "unn",
 	"unec": "unec", "university of nigeria enugu": "unec",
-	"ebsu": "ebsu", "ebonyi": "ebsu",
-	"funai": "funai", "funai ae-funai": "funai",
+	"ebsu": "ebsu", "ebonyi state university": "ebsu",
+	"funai": "funai", "ae-funai": "funai", "federal university ndufu-alike": "funai",
 	"futo": "futo", "federal university of technology owerri": "futo",
 	"oau": "oau", "obafemi awolowo": "oau",
 	"ui": "ui", "university of ibadan": "ui",
 	"abu": "abu", "ahmadu bello": "abu",
 	"covenant": "covenant",
+	// Grade level keywords → infer board
+	"jss1": "bece", "jss2": "bece", "jss3": "bece",
+	"js1": "bece", "js2": "bece", "js3": "bece",
+	"junior secondary school": "bece",
+	"ss1": "waec", "ss2": "waec", "ss3": "waec",
+	"senior secondary": "waec", "senior school": "waec",
+	"secondary school": "waec", "secondary education": "waec",
+	"in secondary": "waec", "high school": "waec",
+	"university": "nuc", "undergraduate": "nuc", "100 level": "nuc",
+	"200 level": "nuc", "300 level": "nuc", "400 level": "nuc",
+	"ND": "nbte", "HND": "nbte", "national diploma": "nbte",
+}
+
+// topicToSubject maps specific topic keywords directly to a subject slug.
+// This is the key fix — if a user says "photosynthesis", we KNOW it's biology.
+var topicToSubject = map[string]string{
+	// Biology
+	"photosynthesis": "biology", "osmosis": "biology", "diffusion": "biology",
+	"mitosis": "biology", "meiosis": "biology", "cell division": "biology",
+	"respiration": "biology", "aerobic": "biology", "anaerobic": "biology",
+	"genetics": "biology", "dna": "biology", "rna": "biology", "chromosome": "biology",
+	"evolution": "biology", "natural selection": "biology", "adaptation": "biology",
+	"ecosystem": "biology", "food chain": "biology", "food web": "biology",
+	"chlorophyll": "biology", "chloroplast": "biology", "nucleus": "biology",
+	"enzyme": "biology", "protein synthesis": "biology", "amino acid": "biology",
+	"excretion": "biology", "kidney": "biology", "liver": "biology",
+	"virus": "biology", "bacteria": "biology", "fungi": "biology", "pathogen": "biology",
+	"cell membrane": "biology", "cell wall": "biology", "cytoplasm": "biology",
+	"taxonomy": "biology", "kingdom": "biology", "classification": "biology",
+	"blood group": "biology", "blood type": "biology", "immune": "biology",
+	"hormone": "biology", "nervous system": "biology", "reflex": "biology",
+	// Physics
+	"newton": "physics", "newtons law": "physics", "law of motion": "physics",
+	"velocity": "physics", "acceleration": "physics", "momentum": "physics",
+	"gravity": "physics", "gravitational": "physics", "projectile": "physics",
+	"electricity": "physics", "electric field": "physics", "ohm": "physics",
+	"magnetism": "physics", "magnetic field": "physics", "electromagnetic": "physics",
+	"wave": "physics", "sound wave": "physics", "light wave": "physics",
+	"refraction": "physics", "reflection": "physics", "lens": "physics",
+	"thermodynamics": "physics", "heat capacity": "physics", "temperature": "physics",
+	"nuclear": "physics", "radioactive": "physics", "fission": "physics", "fusion": "physics",
+	"pressure": "physics", "boyle's law": "physics", "charles law": "physics",
+	"energy": "physics", "kinetic energy": "physics", "potential energy": "physics",
+	"power": "physics", "work done": "physics", "force": "physics",
+	// Chemistry
+	"acid": "chemistry", "base": "chemistry", "alkali": "chemistry", "pH": "chemistry",
+	"titration": "chemistry", "neutralization": "chemistry",
+	"periodic table": "chemistry", "atomic number": "chemistry", "isotope": "chemistry",
+	"electrolysis": "chemistry", "electrode": "chemistry", "cathode": "chemistry",
+	"hydrocarbon": "chemistry", "alkane": "chemistry", "alkene": "chemistry",
+	"oxidation": "chemistry", "reduction": "chemistry", "redox": "chemistry",
+	"chemical bond": "chemistry", "ionic bond": "chemistry", "covalent bond": "chemistry",
+	"mole": "chemistry", "avogadro": "chemistry", "stoichiometry": "chemistry",
+	"salt": "chemistry", "solubility": "chemistry", "concentration": "chemistry",
+	// Mathematics
+	"quadratic": "mathematics", "quadratic equation": "mathematics",
+	"algebra": "mathematics", "simultaneous": "mathematics",
+	"trigonometry": "mathematics", "sine": "mathematics", "cosine": "mathematics",
+	"calculus": "mathematics", "differentiation": "mathematics", "integration": "mathematics",
+	"statistics": "mathematics", "probability": "mathematics", "mean": "mathematics",
+	"geometry": "mathematics", "circle theorem": "mathematics", "pythagoras": "mathematics",
+	"logarithm": "mathematics", "indices": "mathematics", "surds": "mathematics",
+	"matrix": "mathematics", "vector": "mathematics", "coordinate": "mathematics",
+	"set theory": "mathematics", "venn diagram": "mathematics",
+	"fraction": "mathematics", "percentage": "mathematics", "ratio": "mathematics",
+	// Economics
+	"supply": "economics", "demand": "economics", "price elasticity": "economics",
+	"gdp": "economics", "inflation": "economics", "unemployment": "economics",
+	"monopoly": "economics", "oligopoly": "economics", "market structure": "economics",
+	"fiscal": "economics", "monetary policy": "economics", "budget": "economics",
+	// Government
+	"democracy": "government", "constitution": "government", "federalism": "government",
+	"legislature": "government", "judiciary": "government", "executive": "government",
+	"election": "government", "sovereignty": "government", "human rights": "government",
+	// Computer Science
+	"algorithm": "computer-science", "programming": "computer-science", "coding": "computer-science",
+	"database": "computer-science", "binary": "computer-science", "software": "computer-science",
+	"hardware": "computer-science", "operating system": "computer-science",
+	"data structure": "computer-science", "internet": "computer-science",
 }
 
 var subjectKeywords = map[string]string{
-	"math":        "mathematics", "maths": "mathematics", "mathematics": "mathematics",
-	"physics":     "physics",
-	"chemistry":   "chemistry", "chem": "chemistry",
-	"biology":     "biology", "bio": "biology",
-	"economics":   "economics", "econ": "economics",
-	"government":  "government", "govt": "government",
-	"english":     "english-studies", "english studies": "english-studies", "literature": "literature-in-english",
+	"math": "mathematics", "maths": "mathematics", "mathematics": "mathematics",
+	"physics": "physics", "physical science": "physics",
+	"chemistry": "chemistry", "chem": "chemistry",
+	"biology": "biology", "bio": "biology", "life science": "biology",
+	"economics": "economics", "econ": "economics",
+	"government": "government", "govt": "government", "civic": "government",
+	"english": "english-studies", "english language": "english-studies",
+	"literature": "literature-in-english", "lit in english": "literature-in-english",
 	"computer science": "computer-science", "cs": "computer-science", "computing": "computer-science",
-	"law":         "law",
-	"accounting":  "accounting", "accounts": "accounting",
-	"business":    "business-administration", "business admin": "business-administration",
-	"nursing":     "nursing-science",
-	"medicine":    "medicine-surgery", "mbbs": "medicine-surgery", "medical": "medicine-surgery",
-	"mechanical":  "mechanical-engineering", "mechanical engineering": "mechanical-engineering",
-	"electrical":  "electrical-engineering", "electrical engineering": "electrical-engineering",
-	"petroleum":   "petroleum-engineering",
-	"mass comm":   "mass-communication", "mass communication": "mass-communication", "journalism": "mass-communication",
+	"law": "law", "legal": "law",
+	"accounting": "accounting", "accounts": "accounting",
+	"business administration": "business-administration", "business admin": "business-administration",
+	"nursing": "nursing-science",
+	"medicine": "medicine-surgery", "mbbs": "medicine-surgery", "medical": "medicine-surgery",
+	"mechanical engineering": "mechanical-engineering",
+	"electrical engineering": "electrical-engineering",
+	"petroleum engineering": "petroleum-engineering",
+	"mass communication": "mass-communication", "mass comm": "mass-communication", "journalism": "mass-communication",
 	"social studies": "social-studies",
 	"basic science": "basic-science",
 	"basic technology": "basic-technology",
 	"business studies": "business-studies",
-	"science lab":  "science-laboratory-technology", "slt": "science-laboratory-technology",
+	"science laboratory": "science-laboratory-technology", "slt": "science-laboratory-technology",
 	"computer engineering": "computer-engineering-technology",
 }
 
@@ -142,20 +223,32 @@ func parseIntent(text string, existing *ParsedIntent) ParsedIntent {
 		intent.Raw = text
 	}
 
-	// Extract board
+	// Extract board — longest match wins (so "junior secondary school" beats "junior")
 	if intent.Board == "" {
+		bestLen := 0
 		for keyword, board := range boardKeywords {
-			if strings.Contains(lower, keyword) {
+			if strings.Contains(lower, keyword) && len(keyword) > bestLen {
 				intent.Board = board
-				break
+				bestLen = len(keyword)
 			}
 		}
 	}
 
-	// Extract subject
+	// Extract subject — first try explicit subject names (longest match)
 	if intent.Subject == "" {
 		bestLen := 0
 		for keyword, subject := range subjectKeywords {
+			if strings.Contains(lower, keyword) && len(keyword) > bestLen {
+				intent.Subject = subject
+				bestLen = len(keyword)
+			}
+		}
+	}
+
+	// If still no subject, infer from topic keywords (photosynthesis → biology etc.)
+	if intent.Subject == "" {
+		bestLen := 0
+		for keyword, subject := range topicToSubject {
 			if strings.Contains(lower, keyword) && len(keyword) > bestLen {
 				intent.Subject = subject
 				bestLen = len(keyword)
@@ -172,21 +265,43 @@ func parseIntent(text string, existing *ParsedIntent) ParsedIntent {
 			}
 		}
 		if intent.Action == "" {
-			intent.Action = "curriculum" // default
+			intent.Action = "curriculum"
 		}
+	}
+
+	// Default board if missing and subject is present
+	if intent.Board == "" && intent.Subject != "" {
+		intent.Board = defaultBoard(intent)
 	}
 
 	return intent
 }
 
+// defaultBoard returns a sensible default board based on intent signals
+func defaultBoard(intent ParsedIntent) string {
+	// If we have a subject that's clearly university-level, default to nuc
+	universitySubjects := map[string]bool{
+		"computer-science": true, "law": true, "medicine-surgery": true,
+		"accounting": true, "business-administration": true, "nursing-science": true,
+		"mechanical-engineering": true, "electrical-engineering": true,
+		"petroleum-engineering": true, "mass-communication": true,
+	}
+	if universitySubjects[intent.Subject] {
+		return "nuc"
+	}
+	// Default to waec for secondary school subjects
+	return "waec"
+}
+
 func missingFields(intent ParsedIntent) []string {
+	// We NEVER ask for both simultaneously — just fill in smart defaults
+	// Only ask if we truly cannot make a reasonable guess
 	var missing []string
-	if intent.Board == "" {
-		missing = append(missing, "Which exam board or institution? (e.g. WAEC, JAMB, BECE, NECO, NUC University, YABATECH, UNILAG, FUTO)")
-	}
 	if intent.Subject == "" {
-		missing = append(missing, "Which subject or degree programme? (e.g. Mathematics, Physics, Computer Science, Law, Medicine)")
+		// Board we can default; subject we genuinely need
+		missing = append(missing, "Which subject? (e.g. Biology, Physics, Maths, Chemistry, Economics, Government, Literature)")
 	}
+	// Board missing but subject known → use defaultBoard(), don't ask
 	return missing
 }
 
