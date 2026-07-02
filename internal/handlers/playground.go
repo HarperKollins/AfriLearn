@@ -160,13 +160,14 @@ func ServePlayground(c *gin.Context) {
         <div class="config-group">
             <label>AI Provider</label>
             <select id="aiProvider" onchange="updateProviderHint()">
-                <option value="openai">OpenAI (GPT-4 / GPT-4o)</option>
+                <option value="groq" selected>⚡ Groq (Llama 3.3 70B - Free & Ultra Fast)</option>
+                <option value="openai">OpenAI (GPT-4o / GPT-4o-mini)</option>
                 <option value="gemini">Google Gemini</option>
                 <option value="anthropic">Anthropic Claude</option>
             </select>
             <label>AI API Key</label>
-            <input type="password" id="aiKey" placeholder="sk-... or AIza...">
-            <label style="margin-top:0.25rem;font-size:0.72rem;color:var(--muted)" id="providerHint">Get key: platform.openai.com</label>
+            <input type="password" id="aiKey" placeholder="gsk_... or sk-... or AIza...">
+            <label style="margin-top:0.25rem;font-size:0.72rem;color:var(--muted)" id="providerHint">Get free key: console.groq.com</label>
         </div>
 
         <hr>
@@ -335,6 +336,7 @@ function afriHeaders() {
 
 function updateProviderHint() {
     const hints = {
+        groq: 'Get free key: console.groq.com',
         openai: 'Get key: platform.openai.com',
         gemini: 'Get key: aistudio.google.com',
         anthropic: 'Get key: console.anthropic.com'
@@ -618,7 +620,41 @@ async function sendChat() {
     let aiAnswer = '';
     const provider = getProvider();
     try {
-        if (provider === 'openai') {
+        if (provider === 'groq') {
+            let r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + aiKey },
+                body: JSON.stringify({
+                    model: 'llama-3.3-70b-versatile',
+                    messages: [
+                        { role: 'system', content: systemPrompt },
+                        { role: 'user', content: question }
+                    ],
+                    temperature: 0.7,
+                    max_tokens: 1024
+                })
+            });
+            let d = await r.json();
+            // Fallback model if 70b is busy
+            if (!d.choices && d.error) {
+                r = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + aiKey },
+                    body: JSON.stringify({
+                        model: 'llama3-8b-8192',
+                        messages: [
+                            { role: 'system', content: systemPrompt },
+                            { role: 'user', content: question }
+                        ],
+                        temperature: 0.7,
+                        max_tokens: 1024
+                    })
+                });
+                d = await r.json();
+            }
+            if (d.choices && d.choices[0].message) aiAnswer = d.choices[0].message.content;
+            else aiAnswer = '⚠️ Groq Error: ' + JSON.stringify(d.error || d);
+        } else if (provider === 'openai') {
             const r = await fetch('https://api.openai.com/v1/chat/completions', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + aiKey },
