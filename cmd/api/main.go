@@ -54,6 +54,7 @@ func main() {
 	router.GET("/", handlers.ServeDeveloperPortal)
 	router.GET("/health", handlers.HealthCheck)
 	router.GET("/portal", handlers.ServeDeveloperPortal)
+	router.GET("/playground", handlers.ServePlayground)
 	router.GET("/docs", handlers.ServeSwaggerUI)
 	router.GET("/swagger", handlers.ServeSwaggerUI)
 	router.GET("/docs/openapi.json", handlers.ServeOpenAPISpec)
