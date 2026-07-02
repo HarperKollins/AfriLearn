@@ -23,6 +23,18 @@ var (
 	cacheMutex sync.RWMutex
 )
 
+// UpdateKeyCache adds/updates a key in the in-memory cache
+func UpdateKeyCache(apiKey, devName, email, tier string, isActive bool) {
+	cacheMutex.Lock()
+	defer cacheMutex.Unlock()
+	keyCache[apiKey] = CachedKey{
+		DeveloperName: devName,
+		Email:         email,
+		Tier:          tier,
+		IsActive:      isActive,
+	}
+}
+
 // APIKeyAuth middleware validates X-API-Key header or api_key query param
 func APIKeyAuth() gin.HandlerFunc {
 	return func(c *gin.Context) {

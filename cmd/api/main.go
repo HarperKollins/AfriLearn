@@ -50,22 +50,31 @@ func main() {
 		c.Next()
 	})
 
-	// ── Health check & Interactive Swagger Docs ──────────────────────────────
+	// ── Public Web Routes (Health, Portal Dashboard, Swagger Docs) ────────────
 	router.GET("/health", handlers.HealthCheck)
+	router.GET("/portal", handlers.ServeDeveloperPortal)
 	router.GET("/docs", handlers.ServeSwaggerUI)
 	router.GET("/swagger", handlers.ServeSwaggerUI)
 	router.GET("/docs/openapi.json", handlers.ServeOpenAPISpec)
 
-	// ── API v1 routes (protected with APIKeyAuth) ────────────────────────────
+	// ── API v1 routes ─────────────────────────────────────────────────────────
 	v1 := router.Group("/api/v1")
-	v1.Use(middleware.APIKeyAuth())
+	{
+		// Unprotected API Key generation for self-service portal
+		v1.POST("/keys/generate", handlers.GenerateAPIKey)
+	}
+
+	// Protected API v1 endpoints (Require/validate X-API-Key)
+	v1Protected := router.Group("/api/v1")
+	v1Protected.Use(middleware.APIKeyAuth())
 	{
 		// Root info
-		v1.GET("/", func(c *gin.Context) {
+		v1Protected.GET("/", func(c *gin.Context) {
 			c.JSON(200, gin.H{
 				"service":     "AfriLearn Curriculum API",
 				"version":     "v1",
 				"description": "African Curriculum Infrastructure — BECE, WAEC, JAMB, NUC University Degrees, NBTE Polytechnics",
+				"portal_url":  "http://localhost:8080/portal",
 				"docs_url":    "http://localhost:8080/docs",
 				"authentication": gin.H{
 					"header":      "X-API-Key",
@@ -73,12 +82,13 @@ func main() {
 					"demo_key":    "afr_live_demo_9f8e2b7a",
 				},
 				"endpoints": gin.H{
-					"subjects":   "GET /api/v1/subjects",
-					"subject":    "GET /api/v1/subjects/:slug",
-					"boards":     "GET /api/v1/exam-boards",
-					"curriculum": "GET /api/v1/curriculum/:board/:subject",
-					"llm_prompt": "GET /api/v1/curriculum/:board/:subject/llm-prompt",
-					"search":     "GET /api/v1/search?q=<query>",
+					"subjects":     "GET /api/v1/subjects",
+					"subject":      "GET /api/v1/subjects/:slug",
+					"boards":       "GET /api/v1/exam-boards",
+					"curriculum":   "GET /api/v1/curriculum/:board/:subject",
+					"llm_prompt":   "GET /api/v1/curriculum/:board/:subject/llm-prompt",
+					"search":       "GET /api/v1/search?q=<query>",
+					"generate_key": "POST /api/v1/keys/generate",
 				},
 				"example_calls": []string{
 					"/api/v1/curriculum/waec/mathematics",
@@ -91,18 +101,18 @@ func main() {
 		})
 
 		// Subjects
-		v1.GET("/subjects", handlers.GetAllSubjects)
-		v1.GET("/subjects/:slug", handlers.GetSubjectBySlug)
+		v1Protected.GET("/subjects", handlers.GetAllSubjects)
+		v1Protected.GET("/subjects/:slug", handlers.GetSubjectBySlug)
 
 		// Exam Boards & Institutions
-		v1.GET("/exam-boards", handlers.GetAllExamBoards)
+		v1Protected.GET("/exam-boards", handlers.GetAllExamBoards)
 
 		// Curriculum — main endpoints
-		v1.GET("/curriculum/:board/:subject", handlers.GetCurriculum)
-		v1.GET("/curriculum/:board/:subject/llm-prompt", handlers.GetLLMPrompt)
+		v1Protected.GET("/curriculum/:board/:subject", handlers.GetCurriculum)
+		v1Protected.GET("/curriculum/:board/:subject/llm-prompt", handlers.GetLLMPrompt)
 
 		// Search
-		v1.GET("/search", handlers.SearchTopics)
+		v1Protected.GET("/search", handlers.SearchTopics)
 	}
 
 	// Get port
@@ -113,6 +123,7 @@ func main() {
 
 	// Start server
 	log.Printf("🚀 AfriLearn Curriculum API running on http://localhost:%s\n", port)
+	log.Printf("🔑 Developer Portal:          http://localhost:%s/portal\n", port)
 	log.Printf("📖 Interactive Swagger Docs: http://localhost:%s/docs\n", port)
 	log.Printf("💚 Health Check:              http://localhost:%s/health\n", port)
 	log.Println("──────────────────────────────────────────────────────")

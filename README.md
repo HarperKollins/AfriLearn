@@ -1,7 +1,7 @@
 # AfriLearn Curriculum API
 
 > The foundational data layer for African educational technology & AI Tutors.  
-> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NUC CCMAS (100L-500L) · NBTE Polytechnics (ND/HND) · Developer API Keys · AI Tutor LLM Prompts · Interactive Swagger UI (`/docs`) · Docker & Cloud Ready** — structured as APIs.
+> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NUC CCMAS (100L-500L) · NBTE Polytechnics (ND/HND) · Developer Portal (`/portal`) · API Keys · AI Tutor LLM Prompts · Interactive Swagger UI (`/docs`) · Docker & Cloud Ready** — structured as APIs.
 
 ---
 
@@ -10,6 +10,9 @@
 An infrastructure API that exposes official Nigerian/African curriculum data as clean, structured JSON endpoints. Built for EdTech developers, AI tutor companies, universities, polytechnics, schools, and educational platforms.
 
 ```bash
+# 🔑 Self-Service Developer Portal Dashboard
+http://localhost:8080/portal
+
 # 📖 Interactive Swagger UI Playground
 http://localhost:8080/docs
 
@@ -33,7 +36,23 @@ cp .env.example .env
 go run cmd/migrate/main.go
 go run cmd/seeder/main.go
 go run cmd/api/main.go
-# Open http://localhost:8080/docs in your browser
+# Open http://localhost:8080/portal in your browser
+```
+
+---
+
+## 🔑 Developer Portal & Self-Service API Keys (`/portal`)
+
+Open `http://localhost:8080/portal` to access the Developer Portal UI:
+- Generate instant API keys for Free Tier (1,000 req/min) or Pro Partner Tier (50,000 req/min).
+- Copy API keys with 1 click.
+- Test endpoints live.
+
+Or generate via API:
+```bash
+curl -X POST http://localhost:8080/api/v1/keys/generate \
+  -H "Content-Type: application/json" \
+  -d '{"developer_name": "Acme EdTech", "email": "dev@acme.com", "tier": "free"}'
 ```
 
 ---
@@ -58,18 +77,6 @@ docker run -p 8080:8080 -e DB_URL="<your_neon_db_url>" afrilearn-api
 
 ---
 
-## Developer API Keys & Rate Tiers
-
-Pass your API key in the `X-API-Key` HTTP header or as an `api_key` query parameter.
-
-| Tier | API Key | Rate Limit | Description |
-|------|---------|------------|-------------|
-| **Public** | *(None)* | 60 req/min | Public access without header |
-| **Free** | `afr_live_demo_9f8e2b7a` | 1,000 req/min | Free Developer Key |
-| **Pro** | `afr_live_pro_8372bf91` | 50,000 req/min | Commercial EdTech Partner Key |
-
----
-
 ## Live API Reference
 
 ### Base URL
@@ -82,9 +89,11 @@ http://localhost:8080/api/v1
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/health` | API health check & DB status |
+| GET | `/portal` | **🔑 Self-Service Developer Portal Dashboard** |
 | GET | `/docs` | **📖 Interactive Swagger UI Playground** (OpenAPI 3.0) |
 | GET | `/docs/openapi.json` | OpenAPI 3.0 JSON specification |
 | GET | `/api/v1/` | API info and endpoint index |
+| POST | `/api/v1/keys/generate` | Generate self-service developer API key |
 | GET | `/api/v1/subjects` | List all 46 subjects, university degrees & polytechnic diploma programs |
 | GET | `/api/v1/subjects/:slug` | Get subject by slug |
 | GET | `/api/v1/exam-boards` | List all 22 exam boards, polytechnics & universities |
@@ -99,6 +108,7 @@ http://localhost:8080/api/v1
 - **Go (Golang)** — High-performance, low-latency compiled runtime
 - **Gin** — Fast HTTP framework with CORS & middleware
 - **PostgreSQL (Neon)** — Relational storage with JSON array batching optimization (`pq.Array`)
+- **Developer Portal** — Self-service dashboard and key generator (`internal/handlers/portal.go`)
 - **API Key Auth** — In-memory cached key authentication & background usage metering (`internal/middleware/auth.go`)
 - **OpenAPI 3.0 Docs** — Embedded Swagger UI documentation playground (`internal/handlers/docs.go`)
 - **Docker Multi-Stage** — Minimal Alpine production container (`Dockerfile`, `docker-compose.yml`, `render.yaml`)
