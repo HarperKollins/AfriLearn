@@ -455,6 +455,59 @@ function removeTyping() {
     if (el) el.remove();
 }
 
+// Topic keyword → subject slug mapping (client-side smart inference)
+const topicSubjectMap = {
+    // Biology
+    photosynthesis: 'biology', osmosis: 'biology', mitosis: 'biology', meiosis: 'biology',
+    respiration: 'biology', genetics: 'biology', ecosystem: 'biology', cell: 'biology',
+    dna: 'biology', rna: 'biology', enzyme: 'biology', diffusion: 'biology',
+    chlorophyll: 'biology', nucleus: 'biology', chromosome: 'biology', virus: 'biology',
+    bacteria: 'biology', fungi: 'biology', evolution: 'biology', excretion: 'biology',
+    // Mathematics
+    quadratic: 'mathematics', algebra: 'mathematics', trigonometry: 'mathematics',
+    calculus: 'mathematics', statistics: 'mathematics', probability: 'mathematics',
+    geometry: 'mathematics', differentiation: 'mathematics', integration: 'mathematics',
+    logarithm: 'mathematics', matrix: 'mathematics', vector: 'mathematics',
+    fraction: 'mathematics', equation: 'mathematics', arithmetic: 'mathematics',
+    // Physics
+    newton: 'physics', velocity: 'physics', acceleration: 'physics', momentum: 'physics',
+    gravity: 'physics', electricity: 'physics', magnetism: 'physics', optics: 'physics',
+    wave: 'physics', thermodynamics: 'physics', pressure: 'physics', energy: 'physics',
+    force: 'physics', motion: 'physics', nuclear: 'physics', electromagnetic: 'physics',
+    // Chemistry
+    acid: 'chemistry', base: 'chemistry', periodic: 'chemistry', element: 'chemistry',
+    compound: 'chemistry', reaction: 'chemistry', mole: 'chemistry', bond: 'chemistry',
+    titration: 'chemistry', electrolysis: 'chemistry', hydrocarbon: 'chemistry',
+    oxidation: 'chemistry', reduction: 'chemistry', salt: 'chemistry', alkane: 'chemistry',
+    // Economics
+    supply: 'economics', demand: 'economics', inflation: 'economics', gdp: 'economics',
+    market: 'economics', elasticity: 'economics', unemployment: 'economics',
+    monopoly: 'economics', fiscal: 'economics', monetary: 'economics',
+    // Government
+    democracy: 'government', constitution: 'government', federalism: 'government',
+    legislature: 'government', judiciary: 'government', executive: 'government',
+    election: 'government', sovereignty: 'government', citizenship: 'government',
+    // Literature / English
+    poem: 'literature-in-english', novel: 'literature-in-english', prose: 'literature-in-english',
+    shakespeare: 'literature-in-english', metaphor: 'literature-in-english', sonnet: 'literature-in-english',
+    grammar: 'english-studies', comprehension: 'english-studies', essay: 'english-studies',
+    // Computer Science
+    algorithm: 'computer-science', programming: 'computer-science', database: 'computer-science',
+    network: 'computer-science', binary: 'computer-science', software: 'computer-science',
+    hardware: 'computer-science', operating: 'computer-science', data: 'computer-science',
+    // Medicine
+    anatomy: 'medicine-surgery', physiology: 'medicine-surgery', pharmacology: 'medicine-surgery',
+    diagnosis: 'medicine-surgery', pathology: 'medicine-surgery', surgery: 'medicine-surgery',
+};
+
+function guessSubjectFromText(text) {
+    const lower = text.toLowerCase();
+    for (const [keyword, subject] of Object.entries(topicSubjectMap)) {
+        if (lower.includes(keyword)) return subject;
+    }
+    return null;
+}
+
 async function sendChat() {
     const input = document.getElementById('chatInput');
     const question = input.value.trim();
@@ -463,6 +516,9 @@ async function sendChat() {
     document.getElementById('sendBtn').disabled = true;
 
     addMsg('user', question);
+
+    // Client-side subject inference — tries to resolve subject before hitting AfriLearn
+    const guessedSubject = guessSubjectFromText(question);
 
     // Step 1: Call AfriLearn Query Brain
     addTyping();
@@ -481,18 +537,42 @@ async function sendChat() {
     }
     removeTyping();
 
-    // Handle clarification needed
+    // Handle clarification needed — but inject guessed subject if we have one
     if (afriData.data && afriData.data.needs_clarification) {
-        sessionId = afriData.data.session_id;
-        const qs = afriData.data.clarification_required || [];
-        let html = '<strong>🤔 I need a bit more info:</strong><br><br>';
-        html += qs.map(q => '• ' + q).join('<br>');
-        addMsg('assistant', html, [
-            { label: '💬 clarification', color: 'orange' },
-            { label: 'session: ' + sessionId, color: 'purple' }
-        ]);
-        document.getElementById('sendBtn').disabled = false;
-        return;
+        const remaining = afriData.data.clarification_required || [];
+
+        // If we could guess the subject from topic keywords, auto-retry with it
+        if (guessedSubject && remaining.some(q => q.toLowerCase().includes('subject'))) {
+            const sessionIdLocal = afriData.data.session_id;
+            addTyping();
+            try {
+                const body2 = { question: guessedSubject, session_id: sessionIdLocal };
+                const r2 = await fetch(BASE + '/api/v1/query', {
+                    method: 'POST', headers: afriHeaders(), body: JSON.stringify(body2)
+                });
+                afriData = await r2.json();
+            } catch(e) {}
+            removeTyping();
+            // If still needs clarification, fall through to show it
+            if (!afriData.data || afriData.data.needs_clarification) {
+                sessionId = afriData.data && afriData.data.session_id ? afriData.data.session_id : sessionIdLocal;
+                const qs = afriData.data && afriData.data.clarification_required ? afriData.data.clarification_required : remaining;
+                let html = '<strong>🤔 Just one more thing:</strong><br><br>';
+                html += qs.map(q => '• ' + q).join('<br>');
+                addMsg('assistant', html, [{ label: '💬 clarification', color: 'orange' }]);
+                document.getElementById('sendBtn').disabled = false;
+                return;
+            }
+        } else {
+            sessionId = afriData.data.session_id;
+            const qs = remaining;
+            let html = '<strong>🤔 Quick question:</strong><br><br>';
+            html += qs.map(q => '• ' + q).join('<br>');
+            html += '<br><br><em style="color:var(--muted);font-size:0.82rem">Tip: You can ask like "WAEC Biology" or "JAMB Physics" to skip this.</em>';
+            addMsg('assistant', html, [{ label: '💬 clarification', color: 'orange' }]);
+            document.getElementById('sendBtn').disabled = false;
+            return;
+        }
     }
 
     sessionId = null;
@@ -556,16 +636,31 @@ async function sendChat() {
             if (d.choices) aiAnswer = d.choices[0].message.content;
             else aiAnswer = '⚠️ OpenAI Error: ' + JSON.stringify(d.error || d);
         } else if (provider === 'gemini') {
-            const r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + aiKey, {
+            // Try gemini-2.0-flash first (latest free model), fall back to gemini-1.5-flash-latest
+            let geminiModel = 'gemini-2.0-flash';
+            let r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + geminiModel + ':generateContent?key=' + aiKey, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
                     contents: [{ parts: [{ text: systemPrompt + '\n\nStudent question: ' + question }] }],
-                    generationConfig: { temperature: 0.7, maxOutputTokens: 800 }
+                    generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
                 })
             });
-            const d = await r.json();
-            if (d.candidates) aiAnswer = d.candidates[0].content.parts[0].text;
+            let d = await r.json();
+            // Fallback to gemini-1.5-flash-latest if 2.0-flash not available
+            if (!d.candidates && d.error && d.error.code === 404) {
+                geminiModel = 'gemini-1.5-flash-latest';
+                r = await fetch('https://generativelanguage.googleapis.com/v1beta/models/' + geminiModel + ':generateContent?key=' + aiKey, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: systemPrompt + '\n\nStudent question: ' + question }] }],
+                        generationConfig: { temperature: 0.7, maxOutputTokens: 1024 }
+                    })
+                });
+                d = await r.json();
+            }
+            if (d.candidates && d.candidates[0].content) aiAnswer = d.candidates[0].content.parts[0].text;
             else aiAnswer = '⚠️ Gemini Error: ' + JSON.stringify(d.error || d);
         } else if (provider === 'anthropic') {
             const r = await fetch('https://api.anthropic.com/v1/messages', {
