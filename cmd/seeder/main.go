@@ -53,11 +53,16 @@ func main() {
 		scraper.NewJAMBEconomicsScraper(),
 		scraper.NewJAMBGovernmentScraper(),
 
-		// NUC CCMAS (University Higher Education Degrees)
+		// NUC CCMAS (University Higher Education Degrees - 100L to 500L)
 		scraper.NewNUCComputerScienceScraper(),
 		scraper.NewNUCMedicineScraper(),
 		scraper.NewNUCElectricalEngScraper(),
 		scraper.NewNUCLawScraper(),
+		scraper.NewNUCAccountingScraper(),
+		scraper.NewNUCBusinessAdminScraper(),
+		scraper.NewNUCNursingScraper(),
+		scraper.NewNUCMechanicalEngScraper(),
+		scraper.NewNUCMassCommScraper(),
 	}
 
 	for i, s := range scrapers {
@@ -68,7 +73,7 @@ func main() {
 	}
 
 	log.Println("------------------------------------------------------------")
-	log.Println("✅ All 23 Curricula Ingested Successfully!")
+	log.Println("✅ All 28 Curricula Ingested Successfully!")
 	log.Println()
 	log.Println("   BECE (JSS1-3):")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/bece/mathematics")
@@ -87,4 +92,9 @@ func main() {
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/medicine-and-surgery")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/electrical-engineering")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/law")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/accounting")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/business-administration")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/nursing-science")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/mechanical-engineering")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/mass-communication")
 }

@@ -10,11 +10,16 @@
 An infrastructure API that exposes official Nigerian/African curriculum data as clean, structured JSON endpoints. Built for EdTech developers, AI tutor companies, universities, schools, and educational platforms.
 
 ```
-# University Higher Education (NUC CCMAS Standards)
+# University Higher Education (NUC CCMAS Standards - 100L to 500L)
 GET /api/v1/curriculum/nuc/computer-science
 GET /api/v1/curriculum/nuc/medicine-and-surgery
 GET /api/v1/curriculum/nuc/electrical-engineering
 GET /api/v1/curriculum/nuc/law
+GET /api/v1/curriculum/nuc/accounting
+GET /api/v1/curriculum/nuc/business-administration
+GET /api/v1/curriculum/nuc/nursing-science
+GET /api/v1/curriculum/nuc/mechanical-engineering
+GET /api/v1/curriculum/nuc/mass-communication
 
 # Junior & Senior Secondary School
 GET /api/v1/curriculum/bece/mathematics
@@ -77,7 +82,7 @@ http://localhost:8080/api/v1
 |--------|----------|-------------|
 | GET | `/health` | API health check & DB status |
 | GET | `/api/v1/` | API info and endpoint index |
-| GET | `/api/v1/subjects` | List all 31 subjects & degree programs |
+| GET | `/api/v1/subjects` | List all 43 subjects & degree programs across all 17 NUC disciplines |
 | GET | `/api/v1/subjects/:slug` | Get subject by slug |
 | GET | `/api/v1/exam-boards` | List all 13 exam boards & higher ed institutions (BECE, WAEC, JAMB, NUC, UNILAG, UI, OAU, UNN, ABU, Covenant) |
 | GET | `/api/v1/curriculum/:board/:subject` | Full curriculum tree with topics, subtopics & objectives |
@@ -85,13 +90,18 @@ http://localhost:8080/api/v1
 
 ---
 
-## Currently Available Curricula (23 Live Datasets)
+## Currently Available Curricula (28 Live Datasets)
 
 ### University Higher Education (NUC CCMAS Standards - 100L to 500L)
 - **B.Sc. Computer Science** (`nuc/computer-science`) — 100L to 400L (COS 101, COS 102, CSC 201, CSC 301 Data Structures, CSC 302 DBMS, CSC 399 SIWES, CSC 401 AI, CSC 499 Thesis)
 - **M.B.B.S. Medicine & Surgery** (`nuc/medicine-and-surgery`) — 100L to 500L Pre-Med, Anatomy/Biochemistry (1st Professional MBBS), Pathology/Pharmacology (2nd MBBS), Clinical Rotations & MDCN Board
 - **B.Eng. Electrical & Electronic Engineering** (`nuc/electrical-engineering`) — 100L to 500L Circuit Theory, Electromagnetics, Microprocessors, Power Systems, Telecommunications, COREN Design
 - **LL.B. Bachelor of Laws** (`nuc/law`) — 100L to 500L Legal System, Constitutional Law, Contracts, Criminal Law, Torts, Land Law, Equity & Trusts, Evidence, CAMA Company Law, LL.B. Thesis
+- **B.Sc. Accounting** (`nuc/accounting`) — 100L to 400L Financial Accounting, Cost Accounting, Management Accounting, Auditing, IFRS, Taxation & ICAN Standards
+- **B.Sc. Business Administration** (`nuc/business-administration`) — 100L to 400L Principles of Management, Organizational Behavior, Marketing, HRM, Strategic Management & CSR
+- **B.N.Sc. Nursing Science** (`nuc/nursing-science`) — 100L to 500L Anatomy, Physiology, Fundamentals of Nursing, Medical-Surgical Nursing, Midwifery, Mental Health & Community Health Nursing
+- **B.Eng. Mechanical Engineering** (`nuc/mechanical-engineering`) — 100L to 500L Thermodynamics, Fluid Mechanics, Machine Design, Heat Transfer, Mechatronics, CAD/CAM & COREN Design
+- **B.Sc. Mass Communication** (`nuc/mass-communication`) — 100L to 400L Mass Comm History, News Writing, Public Relations, Advertising, Radio/TV Broadcasting, Media Law & Digital Media
 
 ### Junior Secondary School (BECE / JSS1 - JSS3)
 - **BECE Mathematics** (`bece/mathematics`)
