@@ -64,11 +64,17 @@ func main() {
 		scraper.NewNUCMechanicalEngScraper(),
 		scraper.NewNUCMassCommScraper(),
 
-		// Individual University Curricula (EBSU, AE-FUNAI, UNEC, UNN)
+		// Individual Universities (EBSU, AE-FUNAI, UNEC, UNN, UNILAG, FUTO)
 		scraper.NewEBSUComputerScienceScraper(),
 		scraper.NewFUNAIComputerScienceScraper(),
 		scraper.NewUNECLawScraper(),
 		scraper.NewUNNComputerScienceScraper(),
+		scraper.NewUNILAGComputerScienceScraper(),
+		scraper.NewFUTOPetroleumEngScraper(),
+
+		// NBTE Polytechnics (YABATECH, IMT Enugu)
+		scraper.NewYABATECHComputerEngScraper(),
+		scraper.NewIMTSLTScraper(),
 	}
 
 	for i, s := range scrapers {
@@ -79,7 +85,7 @@ func main() {
 	}
 
 	log.Println("------------------------------------------------------------")
-	log.Println("✅ All 32 Curricula Ingested Successfully!")
+	log.Println("✅ All 36 Curricula Ingested Successfully!")
 	log.Println()
 	log.Println("   BECE (JSS1-3):")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/bece/mathematics")
@@ -99,9 +105,15 @@ func main() {
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/electrical-engineering")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/law")
 	log.Println()
-	log.Println("   Individual University Curricula (EBSU, FUNAI, UNEC, UNN):")
+	log.Println("   Individual Universities (EBSU, FUNAI, UNEC, UNN, UNILAG, FUTO):")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/ebsu/computer-science")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/funai/computer-science")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/unec/law")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/unn/computer-science")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/unilag/computer-science")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/futo/petroleum-engineering")
+	log.Println()
+	log.Println("   NBTE Polytechnics (YABATECH, IMT Enugu):")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/yabatech/computer-engineering-tech")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/imt/science-laboratory-tech")
 }

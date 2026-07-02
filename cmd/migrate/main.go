@@ -113,22 +113,28 @@ func main() {
 			CREATE INDEX IF NOT EXISTS idx_objectives_subtopic  ON learning_objectives(subtopic_id)`},
 		{"Seed exam boards & institutions", `
 			INSERT INTO exam_boards (slug, name, full_name, country, description, website) VALUES
-				('bece',    'BECE',    'Basic Education Certificate Examination',   'Nigeria', 'The national exam for Junior Secondary School graduation (JSS3).', 'https://neco.gov.ng'),
-				('waec',    'WAEC',    'West African Examinations Council',         'Nigeria', 'Conducts WASSCE across West Africa.',                              'https://waec.org.ng'),
-				('jamb',    'JAMB',    'Joint Admissions and Matriculation Board',  'Nigeria', 'Responsible for university entrance exams in Nigeria.',            'https://jamb.gov.ng'),
-				('neco',    'NECO',    'National Examinations Council',             'Nigeria', 'Conducts SSCE and BECE exams in Nigeria.',                         'https://neco.gov.ng'),
-				('nerdc',   'NERDC',   'Nigerian Educational Research & Dev Council','Nigeria', 'Develops national secondary curricula.',                              'https://nerdc.gov.ng'),
-				('nuc',     'NUC',     'National Universities Commission (CCMAS)',  'Nigeria', 'Regulates university education and sets the 70% core CCMAS standards for all 270+ Nigerian universities.', 'https://nuc.edu.ng'),
-				('nbte',    'NBTE',    'National Board for Technical Education',    'Nigeria', 'Regulates polytechnic and monotechnic ND/HND education in Nigeria.', 'https://nbte.gov.ng'),
-				('ebsu',    'EBSU',    'Ebonyi State University',                   'Nigeria', 'State university located in Abakaliki, Ebonyi State.',            'https://ebsu.edu.ng'),
-				('funai',   'AE-FUNAI','Alex Ekwueme Federal University, Ndufu-Alike','Nigeria','Federal university located in Ikwo, Ebonyi State.',             'https://funai.edu.ng'),
-				('unn',     'UNN',     'University of Nigeria, Nsukka',             'Nigeria', 'First autonomous federal university located in Nsukka, Enugu State.', 'https://unn.edu.ng'),
-				('unec',    'UNEC',    'University of Nigeria, Enugu Campus',       'Nigeria', 'Enugu campus of UNN housing Law, Business Admin, and Medical Sciences.', 'https://unn.edu.ng'),
-				('unilag',  'UNILAG',  'University of Lagos',                       'Nigeria', 'Premier federal university in Yaba, Lagos State.',                'https://unilag.edu.ng'),
-				('ui',      'UI',      'University of Ibadan',                      'Nigeria', 'Nigeria''s first federal university located in Ibadan, Oyo State.', 'https://ui.edu.ng'),
-				('oau',     'OAU',     'Obafemi Awolowo University',                'Nigeria', 'Premier federal university located in Ile-Ife, Osun State.',       'https://oauife.edu.ng'),
-				('abu',     'ABU',     'Ahmadu Bello University',                   'Nigeria', 'Premier federal university located in Zaria, Kaduna State.',        'https://abu.edu.ng'),
-				('covenant','CU',      'Covenant University',                       'Nigeria', 'Leading private university located in Ota, Ogun State.',          'https://covenantuniversity.edu.ng')
+				('bece',        'BECE',        'Basic Education Certificate Examination',   'Nigeria', 'The national exam for Junior Secondary School graduation (JSS3).', 'https://neco.gov.ng'),
+				('waec',        'WAEC',        'West African Examinations Council',         'Nigeria', 'Conducts WASSCE across West Africa.',                              'https://waec.org.ng'),
+				('jamb',        'JAMB',        'Joint Admissions and Matriculation Board',  'Nigeria', 'Responsible for university entrance exams in Nigeria.',            'https://jamb.gov.ng'),
+				('neco',        'NECO',        'National Examinations Council',             'Nigeria', 'Conducts SSCE and BECE exams in Nigeria.',                         'https://neco.gov.ng'),
+				('nerdc',       'NERDC',       'Nigerian Educational Research & Dev Council','Nigeria', 'Develops national secondary curricula.',                              'https://nerdc.gov.ng'),
+				('nuc',         'NUC',         'National Universities Commission (CCMAS)',  'Nigeria', 'Regulates university education and sets the 70% core CCMAS standards for all 270+ Nigerian universities.', 'https://nuc.edu.ng'),
+				('nbte',        'NBTE',        'National Board for Technical Education',    'Nigeria', 'Regulates polytechnic and monotechnic ND/HND education in Nigeria.', 'https://nbte.gov.ng'),
+				('yabatech',    'YABATECH',    'Yaba College of Technology',               'Nigeria', 'Nigeria''s premier polytechnic located in Yaba, Lagos State.',    'https://yabatech.edu.ng'),
+				('imt',         'IMT',         'Institute of Management and Technology',   'Nigeria', 'Leading polytechnic located in Enugu, Enugu State.',             'https://imt.edu.ng'),
+				('auchi',       'AUCHI',       'Auchi Polytechnic',                        'Nigeria', 'Federal polytechnic located in Auchi, Edo State.',               'https://auchipoly.edu.ng'),
+				('fedpoly-nek', 'NEKEDEPOLY',  'Federal Polytechnic, Nekede',              'Nigeria', 'Federal polytechnic located in Owerri, Imo State.',              'https://fpno.edu.ng'),
+				('ebsu',        'EBSU',        'Ebonyi State University',                   'Nigeria', 'State university located in Abakaliki, Ebonyi State.',            'https://ebsu.edu.ng'),
+				('funai',       'AE-FUNAI',    'Alex Ekwueme Federal University, Ndufu-Alike','Nigeria','Federal university located in Ikwo, Ebonyi State.',             'https://funai.edu.ng'),
+				('unn',         'UNN',         'University of Nigeria, Nsukka',             'Nigeria', 'First autonomous federal university located in Nsukka, Enugu State.', 'https://unn.edu.ng'),
+				('unec',        'UNEC',        'University of Nigeria, Enugu Campus',       'Nigeria', 'Enugu campus of UNN housing Law, Business Admin, and Medical Sciences.', 'https://unn.edu.ng'),
+				('unilag',      'UNILAG',      'University of Lagos',                       'Nigeria', 'Premier federal university in Yaba, Lagos State.',                'https://unilag.edu.ng'),
+				('ui',          'UI',          'University of Ibadan',                      'Nigeria', 'Nigeria''s first federal university located in Ibadan, Oyo State.', 'https://ui.edu.ng'),
+				('oau',         'OAU',         'Obafemi Awolowo University',                'Nigeria', 'Premier federal university located in Ile-Ife, Osun State.',       'https://oauife.edu.ng'),
+				('abu',         'ABU',         'Ahmadu Bello University',                   'Nigeria', 'Premier federal university located in Zaria, Kaduna State.',        'https://abu.edu.ng'),
+				('futo',        'FUTO',        'Federal University of Technology, Owerri',  'Nigeria', 'Premier university of technology in Owerri, Imo State.',          'https://futo.edu.ng'),
+				('futa',        'FUTA',        'Federal University of Technology, Akure',   'Nigeria', 'Premier university of technology in Akure, Ondo State.',          'https://futa.edu.ng'),
+				('covenant',    'CU',          'Covenant University',                       'Nigeria', 'Leading private university located in Ota, Ogun State.',          'https://covenantuniversity.edu.ng')
 			ON CONFLICT (slug) DO NOTHING`},
 		{"Seed subjects & degree programs", `
 			INSERT INTO subjects (slug, name, description, category) VALUES
@@ -174,7 +180,10 @@ func main() {
 				('political-science',    'B.Sc. Political Science',              'NUC CCMAS degree program covering political theory, public admin, and international relations.',    'arts'),
 				('mass-communication',   'B.Sc. Mass Communication',             'NUC CCMAS degree program covering journalism, broadcasting, public relations, and digital media.',          'arts'),
 				('architecture',         'B.Sc. Architecture',                   'NUC CCMAS degree program covering architectural design studio, building construction, and CAD.',    'environment'),
-				('agriculture-degree',   'B.Agric. Agriculture',                 'NUC CCMAS degree program covering crop science, animal science, soil science, and ag-economics.',  'agriculture')
+				('agriculture-degree',   'B.Agric. Agriculture',                 'NUC CCMAS degree program covering crop science, animal science, soil science, and ag-economics.',  'agriculture'),
+				('computer-engineering-tech', 'ND/HND Computer Engineering Tech', 'NBTE polytechnic diploma program covering digital systems, hardware repair, microprocessors, and networking.', 'polytechnic'),
+				('science-laboratory-tech',   'ND/HND Science Laboratory Tech (SLT)', 'NBTE polytechnic diploma program covering analytical chemistry, biochemistry, and lab techniques.',  'polytechnic'),
+				('electrical-telecoms-tech',  'ND/HND Electrical & Telecoms Tech',   'NBTE polytechnic diploma program covering power electronics, telecommunications, and high voltage.',  'polytechnic')
 			ON CONFLICT (slug) DO NOTHING`},
 	}
 

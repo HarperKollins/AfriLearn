@@ -1,16 +1,22 @@
 # AfriLearn Curriculum API
 
 > The foundational data layer for African educational technology.  
-> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NUC CCMAS (100L-500L) · Nigerian Universities (EBSU, FUNAI, UNEC, UNN)** — structured as APIs.
+> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NUC CCMAS (100L-500L) · NBTE Polytechnics (ND/HND) · Nigerian Universities (EBSU, FUNAI, UNEC, UNN, UNILAG, FUTO)** — structured as APIs.
 
 ---
 
 ## What This Is
 
-An infrastructure API that exposes official Nigerian/African curriculum data as clean, structured JSON endpoints. Built for EdTech developers, AI tutor companies, universities, schools, and educational platforms.
+An infrastructure API that exposes official Nigerian/African curriculum data as clean, structured JSON endpoints. Built for EdTech developers, AI tutor companies, universities, polytechnics, schools, and educational platforms.
 
 ```
-# Specific University Curricula (EBSU, FUNAI, UNEC, UNN)
+# NBTE Polytechnics (ND & HND Diplomas)
+GET /api/v1/curriculum/yabatech/computer-engineering-tech
+GET /api/v1/curriculum/imt/science-laboratory-tech
+
+# Specific Federal & State Universities (EBSU, FUNAI, UNEC, UNN, UNILAG, FUTO)
+GET /api/v1/curriculum/unilag/computer-science
+GET /api/v1/curriculum/futo/petroleum-engineering
 GET /api/v1/curriculum/ebsu/computer-science
 GET /api/v1/curriculum/funai/computer-science
 GET /api/v1/curriculum/unec/law
@@ -22,12 +28,8 @@ GET /api/v1/curriculum/nuc/medicine-and-surgery
 GET /api/v1/curriculum/nuc/electrical-engineering
 GET /api/v1/curriculum/nuc/law
 GET /api/v1/curriculum/nuc/accounting
-GET /api/v1/curriculum/nuc/business-administration
-GET /api/v1/curriculum/nuc/nursing-science
-GET /api/v1/curriculum/nuc/mechanical-engineering
-GET /api/v1/curriculum/nuc/mass-communication
 
-# Junior & Senior Secondary School
+# Secondary Education
 GET /api/v1/curriculum/bece/mathematics
 GET /api/v1/curriculum/waec/mathematics
 GET /api/v1/curriculum/jamb/mathematics
@@ -88,17 +90,23 @@ http://localhost:8080/api/v1
 |--------|----------|-------------|
 | GET | `/health` | API health check & DB status |
 | GET | `/api/v1/` | API info and endpoint index |
-| GET | `/api/v1/subjects` | List all 43 subjects & degree programs across all 17 NUC disciplines |
+| GET | `/api/v1/subjects` | List all 46 subjects, university degrees & polytechnic diploma programs |
 | GET | `/api/v1/subjects/:slug` | Get subject by slug |
-| GET | `/api/v1/exam-boards` | List all 16 exam boards & universities (BECE, WAEC, JAMB, NUC, EBSU, FUNAI, UNEC, UNN, UNILAG, UI, OAU, ABU, Covenant) |
+| GET | `/api/v1/exam-boards` | List all 22 exam boards, polytechnics & universities (BECE, WAEC, JAMB, NUC, NBTE, YABATECH, IMT, AUCHI, EBSU, FUNAI, UNEC, UNN, UNILAG, UI, OAU, ABU, FUTO, FUTA, Covenant) |
 | GET | `/api/v1/curriculum/:board/:subject` | Full curriculum tree with topics, subtopics & objectives |
-| GET | `/api/v1/search?q=:query` | Search topics across all exam boards and university degrees |
+| GET | `/api/v1/search?q=:query` | Search topics across all exam boards, university degrees, and polytechnic diplomas |
 
 ---
 
-## Currently Available Curricula (32 Live Datasets)
+## Currently Available Curricula (36 Live Datasets)
 
-### Nigerian Universities (EBSU, FUNAI, UNEC, UNN)
+### NBTE Polytechnics (ND & HND Diplomas)
+- **Yaba College of Technology (YABATECH)** — `yabatech/computer-engineering-tech` (ND & HND Computer Engineering)
+- **Institute of Management and Technology, Enugu (IMT)** — `imt/science-laboratory-tech` (ND & HND Science Lab Tech SLT)
+
+### Specific Federal & State Universities
+- **University of Lagos (UNILAG)** — `unilag/computer-science` (Faculty of Science)
+- **Federal University of Technology, Owerri (FUTO)** — `futo/petroleum-engineering` (SEET Owerri)
 - **Ebonyi State University, Abakaliki (EBSU)** — `ebsu/computer-science` (Faculty of Physical Sciences)
 - **Alex Ekwueme Federal University, Ndufu-Alike (AE-FUNAI)** — `funai/computer-science` (Faculty of Science)
 - **University of Nigeria, Enugu Campus (UNEC)** — `unec/law` (Faculty of Law, Enugu Campus)
