@@ -50,8 +50,11 @@ func main() {
 		c.Next()
 	})
 
-	// ── Health check ─────────────────────────────────────────────────────────
+	// ── Health check & Interactive Swagger Docs ──────────────────────────────
 	router.GET("/health", handlers.HealthCheck)
+	router.GET("/docs", handlers.ServeSwaggerUI)
+	router.GET("/swagger", handlers.ServeSwaggerUI)
+	router.GET("/docs/openapi.json", handlers.ServeOpenAPISpec)
 
 	// ── API v1 routes (protected with APIKeyAuth) ────────────────────────────
 	v1 := router.Group("/api/v1")
@@ -63,6 +66,7 @@ func main() {
 				"service":     "AfriLearn Curriculum API",
 				"version":     "v1",
 				"description": "African Curriculum Infrastructure — BECE, WAEC, JAMB, NUC University Degrees, NBTE Polytechnics",
+				"docs_url":    "http://localhost:8080/docs",
 				"authentication": gin.H{
 					"header":      "X-API-Key",
 					"query_param": "api_key",
@@ -109,8 +113,8 @@ func main() {
 
 	// Start server
 	log.Printf("🚀 AfriLearn Curriculum API running on http://localhost:%s\n", port)
-	log.Printf("📖 API Documentation: http://localhost:%s/api/v1/\n", port)
-	log.Printf("💚 Health Check:      http://localhost:%s/health\n", port)
+	log.Printf("📖 Interactive Swagger Docs: http://localhost:%s/docs\n", port)
+	log.Printf("💚 Health Check:              http://localhost:%s/health\n", port)
 	log.Println("──────────────────────────────────────────────────────")
 	log.Printf("📡 Try: curl -H 'X-API-Key: afr_live_demo_9f8e2b7a' http://localhost:%s/api/v1/curriculum/waec/physics/llm-prompt\n", port)
 

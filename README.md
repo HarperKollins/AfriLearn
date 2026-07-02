@@ -1,7 +1,7 @@
 # AfriLearn Curriculum API
 
 > The foundational data layer for African educational technology & AI Tutors.  
-> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NUC CCMAS (100L-500L) · NBTE Polytechnics (ND/HND) · Developer API Keys · AI Tutor LLM Prompts** — structured as APIs.
+> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NUC CCMAS (100L-500L) · NBTE Polytechnics (ND/HND) · Developer API Keys · AI Tutor LLM Prompts · Interactive Swagger UI (`/docs`)** — structured as APIs.
 
 ---
 
@@ -10,6 +10,9 @@
 An infrastructure API that exposes official Nigerian/African curriculum data as clean, structured JSON endpoints. Built for EdTech developers, AI tutor companies, universities, polytechnics, schools, and educational platforms.
 
 ```bash
+# 📖 Interactive Swagger UI Playground
+http://localhost:8080/docs
+
 # Authenticated Request with X-API-Key
 curl -H "X-API-Key: afr_live_demo_9f8e2b7a" http://localhost:8080/api/v1/curriculum/waec/physics
 
@@ -48,9 +51,10 @@ go run cmd/migrate/main.go
 go run cmd/seeder/main.go
 ```
 
-### 6. Start the API server
+### 6. Start the API server & open docs
 ```bash
 go run cmd/api/main.go
+# Open http://localhost:8080/docs in your browser
 ```
 
 ---
@@ -79,6 +83,8 @@ http://localhost:8080/api/v1
 | Method | Endpoint | Description |
 |--------|----------|-------------|
 | GET | `/health` | API health check & DB status |
+| GET | `/docs` | **📖 Interactive Swagger UI Playground** (OpenAPI 3.0) |
+| GET | `/docs/openapi.json` | OpenAPI 3.0 JSON specification |
 | GET | `/api/v1/` | API info and endpoint index |
 | GET | `/api/v1/subjects` | List all 46 subjects, university degrees & polytechnic diploma programs |
 | GET | `/api/v1/subjects/:slug` | Get subject by slug |
@@ -95,4 +101,5 @@ http://localhost:8080/api/v1
 - **Gin** — Fast HTTP framework with CORS & middleware
 - **PostgreSQL (Neon)** — Relational storage with JSON array batching optimization (`pq.Array`)
 - **API Key Auth** — In-memory cached key authentication & background usage metering (`internal/middleware/auth.go`)
+- **OpenAPI 3.0 Docs** — Embedded Swagger UI documentation playground (`internal/handlers/docs.go`)
 - **Scraper Engine** — Modular `Scraper` interface pattern (`internal/scraper`)
