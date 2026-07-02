@@ -7,10 +7,13 @@
 
 ## What This Is
 
-An infrastructure API that exposes Nigerian/African curriculum data as clean, structured JSON endpoints. Built for EdTech developers, AI tutor companies, schools, and educational platforms.
+An infrastructure API that exposes official Nigerian/African curriculum data as clean, structured JSON endpoints. Built for EdTech developers, AI tutor companies, schools, and educational platforms.
 
 ```
 GET /api/v1/curriculum/waec/mathematics
+GET /api/v1/curriculum/waec/physics
+GET /api/v1/curriculum/waec/biology
+GET /api/v1/curriculum/jamb/mathematics
 GET /api/v1/curriculum/jamb/physics
 GET /api/v1/subjects
 GET /api/v1/search?q=quadratic equations
@@ -26,43 +29,35 @@ GET /api/v1/search?q=quadratic equations
 
 ### 2. Clone and install
 ```bash
-git clone https://github.com/yourname/curriculum-api
-cd curriculum-api
+git clone https://github.com/HarperKollins/AfriLearn.git
+cd eduscrape
 go mod tidy
 ```
 
 ### 3. Configure environment
 ```bash
 cp .env.example .env
-# Edit .env with your database credentials
+# Edit .env with your database connection string (DB_URL)
 ```
 
-### 4. Set up the database
+### 4. Deploy database schema
 ```bash
-# Run schema.sql against your PostgreSQL database
-psql -U postgres -d afrilearn -f internal/database/schema.sql
+go run cmd/migrate/main.go
 ```
 
-### 5. Seed WAEC Mathematics data
+### 5. Ingest curriculum datasets
 ```bash
 go run cmd/seeder/main.go
 ```
 
-### 6. Start the API
+### 6. Start the API server
 ```bash
 go run cmd/api/main.go
 ```
 
-### 7. Test it
-```bash
-curl http://localhost:8080/health
-curl http://localhost:8080/api/v1/curriculum/waec/mathematics
-curl http://localhost:8080/api/v1/search?q=quadratic
-```
-
 ---
 
-## API Reference
+## Live API Reference
 
 ### Base URL
 ```
@@ -73,81 +68,29 @@ http://localhost:8080/api/v1
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/health` | API health check |
-| GET | `/api/v1/` | API info and endpoint list |
+| GET | `/health` | API health check & DB status |
+| GET | `/api/v1/` | API info and endpoint index |
 | GET | `/api/v1/subjects` | List all subjects |
 | GET | `/api/v1/subjects/:slug` | Get subject by slug |
-| GET | `/api/v1/exam-boards` | List all exam boards |
-| GET | `/api/v1/curriculum/:board/:subject` | Full curriculum with topics |
-| GET | `/api/v1/search?q=:query` | Search topics |
-
-### Example Response
-```json
-{
-  "success": true,
-  "data": {
-    "id": "uuid",
-    "year": 2025,
-    "level": "senior-secondary",
-    "exam_board": { "name": "WAEC", "full_name": "West African Examinations Council" },
-    "subject": { "name": "Mathematics", "category": "science" },
-    "topics": [
-      {
-        "name": "Algebra",
-        "difficulty": "medium",
-        "subtopics": [
-          {
-            "name": "Quadratic Equations",
-            "objectives": [
-              { "description": "Solve quadratic equations by factorisation", "verb": "solve" }
-            ]
-          }
-        ]
-      }
-    ]
-  },
-  "meta": { "version": "v1" }
-}
-```
+| GET | `/api/v1/exam-boards` | List all exam boards (WAEC, JAMB, NECO, NERDC) |
+| GET | `/api/v1/curriculum/:board/:subject` | Full curriculum tree with topics, subtopics & objectives |
+| GET | `/api/v1/search?q=:query` | Search topics across all exam boards |
 
 ---
 
-## Project Structure
+## Currently Available Curricula
 
-```
-eduscrape/
-├── cmd/
-│   ├── api/        → API server entry point
-│   └── seeder/     → Database seeder CLI
-├── internal/
-│   ├── database/   → DB connection + schema.sql
-│   ├── handlers/   → HTTP route handlers
-│   ├── models/     → Data models
-│   └── scraper/    → Web scrapers (WAEC, JAMB, NECO)
-├── .env.example    → Environment template
-└── README.md
-```
+- **WAEC Mathematics** (`waec/mathematics`) — 9 Sections, 40+ Subtopics, 100+ Objectives (NERDC Senior Secondary)
+- **WAEC Physics** (`waec/physics`) — 6 Themes, 26 Subtopics, 80+ Objectives (NERDC Senior Secondary)
+- **WAEC Biology** (`waec/biology`) — 4 Themes, 18 Subtopics, 60+ Objectives (NERDC Senior Secondary)
+- **JAMB Mathematics** (`jamb/mathematics`) — 5 UTME Sections, 18 Subtopics, 60+ Objectives (JAMB IBASS)
+- **JAMB Physics** (`jamb/physics`) — 4 UTME Sections, 18 Subtopics, 55+ Objectives (JAMB IBASS)
 
 ---
 
-## Roadmap
+## Technical Architecture
 
-- [x] WAEC Mathematics — Topics, Subtopics, Learning Objectives
-- [ ] WAEC Physics
-- [ ] WAEC Biology  
-- [ ] JAMB Mathematics
-- [ ] JAMB Physics
-- [ ] NERDC Primary Curriculum
-- [ ] Knowledge Graph relationships (topic prerequisites)
-- [ ] Semantic search (pgvector)
-- [ ] API key authentication
-- [ ] Developer portal
-
----
-
-## Built With
-
-- **Go** — High-performance, compiled backend
-- **Gin** — Fast HTTP framework
-- **PostgreSQL** — Relational data store
-- **Colly** — Web scraping
+- **Go (Golang)** — High-performance, low-latency compiled runtime
+- **Gin** — Fast HTTP framework with CORS & middleware
+- **PostgreSQL (Neon)** — Relational storage with JSON array batching optimization (`pq.Array`)
+- **Scraper Engine** — Modular `Scraper` interface pattern (`internal/scraper`)

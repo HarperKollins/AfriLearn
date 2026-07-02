@@ -7,6 +7,7 @@ import (
 	"github.com/afrilearn/curriculum-api/internal/database"
 	"github.com/afrilearn/curriculum-api/internal/models"
 	"github.com/gin-gonic/gin"
+	"github.com/lib/pq"
 )
 
 // GetAllSubjects returns all available subjects
@@ -107,13 +108,13 @@ func GetAllExamBoards(c *gin.Context) {
 	})
 }
 
-// GetCurriculum returns full curriculum with topics for a given board+subject
+// GetCurriculum returns full curriculum with topics, subtopics, and objectives for a board+subject
 // GET /api/v1/curriculum/:board/:subject
 func GetCurriculum(c *gin.Context) {
 	boardSlug := c.Param("board")
 	subjectSlug := c.Param("subject")
 
-	// Fetch curriculum
+	// 1. Fetch curriculum metadata
 	var curr models.Curriculum
 	var board models.ExamBoard
 	var subject models.Subject
@@ -121,8 +122,8 @@ func GetCurriculum(c *gin.Context) {
 	err := database.DB.QueryRow(`
 		SELECT 
 			c.id, c.exam_board_id, c.subject_id, c.year, c.level, c.source_url, c.created_at, c.updated_at,
-			eb.slug, eb.name, eb.full_name, eb.country,
-			s.slug, s.name, s.category
+			eb.slug, eb.name, eb.full_name, eb.country, eb.description, eb.website,
+			s.slug, s.name, s.description, s.category
 		FROM curricula c
 		JOIN exam_boards eb ON c.exam_board_id = eb.id
 		JOIN subjects s ON c.subject_id = s.id
@@ -131,8 +132,8 @@ func GetCurriculum(c *gin.Context) {
 		LIMIT 1
 	`, boardSlug, subjectSlug).Scan(
 		&curr.ID, &curr.ExamBoardID, &curr.SubjectID, &curr.Year, &curr.Level, &curr.SourceURL, &curr.CreatedAt, &curr.UpdatedAt,
-		&board.Slug, &board.Name, &board.FullName, &board.Country,
-		&subject.Slug, &subject.Name, &subject.Category,
+		&board.Slug, &board.Name, &board.FullName, &board.Country, &board.Description, &board.Website,
+		&subject.Slug, &subject.Name, &subject.Description, &subject.Category,
 	)
 
 	if err == sql.ErrNoRows {
@@ -153,53 +154,100 @@ func GetCurriculum(c *gin.Context) {
 	curr.ExamBoard = &board
 	curr.Subject = &subject
 
-	// Fetch topics
+	// 2. Query all topics for this curriculum
 	topicRows, err := database.DB.Query(`
 		SELECT id, curriculum_id, slug, name, description, order_index, difficulty, created_at, updated_at
 		FROM topics WHERE curriculum_id = $1 ORDER BY order_index
 	`, curr.ID)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, models.APIResponse{
+			Success: false,
+			Message: "Failed to fetch curriculum topics",
+		})
+		return
+	}
+	defer topicRows.Close()
+
+	var topics []models.Topic
+	var topicIDs []string
+	topicMap := make(map[string]*models.Topic)
+
+	for topicRows.Next() {
+		var t models.Topic
+		if err := topicRows.Scan(&t.ID, &t.CurriculumID, &t.Slug, &t.Name, &t.Description, &t.OrderIndex, &t.Difficulty, &t.CreatedAt, &t.UpdatedAt); err != nil {
+			continue
+		}
+		topics = append(topics, t)
+		topicIDs = append(topicIDs, t.ID)
+	}
+
+	if len(topicIDs) == 0 {
+		curr.Topics = []models.Topic{}
+		c.JSON(http.StatusOK, models.APIResponse{
+			Success: true,
+			Data:    curr,
+			Meta:    &models.Meta{Source: curr.SourceURL, Version: "v1"},
+		})
+		return
+	}
+
+	// 3. Query all subtopics for all topics in a single batch query
+	subRows, err := database.DB.Query(`
+		SELECT id, topic_id, slug, name, description, order_index, created_at, updated_at
+		FROM subtopics WHERE topic_id = ANY($1) ORDER BY topic_id, order_index
+	`, pq.Array(topicIDs))
+
+	var subtopicIDs []string
+	subtopicMap := make(map[string]*models.Subtopic)
+
 	if err == nil {
-		defer topicRows.Close()
-		for topicRows.Next() {
-			var t models.Topic
-			if err := topicRows.Scan(&t.ID, &t.CurriculumID, &t.Slug, &t.Name, &t.Description, &t.OrderIndex, &t.Difficulty, &t.CreatedAt, &t.UpdatedAt); err != nil {
+		defer subRows.Close()
+		for subRows.Next() {
+			var st models.Subtopic
+			if err := subRows.Scan(&st.ID, &st.TopicID, &st.Slug, &st.Name, &st.Description, &st.OrderIndex, &st.CreatedAt, &st.UpdatedAt); err != nil {
 				continue
 			}
-
-			// Fetch subtopics for each topic
-			subRows, err := database.DB.Query(`
-				SELECT id, topic_id, slug, name, description, order_index, created_at, updated_at
-				FROM subtopics WHERE topic_id = $1 ORDER BY order_index
-			`, t.ID)
-			if err == nil {
-				defer subRows.Close()
-				for subRows.Next() {
-					var st models.Subtopic
-					if err := subRows.Scan(&st.ID, &st.TopicID, &st.Slug, &st.Name, &st.Description, &st.OrderIndex, &st.CreatedAt, &st.UpdatedAt); err != nil {
-						continue
-					}
-
-					// Fetch objectives for each subtopic
-					objRows, err := database.DB.Query(`
-						SELECT id, subtopic_id, description, verb, order_index, created_at
-						FROM learning_objectives WHERE subtopic_id = $1 ORDER BY order_index
-					`, st.ID)
-					if err == nil {
-						defer objRows.Close()
-						for objRows.Next() {
-							var obj models.LearningObjective
-							if err := objRows.Scan(&obj.ID, &obj.SubtopicID, &obj.Description, &obj.Verb, &obj.OrderIndex, &obj.CreatedAt); err != nil {
-								continue
-							}
-							st.Objectives = append(st.Objectives, obj)
-						}
-					}
-					t.Subtopics = append(t.Subtopics, st)
-				}
-			}
-			curr.Topics = append(curr.Topics, t)
+			subtopicIDs = append(subtopicIDs, st.ID)
+			subtopicMap[st.ID] = &st
 		}
 	}
+
+	// 4. Query all learning_objectives for all subtopics in a single batch query
+	if len(subtopicIDs) > 0 {
+		objRows, err := database.DB.Query(`
+			SELECT id, subtopic_id, description, verb, order_index, created_at
+			FROM learning_objectives WHERE subtopic_id = ANY($1) ORDER BY subtopic_id, order_index
+		`, pq.Array(subtopicIDs))
+		if err == nil {
+			defer objRows.Close()
+			for objRows.Next() {
+				var obj models.LearningObjective
+				if err := objRows.Scan(&obj.ID, &obj.SubtopicID, &obj.Description, &obj.Verb, &obj.OrderIndex, &obj.CreatedAt); err != nil {
+					continue
+				}
+				if st, exists := subtopicMap[obj.SubtopicID]; exists {
+					st.Objectives = append(st.Objectives, obj)
+				}
+			}
+		}
+	}
+
+	// Reassemble subtopics into topics
+	topicSubtopicMap := make(map[string][]models.Subtopic)
+	for _, stPtr := range subtopicMap {
+		topicSubtopicMap[stPtr.TopicID] = append(topicSubtopicMap[stPtr.TopicID], *stPtr)
+	}
+
+	for i := range topics {
+		if subs, ok := topicSubtopicMap[topics[i].ID]; ok {
+			topics[i].Subtopics = subs
+		} else {
+			topics[i].Subtopics = []models.Subtopic{}
+		}
+		topicMap[topics[i].ID] = &topics[i]
+	}
+
+	curr.Topics = topics
 
 	c.JSON(http.StatusOK, models.APIResponse{
 		Success: true,
