@@ -60,17 +60,20 @@ func main() {
 			c.JSON(200, gin.H{
 				"service":     "AfriLearn Curriculum API",
 				"version":     "v1",
-				"description": "African Curriculum Infrastructure — WAEC, JAMB, NECO data",
+				"description": "African Curriculum Infrastructure — BECE, WAEC, JAMB, NUC University Degrees, NBTE Polytechnics",
 				"endpoints": gin.H{
 					"subjects":   "GET /api/v1/subjects",
 					"subject":    "GET /api/v1/subjects/:slug",
 					"boards":     "GET /api/v1/exam-boards",
 					"curriculum": "GET /api/v1/curriculum/:board/:subject",
+					"llm_prompt": "GET /api/v1/curriculum/:board/:subject/llm-prompt",
 					"search":     "GET /api/v1/search?q=<query>",
 				},
 				"example_calls": []string{
 					"/api/v1/curriculum/waec/mathematics",
-					"/api/v1/curriculum/jamb/physics",
+					"/api/v1/curriculum/waec/physics/llm-prompt",
+					"/api/v1/curriculum/nuc/computer-science/llm-prompt",
+					"/api/v1/curriculum/yabatech/computer-engineering-tech/llm-prompt",
 					"/api/v1/search?q=quadratic equations",
 					"/api/v1/subjects",
 				},
@@ -81,11 +84,12 @@ func main() {
 		v1.GET("/subjects", handlers.GetAllSubjects)
 		v1.GET("/subjects/:slug", handlers.GetSubjectBySlug)
 
-		// Exam Boards
+		// Exam Boards & Institutions
 		v1.GET("/exam-boards", handlers.GetAllExamBoards)
 
-		// Curriculum — the main endpoint
+		// Curriculum — main endpoints
 		v1.GET("/curriculum/:board/:subject", handlers.GetCurriculum)
+		v1.GET("/curriculum/:board/:subject/llm-prompt", handlers.GetLLMPrompt)
 
 		// Search
 		v1.GET("/search", handlers.SearchTopics)
@@ -102,7 +106,7 @@ func main() {
 	log.Printf("📖 API Documentation: http://localhost:%s/api/v1/\n", port)
 	log.Printf("💚 Health Check:      http://localhost:%s/health\n", port)
 	log.Println("──────────────────────────────────────────────────────")
-	log.Printf("📡 Try: curl http://localhost:%s/api/v1/curriculum/waec/mathematics\n", port)
+	log.Printf("📡 Try: curl http://localhost:%s/api/v1/curriculum/waec/physics/llm-prompt\n", port)
 
 	// Graceful shutdown
 	go func() {
