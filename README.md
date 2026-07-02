@@ -1,39 +1,29 @@
 # AfriLearn Curriculum API
 
 > The foundational data layer for African educational technology.  
-> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NECO · NERDC** — structured as APIs.
+> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NUC CCMAS University Degrees (100L-500L)** — structured as APIs.
 
 ---
 
 ## What This Is
 
-An infrastructure API that exposes official Nigerian/African curriculum data as clean, structured JSON endpoints. Built for EdTech developers, AI tutor companies, schools, and educational platforms.
+An infrastructure API that exposes official Nigerian/African curriculum data as clean, structured JSON endpoints. Built for EdTech developers, AI tutor companies, universities, schools, and educational platforms.
 
 ```
+# University Higher Education (NUC CCMAS Standards)
+GET /api/v1/curriculum/nuc/computer-science
+GET /api/v1/curriculum/nuc/medicine-and-surgery
+GET /api/v1/curriculum/nuc/electrical-engineering
+GET /api/v1/curriculum/nuc/law
+
+# Junior & Senior Secondary School
 GET /api/v1/curriculum/bece/mathematics
-GET /api/v1/curriculum/bece/basic-science
-GET /api/v1/curriculum/bece/basic-technology
-GET /api/v1/curriculum/bece/english-language
-GET /api/v1/curriculum/bece/social-studies
-GET /api/v1/curriculum/bece/business-studies
-
 GET /api/v1/curriculum/waec/mathematics
-GET /api/v1/curriculum/waec/physics
-GET /api/v1/curriculum/waec/biology
-GET /api/v1/curriculum/waec/chemistry
-GET /api/v1/curriculum/waec/economics
-GET /api/v1/curriculum/waec/government
-GET /api/v1/curriculum/waec/literature
-
 GET /api/v1/curriculum/jamb/mathematics
-GET /api/v1/curriculum/jamb/physics
-GET /api/v1/curriculum/jamb/chemistry
-GET /api/v1/curriculum/jamb/biology
-GET /api/v1/curriculum/jamb/economics
-GET /api/v1/curriculum/jamb/government
 
 GET /api/v1/subjects
-GET /api/v1/search?q=quadratic equations
+GET /api/v1/exam-boards
+GET /api/v1/search?q=data structures
 ```
 
 ---
@@ -87,40 +77,46 @@ http://localhost:8080/api/v1
 |--------|----------|-------------|
 | GET | `/health` | API health check & DB status |
 | GET | `/api/v1/` | API info and endpoint index |
-| GET | `/api/v1/subjects` | List all 21 subjects |
+| GET | `/api/v1/subjects` | List all 31 subjects & degree programs |
 | GET | `/api/v1/subjects/:slug` | Get subject by slug |
-| GET | `/api/v1/exam-boards` | List all exam boards (BECE, WAEC, JAMB, NECO, NERDC) |
+| GET | `/api/v1/exam-boards` | List all 13 exam boards & higher ed institutions (BECE, WAEC, JAMB, NUC, UNILAG, UI, OAU, UNN, ABU, Covenant) |
 | GET | `/api/v1/curriculum/:board/:subject` | Full curriculum tree with topics, subtopics & objectives |
-| GET | `/api/v1/search?q=:query` | Search topics across all exam boards |
+| GET | `/api/v1/search?q=:query` | Search topics across all exam boards and university degrees |
 
 ---
 
-## Currently Available Curricula (19 Live Datasets)
+## Currently Available Curricula (23 Live Datasets)
+
+### University Higher Education (NUC CCMAS Standards - 100L to 500L)
+- **B.Sc. Computer Science** (`nuc/computer-science`) — 100L to 400L (COS 101, COS 102, CSC 201, CSC 301 Data Structures, CSC 302 DBMS, CSC 399 SIWES, CSC 401 AI, CSC 499 Thesis)
+- **M.B.B.S. Medicine & Surgery** (`nuc/medicine-and-surgery`) — 100L to 500L Pre-Med, Anatomy/Biochemistry (1st Professional MBBS), Pathology/Pharmacology (2nd MBBS), Clinical Rotations & MDCN Board
+- **B.Eng. Electrical & Electronic Engineering** (`nuc/electrical-engineering`) — 100L to 500L Circuit Theory, Electromagnetics, Microprocessors, Power Systems, Telecommunications, COREN Design
+- **LL.B. Bachelor of Laws** (`nuc/law`) — 100L to 500L Legal System, Constitutional Law, Contracts, Criminal Law, Torts, Land Law, Equity & Trusts, Evidence, CAMA Company Law, LL.B. Thesis
 
 ### Junior Secondary School (BECE / JSS1 - JSS3)
-- **BECE Mathematics** (`bece/mathematics`) — 4 Themes, 11 Subtopics, 35+ Objectives (NERDC JSS)
-- **BECE Basic Science** (`bece/basic-science`) — 3 Themes, 8 Subtopics, 25+ Objectives (NERDC JSS)
-- **BECE Basic Technology** (`bece/basic-technology`) — 3 Themes, 7 Subtopics, 22+ Objectives (NERDC JSS)
-- **BECE English Studies** (`bece/english-language`) — 4 Themes, 8 Subtopics, 25+ Objectives (NERDC JSS)
-- **BECE Social Studies** (`bece/social-studies`) — 3 Themes, 6 Subtopics, 20+ Objectives (NERDC JSS)
-- **BECE Business Studies** (`bece/business-studies`) — 2 Themes, 4 Subtopics, 15+ Objectives (NERDC JSS)
+- **BECE Mathematics** (`bece/mathematics`)
+- **BECE Basic Science** (`bece/basic-science`)
+- **BECE Basic Technology** (`bece/basic-technology`)
+- **BECE English Studies** (`bece/english-language`)
+- **BECE Social Studies** (`bece/social-studies`)
+- **BECE Business Studies** (`bece/business-studies`)
 
-### Senior Secondary School (WAEC / SS1 - SS3)
-- **WAEC Mathematics** (`waec/mathematics`) — 9 Sections, 40+ Subtopics, 100+ Objectives (NERDC SS)
-- **WAEC Physics** (`waec/physics`) — 6 Themes, 26 Subtopics, 80+ Objectives (NERDC SS)
-- **WAEC Biology** (`waec/biology`) — 4 Themes, 18 Subtopics, 60+ Objectives (NERDC SS)
-- **WAEC Chemistry** (`waec/chemistry`) — 4 Themes, 11 Subtopics, 40+ Objectives (NERDC SS)
-- **WAEC Economics** (`waec/economics`) — 3 Themes, 8 Subtopics, 30+ Objectives (NERDC SS)
-- **WAEC Government** (`waec/government`) — 3 Themes, 6 Subtopics, 25+ Objectives (NERDC SS)
-- **WAEC Literature in English** (`waec/literature`) — 3 Themes, 6 Subtopics, 20+ Objectives (NERDC SS)
+### Senior Secondary School (WAEC & NECO / SS1 - SS3)
+- **WAEC Mathematics** (`waec/mathematics`)
+- **WAEC Physics** (`waec/physics`)
+- **WAEC Biology** (`waec/biology`)
+- **WAEC Chemistry** (`waec/chemistry`)
+- **WAEC Economics** (`waec/economics`)
+- **WAEC Government** (`waec/government`)
+- **WAEC Literature in English** (`waec/literature`)
 
 ### Tertiary Entry Examination (JAMB / UTME)
-- **JAMB Mathematics** (`jamb/mathematics`) — 5 UTME Sections, 18 Subtopics, 60+ Objectives (JAMB IBASS)
-- **JAMB Physics** (`jamb/physics`) — 4 UTME Sections, 18 Subtopics, 55+ Objectives (JAMB IBASS)
-- **JAMB Chemistry** (`jamb/chemistry`) — 3 UTME Sections, 7 Subtopics, 25+ Objectives (JAMB IBASS)
-- **JAMB Biology** (`jamb/biology`) — 3 UTME Sections, 7 Subtopics, 25+ Objectives (JAMB IBASS)
-- **JAMB Economics** (`jamb/economics`) — 3 UTME Sections, 6 Subtopics, 20+ Objectives (JAMB IBASS)
-- **JAMB Government** (`jamb/government`) — 3 UTME Sections, 6 Subtopics, 20+ Objectives (JAMB IBASS)
+- **JAMB Mathematics** (`jamb/mathematics`)
+- **JAMB Physics** (`jamb/physics`)
+- **JAMB Chemistry** (`jamb/chemistry`)
+- **JAMB Biology** (`jamb/biology`)
+- **JAMB Economics** (`jamb/economics`)
+- **JAMB Government** (`jamb/government`)
 
 ---
 

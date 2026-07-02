@@ -111,15 +111,23 @@ func main() {
 			CREATE INDEX IF NOT EXISTS idx_topics_curriculum    ON topics(curriculum_id);
 			CREATE INDEX IF NOT EXISTS idx_subtopics_topic      ON subtopics(topic_id);
 			CREATE INDEX IF NOT EXISTS idx_objectives_subtopic  ON learning_objectives(subtopic_id)`},
-		{"Seed exam boards", `
+		{"Seed exam boards & institutions", `
 			INSERT INTO exam_boards (slug, name, full_name, country, description, website) VALUES
-				('bece',  'BECE',  'Basic Education Certificate Examination',   'Nigeria', 'The national exam for Junior Secondary School graduation (JSS3).', 'https://neco.gov.ng'),
-				('waec',  'WAEC',  'West African Examinations Council',         'Nigeria', 'Conducts the WASSCE across West Africa.',            'https://waec.org.ng'),
-				('jamb',  'JAMB',  'Joint Admissions and Matriculation Board',  'Nigeria', 'Responsible for university entrance exams in Nigeria.',     'https://jamb.gov.ng'),
-				('neco',  'NECO',  'National Examinations Council',             'Nigeria', 'Conducts SSCE and BECE exams in Nigeria.',                  'https://neco.gov.ng'),
-				('nerdc', 'NERDC', 'Nigerian Educational Research & Dev Council','Nigeria', 'Responsible for developing national curricula.',          'https://nerdc.gov.ng')
+				('bece',    'BECE',    'Basic Education Certificate Examination',   'Nigeria', 'The national exam for Junior Secondary School graduation (JSS3).', 'https://neco.gov.ng'),
+				('waec',    'WAEC',    'West African Examinations Council',         'Nigeria', 'Conducts WASSCE across West Africa.',                              'https://waec.org.ng'),
+				('jamb',    'JAMB',    'Joint Admissions and Matriculation Board',  'Nigeria', 'Responsible for university entrance exams in Nigeria.',            'https://jamb.gov.ng'),
+				('neco',    'NECO',    'National Examinations Council',             'Nigeria', 'Conducts SSCE and BECE exams in Nigeria.',                         'https://neco.gov.ng'),
+				('nerdc',   'NERDC',   'Nigerian Educational Research & Dev Council','Nigeria', 'Develops national secondary curricula.',                              'https://nerdc.gov.ng'),
+				('nuc',     'NUC',     'National Universities Commission (CCMAS)',  'Nigeria', 'Regulates university education and sets the 70% core CCMAS standards for all Nigerian universities.', 'https://nuc.edu.ng'),
+				('nbte',    'NBTE',    'National Board for Technical Education',    'Nigeria', 'Regulates polytechnic and monotechnic ND/HND education in Nigeria.', 'https://nbte.gov.ng'),
+				('unilag',  'UNILAG',  'University of Lagos',                       'Nigeria', 'Premier federal university in Yaba, Lagos State.',                'https://unilag.edu.ng'),
+				('ui',      'UI',      'University of Ibadan',                      'Nigeria', 'Nigeria''s first federal university located in Ibadan, Oyo State.', 'https://ui.edu.ng'),
+				('oau',     'OAU',     'Obafemi Awolowo University',                'Nigeria', 'Premier federal university located in Ile-Ife, Osun State.',       'https://oauife.edu.ng'),
+				('unn',     'UNN',     'University of Nigeria, Nsukka',             'Nigeria', 'First autonomous federal university located in Nsukka, Enugu State.', 'https://unn.edu.ng'),
+				('abu',     'ABU',     'Ahmadu Bello University',                   'Nigeria', 'Premier federal university located in Zaria, Kaduna State.',        'https://abu.edu.ng'),
+				('covenant','CU',      'Covenant University',                       'Nigeria', 'Leading private university located in Ota, Ogun State.',          'https://covenantuniversity.edu.ng')
 			ON CONFLICT (slug) DO NOTHING`},
-		{"Seed subjects", `
+		{"Seed subjects & degree programs", `
 			INSERT INTO subjects (slug, name, description, category) VALUES
 				('mathematics',          'Mathematics',          'Core senior secondary mathematics syllabus.',                                'science'),
 				('english-language',     'English Language',     'Core senior secondary English language and communication.',                   'arts'),
@@ -141,7 +149,17 @@ func main() {
 				('social-studies',       'Social Studies',       'Human relationships, culture, family, social issues, and environment.',      'basic'),
 				('business-studies',     'Business Studies',     'Office practice, book-keeping, shorthand, commerce, and consumer education.', 'basic'),
 				('cultural-and-creative-arts', 'Cultural & Creative Arts', 'Visual arts, drama, music, and Nigerian cultural heritage.',        'basic'),
-				('physical-and-health-education', 'Physical & Health Education', 'Physical fitness, athletics, games, safety, and health education.', 'basic')
+				('physical-and-health-education', 'Physical & Health Education', 'Physical fitness, athletics, games, safety, and health education.', 'basic'),
+				('computer-science',     'B.Sc. Computer Science',               'NUC CCMAS degree program covering programming, algorithms, systems, AI, and software engineering.', 'computing'),
+				('cyber-security',       'B.Sc. Cyber Security',                 'NUC CCMAS degree program covering network security, cryptography, forensics, and ethical hacking.',  'computing'),
+				('software-engineering', 'B.Sc. Software Engineering',           'NUC CCMAS degree program covering software architecture, testing, DevOps, and project management.',  'computing'),
+				('medicine-and-surgery', 'M.B.B.S. Medicine and Surgery',        'NUC CCMAS professional medical degree program covering anatomy, physiology, pathology, and clinical medicine.', 'medical'),
+				('nursing-science',      'B.N.Sc. Nursing Science',              'NUC CCMAS professional degree program covering clinical nursing, anatomy, pharmacology, and patient care.',  'medical'),
+				('electrical-engineering','B.Eng. Electrical & Electronic Eng',  'NUC CCMAS engineering program covering circuit theory, power systems, electronics, and telecommunications.','engineering'),
+				('mechanical-engineering','B.Eng. Mechanical Engineering',       'NUC CCMAS engineering program covering thermodynamics, fluid mechanics, machine design, and manufacturing.', 'engineering'),
+				('law',                  'LL.B. Bachelor of Laws',               'NUC CCMAS professional law degree program covering constitutional law, criminal law, contract law, and jurisprudence.', 'law'),
+				('accounting',           'B.Sc. Accounting',                     'NUC CCMAS degree program covering financial accounting, auditing, taxation, and management accounting.',    'commercial'),
+				('mass-communication',   'B.Sc. Mass Communication',             'NUC CCMAS degree program covering journalism, broadcasting, public relations, and digital media.',          'arts')
 			ON CONFLICT (slug) DO NOTHING`},
 	}
 
@@ -161,7 +179,7 @@ func main() {
 	fmt.Println()
 	fmt.Println("╔══════════════════════════════════════════╗")
 	fmt.Println("║      ✅ Schema deployed to Neon!         ║")
-	fmt.Printf("║   Exam Boards: %-4d  Subjects: %-4d       ║\n", boardCount, subjectCount)
+	fmt.Printf("║   Institutions: %-4d  Subjects/Degree Programs: %-4d       ║\n", boardCount, subjectCount)
 	fmt.Println("╠══════════════════════════════════════════╣")
 	fmt.Println("║  Next: go run cmd/seeder/main.go         ║")
 	fmt.Println("╚══════════════════════════════════════════╝")

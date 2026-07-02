@@ -52,6 +52,12 @@ func main() {
 		scraper.NewJAMBBiologyScraper(),
 		scraper.NewJAMBEconomicsScraper(),
 		scraper.NewJAMBGovernmentScraper(),
+
+		// NUC CCMAS (University Higher Education Degrees)
+		scraper.NewNUCComputerScienceScraper(),
+		scraper.NewNUCMedicineScraper(),
+		scraper.NewNUCElectricalEngScraper(),
+		scraper.NewNUCLawScraper(),
 	}
 
 	for i, s := range scrapers {
@@ -62,30 +68,23 @@ func main() {
 	}
 
 	log.Println("------------------------------------------------------------")
-	log.Println("✅ All 19 Curricula Ingested Successfully!")
+	log.Println("✅ All 23 Curricula Ingested Successfully!")
 	log.Println()
 	log.Println("   BECE (JSS1-3):")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/bece/mathematics")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/bece/basic-science")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/bece/basic-technology")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/bece/english-language")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/bece/social-studies")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/bece/business-studies")
 	log.Println()
 	log.Println("   WAEC (SS1-3):")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/waec/mathematics")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/waec/physics")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/waec/biology")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/waec/chemistry")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/waec/economics")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/waec/government")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/waec/literature")
 	log.Println()
 	log.Println("   JAMB (UTME):")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/jamb/mathematics")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/jamb/physics")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/jamb/chemistry")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/jamb/biology")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/jamb/economics")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/jamb/government")
+	log.Println()
+	log.Println("   NUC CCMAS University Degrees (100L - 500L):")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/computer-science")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/medicine-and-surgery")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/electrical-engineering")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/law")
 }

@@ -5,7 +5,7 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- ============================================================
--- EXAM BOARDS (WAEC, JAMB, NECO, BECE, NERDC, etc.)
+-- EXAM BOARDS & INSTITUTIONS (WAEC, JAMB, NECO, BECE, NERDC, NUC, UNILAG, etc.)
 -- ============================================================
 CREATE TABLE IF NOT EXISTS exam_boards (
     id          UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -20,27 +20,27 @@ CREATE TABLE IF NOT EXISTS exam_boards (
 );
 
 -- ============================================================
--- SUBJECTS (Senior & Junior Secondary subjects)
+-- SUBJECTS & DEGREE PROGRAMS (Secondary Subjects + University Degree Programs)
 -- ============================================================
 CREATE TABLE IF NOT EXISTS subjects (
     id          UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     slug        VARCHAR(100) NOT NULL UNIQUE,
     name        VARCHAR(255) NOT NULL,
     description TEXT,
-    category    VARCHAR(50) NOT NULL DEFAULT 'general', -- science, arts, commercial, basic, general
+    category    VARCHAR(50) NOT NULL DEFAULT 'general', -- science, arts, commercial, basic, computing, engineering, medical, law
     created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
 -- ============================================================
--- CURRICULA (links an exam board to a subject)
+-- CURRICULA (links an exam board / regulatory body / university to a subject or degree program)
 -- ============================================================
 CREATE TABLE IF NOT EXISTS curricula (
     id              UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     exam_board_id   UUID NOT NULL REFERENCES exam_boards(id) ON DELETE CASCADE,
     subject_id      UUID NOT NULL REFERENCES subjects(id) ON DELETE CASCADE,
     year            INTEGER NOT NULL DEFAULT EXTRACT(YEAR FROM NOW()),
-    level           VARCHAR(50) NOT NULL DEFAULT 'senior-secondary', -- primary, junior-secondary, senior-secondary, tertiary-entry
+    level           VARCHAR(50) NOT NULL DEFAULT 'senior-secondary', -- junior-secondary, senior-secondary, tertiary-entry, 100-level, 200-level, 300-level, 400-level, 500-level, tertiary-degree
     source_url      VARCHAR(500),
     created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS curricula (
 );
 
 -- ============================================================
--- TOPICS (major sections, e.g. "Algebra", "Mensuration")
+-- TOPICS / COURSE MODULES (major sections or university course codes e.g. "COS 101", "CSC 201")
 -- ============================================================
 CREATE TABLE IF NOT EXISTS topics (
     id              UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS topics (
 );
 
 -- ============================================================
--- SUBTOPICS (specific areas, e.g. "Quadratic Equations")
+-- SUBTOPICS / COURSE UNITS (specific subtopics or lecture modules)
 -- ============================================================
 CREATE TABLE IF NOT EXISTS subtopics (
     id          UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
@@ -100,18 +100,29 @@ CREATE INDEX IF NOT EXISTS idx_subtopics_topic      ON subtopics(topic_id);
 CREATE INDEX IF NOT EXISTS idx_objectives_subtopic  ON learning_objectives(subtopic_id);
 
 -- ============================================================
--- SEED DATA - Exam Boards
+-- SEED DATA - Exam Boards & Higher Ed Bodies / Institutions
 -- ============================================================
 INSERT INTO exam_boards (slug, name, full_name, country, description, website) VALUES
-    ('bece',  'BECE',  'Basic Education Certificate Examination',   'Nigeria', 'The national exam for Junior Secondary School graduation (JSS3).', 'https://neco.gov.ng'),
-    ('waec',  'WAEC',  'West African Examinations Council',         'Nigeria', 'The body that conducts the WASSCE across West Africa.',            'https://waec.org.ng'),
-    ('jamb',  'JAMB',  'Joint Admissions and Matriculation Board',  'Nigeria', 'The body responsible for university entrance exams in Nigeria.',     'https://jamb.gov.ng'),
-    ('neco',  'NECO',  'National Examinations Council',             'Nigeria', 'The national body that conducts SSCE and BECE exams in Nigeria.',   'https://neco.gov.ng'),
-    ('nerdc', 'NERDC', 'Nigerian Educational Research & Dev Council','Nigeria', 'The statutory body that develops the national curriculum.',       'https://nerdc.gov.ng')
+    -- Secondary Exam Boards
+    ('bece',    'BECE',    'Basic Education Certificate Examination',   'Nigeria', 'The national exam for Junior Secondary School graduation (JSS3).', 'https://neco.gov.ng'),
+    ('waec',    'WAEC',    'West African Examinations Council',         'Nigeria', 'The body that conducts the WASSCE across West Africa.',            'https://waec.org.ng'),
+    ('jamb',    'JAMB',    'Joint Admissions and Matriculation Board',  'Nigeria', 'The body responsible for university entrance exams in Nigeria.',     'https://jamb.gov.ng'),
+    ('neco',    'NECO',    'National Examinations Council',             'Nigeria', 'The national body that conducts SSCE and BECE exams in Nigeria.',   'https://neco.gov.ng'),
+    ('nerdc',   'NERDC',   'Nigerian Educational Research & Dev Council','Nigeria', 'The statutory body that develops the national curriculum.',       'https://nerdc.gov.ng'),
+
+    -- Tertiary Regulatory Bodies & Flagship Universities
+    ('nuc',     'NUC',     'National Universities Commission (CCMAS)',  'Nigeria', 'Regulates university education and sets the 70% core CCMAS standards for all Nigerian universities.', 'https://nuc.edu.ng'),
+    ('nbte',    'NBTE',    'National Board for Technical Education',    'Nigeria', 'Regulates polytechnic and monotechnic ND/HND education in Nigeria.', 'https://nbte.gov.ng'),
+    ('unilag',  'UNILAG',  'University of Lagos',                       'Nigeria', 'Premier federal university in Yaba, Lagos State.',                'https://unilag.edu.ng'),
+    ('ui',      'UI',      'University of Ibadan',                      'Nigeria', 'Nigeria''s first federal university located in Ibadan, Oyo State.', 'https://ui.edu.ng'),
+    ('oau',     'OAU',     'Obafemi Awolowo University',                'Nigeria', 'Premier federal university located in Ile-Ife, Osun State.',       'https://oauife.edu.ng'),
+    ('unn',     'UNN',     'University of Nigeria, Nsukka',             'Nigeria', 'First autonomous federal university located in Nsukka, Enugu State.', 'https://unn.edu.ng'),
+    ('abu',     'ABU',     'Ahmadu Bello University',                   'Nigeria', 'Premier federal university located in Zaria, Kaduna State.',        'https://abu.edu.ng'),
+    ('covenant','CU',      'Covenant University',                       'Nigeria', 'Leading private university located in Ota, Ogun State.',          'https://covenantuniversity.edu.ng')
 ON CONFLICT (slug) DO NOTHING;
 
 -- ============================================================
--- SEED DATA - Subjects (Senior & Junior Secondary)
+-- SEED DATA - Subjects & University Degree Programs
 -- ============================================================
 INSERT INTO subjects (slug, name, description, category) VALUES
     -- Senior Secondary Subjects
@@ -137,5 +148,17 @@ INSERT INTO subjects (slug, name, description, category) VALUES
     ('social-studies',       'Social Studies',       'Human relationships, culture, family, social issues, and environment.',      'basic'),
     ('business-studies',     'Business Studies',     'Office practice, book-keeping, shorthand, commerce, and consumer education.', 'basic'),
     ('cultural-and-creative-arts', 'Cultural & Creative Arts', 'Visual arts, drama, music, and Nigerian cultural heritage.',        'basic'),
-    ('physical-and-health-education', 'Physical & Health Education', 'Physical fitness, athletics, games, safety, and health education.', 'basic')
+    ('physical-and-health-education', 'Physical & Health Education', 'Physical fitness, athletics, games, safety, and health education.', 'basic'),
+
+    -- University Degree Programs (NUC CCMAS Standards)
+    ('computer-science',            'B.Sc. Computer Science',               'NUC CCMAS degree program covering programming, algorithms, systems, AI, and software engineering.', 'computing'),
+    ('cyber-security',              'B.Sc. Cyber Security',                 'NUC CCMAS degree program covering network security, cryptography, forensics, and ethical hacking.',  'computing'),
+    ('software-engineering',        'B.Sc. Software Engineering',           'NUC CCMAS degree program covering software architecture, testing, DevOps, and project management.',  'computing'),
+    ('medicine-and-surgery',        'M.B.B.S. Medicine and Surgery',        'NUC CCMAS professional medical degree program covering anatomy, physiology, pathology, and clinical medicine.', 'medical'),
+    ('nursing-science',             'B.N.Sc. Nursing Science',              'NUC CCMAS professional degree program covering clinical nursing, anatomy, pharmacology, and patient care.',  'medical'),
+    ('electrical-engineering',      'B.Eng. Electrical & Electronic Eng',   'NUC CCMAS engineering program covering circuit theory, power systems, electronics, and telecommunications.','engineering'),
+    ('mechanical-engineering',      'B.Eng. Mechanical Engineering',       'NUC CCMAS engineering program covering thermodynamics, fluid mechanics, machine design, and manufacturing.', 'engineering'),
+    ('law',                         'LL.B. Bachelor of Laws',               'NUC CCMAS professional law degree program covering constitutional law, criminal law, contract law, and jurisprudence.', 'law'),
+    ('accounting',                  'B.Sc. Accounting',                     'NUC CCMAS degree program covering financial accounting, auditing, taxation, and management accounting.',    'commercial'),
+    ('mass-communication',          'B.Sc. Mass Communication',             'NUC CCMAS degree program covering journalism, broadcasting, public relations, and digital media.',          'arts')
 ON CONFLICT (slug) DO NOTHING;
