@@ -129,6 +129,34 @@ func main() {
 				('afr_live_demo_9f8e2b7a', 'AfriLearn Demo Developer', 'demo@afrilearn.org', 'free'),
 				('afr_live_pro_8372bf91',  'AfriLearn Pro Partner',    'pro@afrilearn.org',  'pro')
 			ON CONFLICT (api_key) DO NOTHING`},
+		{"Create topic_prerequisites table", `
+			CREATE TABLE IF NOT EXISTS topic_prerequisites (
+				id                   UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+				topic_id             UUID NOT NULL REFERENCES topics(id) ON DELETE CASCADE,
+				prerequisite_topic_id UUID NOT NULL REFERENCES topics(id) ON DELETE CASCADE,
+				order_index          INTEGER NOT NULL DEFAULT 0,
+				created_at           TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+				UNIQUE(topic_id, prerequisite_topic_id)
+			)`},
+		{"Create query_cache table", `
+			CREATE TABLE IF NOT EXISTS query_cache (
+				id            UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+				query_hash    TEXT NOT NULL UNIQUE,
+				raw_query     TEXT NOT NULL,
+				normalized    TEXT NOT NULL,
+				intent_tags   TEXT[],
+				response_json JSONB NOT NULL,
+				hit_count     INTEGER NOT NULL DEFAULT 1,
+				last_hit_at   TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+				created_at    TIMESTAMPTZ NOT NULL DEFAULT NOW()
+			)`},
+		{"Create intelligence layer indexes", `
+			CREATE INDEX IF NOT EXISTS idx_topic_prereqs_topic      ON topic_prerequisites(topic_id);
+			CREATE INDEX IF NOT EXISTS idx_topic_prereqs_prereq     ON topic_prerequisites(prerequisite_topic_id);
+			CREATE INDEX IF NOT EXISTS idx_query_cache_hash         ON query_cache(query_hash);
+			CREATE INDEX IF NOT EXISTS idx_query_cache_hits         ON query_cache(hit_count DESC);
+			CREATE INDEX IF NOT EXISTS idx_topics_name_search       ON topics USING gin(to_tsvector('english', name));
+			CREATE INDEX IF NOT EXISTS idx_subtopics_name_search    ON subtopics USING gin(to_tsvector('english', name))`},
 	}
 
 	for _, stmt := range statements {

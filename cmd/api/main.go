@@ -112,6 +112,19 @@ func main() {
 		v1Protected.GET("/curriculum/:board/:subject", handlers.GetCurriculum)
 		v1Protected.GET("/curriculum/:board/:subject/llm-prompt", handlers.GetLLMPrompt)
 
+		// ── Intelligence Layer ────────────────────────────────────────────
+		// Cross-Board Curriculum Matching — query all 22 boards simultaneously
+		v1Protected.GET("/curriculum/match/:topic", handlers.GetCurriculumMatch)
+
+		// Learning Pathway Engine — ordered journey between curriculum levels
+		v1Protected.GET("/curriculum/pathway", handlers.GetLearningPathway)
+
+		// Prerequisite Engine — what to study before a specific topic
+		v1Protected.GET("/curriculum/prerequisites/:board/:subject/:topic", handlers.GetTopicPrerequisites)
+
+		// Curriculum Query Brain — natural language + clarification + smart cache
+		v1Protected.POST("/query", handlers.HandleCurriculumQuery)
+
 		// Search
 		v1Protected.GET("/search", handlers.SearchTopics)
 	}
