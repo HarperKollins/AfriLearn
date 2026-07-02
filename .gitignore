@@ -1,0 +1,30 @@
+# Environment variables (NEVER commit — contains secrets)
+.env
+
+# Binaries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+bin/
+
+# Go build cache
+*.test
+*.out
+
+# Environment variables (NEVER commit this)
+.env
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
