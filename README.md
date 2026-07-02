@@ -1,7 +1,7 @@
 # AfriLearn Curriculum API
 
 > The foundational data layer for African educational technology & AI Tutors.  
-> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NUC CCMAS (100L-500L) · NBTE Polytechnics (ND/HND) · AI Tutor LLM Prompt Generation** — structured as APIs.
+> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB · NUC CCMAS (100L-500L) · NBTE Polytechnics (ND/HND) · Developer API Keys · AI Tutor LLM Prompts** — structured as APIs.
 
 ---
 
@@ -9,18 +9,12 @@
 
 An infrastructure API that exposes official Nigerian/African curriculum data as clean, structured JSON endpoints. Built for EdTech developers, AI tutor companies, universities, polytechnics, schools, and educational platforms.
 
-```
-# 🤖 AI Tutor LLM System Prompt & Context Window Endpoints
-GET /api/v1/curriculum/waec/physics/llm-prompt
-GET /api/v1/curriculum/jamb/mathematics/llm-prompt
-GET /api/v1/curriculum/nuc/computer-science/llm-prompt
-GET /api/v1/curriculum/yabatech/computer-engineering-tech/llm-prompt
+```bash
+# Authenticated Request with X-API-Key
+curl -H "X-API-Key: afr_live_demo_9f8e2b7a" http://localhost:8080/api/v1/curriculum/waec/physics
 
-# Full Curriculum Tree Endpoints
-GET /api/v1/curriculum/yabatech/computer-engineering-tech
-GET /api/v1/curriculum/unilag/computer-science
-GET /api/v1/curriculum/nuc/computer-science
-GET /api/v1/curriculum/waec/mathematics
+# 🤖 AI Tutor LLM System Prompt & Context Window Endpoint
+curl -H "X-API-Key: afr_live_demo_9f8e2b7a" http://localhost:8080/api/v1/curriculum/waec/physics/llm-prompt
 ```
 
 ---
@@ -61,6 +55,18 @@ go run cmd/api/main.go
 
 ---
 
+## Developer API Keys & Rate Tiers
+
+Pass your API key in the `X-API-Key` HTTP header or as an `api_key` query parameter.
+
+| Tier | API Key | Rate Limit | Description |
+|------|---------|------------|-------------|
+| **Public** | *(None)* | 60 req/min | Public access without header |
+| **Free** | `afr_live_demo_9f8e2b7a` | 1,000 req/min | Free Developer Key |
+| **Pro** | `afr_live_pro_8372bf91` | 50,000 req/min | Commercial EdTech Partner Key |
+
+---
+
 ## Live API Reference
 
 ### Base URL
@@ -83,37 +89,10 @@ http://localhost:8080/api/v1
 
 ---
 
-## AI Tutor LLM Response Schema (`/llm-prompt`)
-
-```json
-{
-  "success": true,
-  "data": {
-    "exam_board": "WAEC",
-    "exam_board_slug": "waec",
-    "subject": "Physics",
-    "subject_slug": "physics",
-    "level": "senior-secondary",
-    "system_prompt": "You are an expert AI Tutor specialized in the official WAEC Physics curriculum for Senior Secondary School...",
-    "topics_summary": "1. Interaction of Matter, Space, and Time\n2. Energy\n...",
-    "full_context_window": "# WAEC Physics Official Curriculum Context\n\n## System Directive...\n",
-    "formatted_modules": [
-      {
-        "module_name": "Interaction of Matter, Space, and Time",
-        "difficulty": "medium",
-        "llm_instruction": "Teach 'Interaction of Matter, Space, and Time' with focus on: Concepts of Matter...",
-        "subtopics": ["Concepts of Matter and Position", "Units and Kinematics"]
-      }
-    ]
-  }
-}
-```
-
----
-
 ## Technical Architecture
 
 - **Go (Golang)** — High-performance, low-latency compiled runtime
 - **Gin** — Fast HTTP framework with CORS & middleware
 - **PostgreSQL (Neon)** — Relational storage with JSON array batching optimization (`pq.Array`)
+- **API Key Auth** — In-memory cached key authentication & background usage metering (`internal/middleware/auth.go`)
 - **Scraper Engine** — Modular `Scraper` interface pattern (`internal/scraper`)

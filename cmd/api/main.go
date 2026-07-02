@@ -9,6 +9,7 @@ import (
 
 	"github.com/afrilearn/curriculum-api/internal/database"
 	"github.com/afrilearn/curriculum-api/internal/handlers"
+	"github.com/afrilearn/curriculum-api/internal/middleware"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 )
@@ -52,8 +53,9 @@ func main() {
 	// ── Health check ─────────────────────────────────────────────────────────
 	router.GET("/health", handlers.HealthCheck)
 
-	// ── API v1 routes ─────────────────────────────────────────────────────────
+	// ── API v1 routes (protected with APIKeyAuth) ────────────────────────────
 	v1 := router.Group("/api/v1")
+	v1.Use(middleware.APIKeyAuth())
 	{
 		// Root info
 		v1.GET("/", func(c *gin.Context) {
@@ -61,6 +63,11 @@ func main() {
 				"service":     "AfriLearn Curriculum API",
 				"version":     "v1",
 				"description": "African Curriculum Infrastructure — BECE, WAEC, JAMB, NUC University Degrees, NBTE Polytechnics",
+				"authentication": gin.H{
+					"header":      "X-API-Key",
+					"query_param": "api_key",
+					"demo_key":    "afr_live_demo_9f8e2b7a",
+				},
 				"endpoints": gin.H{
 					"subjects":   "GET /api/v1/subjects",
 					"subject":    "GET /api/v1/subjects/:slug",
@@ -75,7 +82,6 @@ func main() {
 					"/api/v1/curriculum/nuc/computer-science/llm-prompt",
 					"/api/v1/curriculum/yabatech/computer-engineering-tech/llm-prompt",
 					"/api/v1/search?q=quadratic equations",
-					"/api/v1/subjects",
 				},
 			})
 		})
@@ -106,7 +112,7 @@ func main() {
 	log.Printf("📖 API Documentation: http://localhost:%s/api/v1/\n", port)
 	log.Printf("💚 Health Check:      http://localhost:%s/health\n", port)
 	log.Println("──────────────────────────────────────────────────────")
-	log.Printf("📡 Try: curl http://localhost:%s/api/v1/curriculum/waec/physics/llm-prompt\n", port)
+	log.Printf("📡 Try: curl -H 'X-API-Key: afr_live_demo_9f8e2b7a' http://localhost:%s/api/v1/curriculum/waec/physics/llm-prompt\n", port)
 
 	// Graceful shutdown
 	go func() {
