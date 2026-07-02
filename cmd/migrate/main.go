@@ -113,23 +113,35 @@ func main() {
 			CREATE INDEX IF NOT EXISTS idx_objectives_subtopic  ON learning_objectives(subtopic_id)`},
 		{"Seed exam boards", `
 			INSERT INTO exam_boards (slug, name, full_name, country, description, website) VALUES
-				('waec',  'WAEC',  'West African Examinations Council',                    'Nigeria', 'Conducts the WASSCE and other examinations across West Africa.', 'https://waec.org.ng'),
-				('jamb',  'JAMB',  'Joint Admissions and Matriculation Board',             'Nigeria', 'Responsible for university entrance examinations in Nigeria.',   'https://jamb.gov.ng'),
-				('neco',  'NECO',  'National Examinations Council',                        'Nigeria', 'Conducts the SSCE and other examinations in Nigeria.',           'https://neco.gov.ng'),
-				('nerdc', 'NERDC', 'Nigerian Educational Research and Development Council','Nigeria', 'Responsible for developing the national curriculum.',            'https://nerdc.gov.ng')
+				('bece',  'BECE',  'Basic Education Certificate Examination',   'Nigeria', 'The national exam for Junior Secondary School graduation (JSS3).', 'https://neco.gov.ng'),
+				('waec',  'WAEC',  'West African Examinations Council',         'Nigeria', 'Conducts the WASSCE across West Africa.',            'https://waec.org.ng'),
+				('jamb',  'JAMB',  'Joint Admissions and Matriculation Board',  'Nigeria', 'Responsible for university entrance exams in Nigeria.',     'https://jamb.gov.ng'),
+				('neco',  'NECO',  'National Examinations Council',             'Nigeria', 'Conducts SSCE and BECE exams in Nigeria.',                  'https://neco.gov.ng'),
+				('nerdc', 'NERDC', 'Nigerian Educational Research & Dev Council','Nigeria', 'Responsible for developing national curricula.',          'https://nerdc.gov.ng')
 			ON CONFLICT (slug) DO NOTHING`},
 		{"Seed subjects", `
 			INSERT INTO subjects (slug, name, description, category) VALUES
-				('mathematics',          'Mathematics',          'The study of numbers, quantities, shapes, and patterns.',                  'science'),
-				('english-language',     'English Language',     'The study of the English language, literature, and communication.',         'arts'),
-				('physics',              'Physics',              'The study of matter, energy, and fundamental forces.',                      'science'),
-				('chemistry',            'Chemistry',            'The study of substances, their properties, and reactions.',                 'science'),
-				('biology',              'Biology',              'The study of living organisms and their interactions.',                     'science'),
-				('economics',            'Economics',            'The study of how societies allocate scarce resources.',                     'commercial'),
-				('government',           'Government',           'The study of political systems and civic responsibilities.',                'arts'),
-				('literature',           'Literature in English','The study and analysis of literary texts in English.',                     'arts'),
-				('geography',            'Geography',            'The study of physical features of the earth and human activity.',          'arts'),
-				('further-mathematics',  'Further Mathematics',  'Advanced mathematics covering topics beyond the standard syllabus.',        'science')
+				('mathematics',          'Mathematics',          'Core senior secondary mathematics syllabus.',                                'science'),
+				('english-language',     'English Language',     'Core senior secondary English language and communication.',                   'arts'),
+				('physics',              'Physics',              'Study of matter, energy, mechanics, electricity, and modern physics.',        'science'),
+				('chemistry',            'Chemistry',            'Study of atomic structure, chemical bonding, reactions, and organic chemistry.','science'),
+				('biology',              'Biology',              'Study of living organisms, cellular processes, genetics, and ecology.',       'science'),
+				('economics',            'Economics',            'Microeconomics, macroeconomics, trade, and economic principles.',            'commercial'),
+				('government',           'Government',           'Political institutions, governance, constitutions, and international relations.','arts'),
+				('literature',           'Literature in English','African and non-African prose, poetry, and drama analysis.',                 'arts'),
+				('geography',            'Geography',            'Physical, human, regional, and practical map reading geography.',             'arts'),
+				('further-mathematics',  'Further Mathematics',  'Advanced pure mathematics, mechanics, and statistics.',                       'science'),
+				('agricultural-science', 'Agricultural Science', 'Crop production, animal husbandry, soil science, and farm management.',        'science'),
+				('civic-education',      'Civic Education',      'Values, human rights, citizenship, democracy, and national consciousness.',    'arts'),
+				('commerce',             'Commerce',             'Trade, business operations, banking, insurance, and marketing.',             'commercial'),
+				('financial-accounting', 'Financial Accounting', 'Bookkeeping, financial statements, partnership, and corporate accounting.',  'commercial'),
+				('computer-studies',     'Computer Studies',     'Computer hardware, software, networking, programming, and ICT applications.', 'science'),
+				('basic-science',        'Basic Science',        'Integrated junior secondary physical, chemical, and biological science.',     'basic'),
+				('basic-technology',     'Basic Technology',     'Materials, tools, woodwork, metalwork, technical drawing, and electronics.',  'basic'),
+				('social-studies',       'Social Studies',       'Human relationships, culture, family, social issues, and environment.',      'basic'),
+				('business-studies',     'Business Studies',     'Office practice, book-keeping, shorthand, commerce, and consumer education.', 'basic'),
+				('cultural-and-creative-arts', 'Cultural & Creative Arts', 'Visual arts, drama, music, and Nigerian cultural heritage.',        'basic'),
+				('physical-and-health-education', 'Physical & Health Education', 'Physical fitness, athletics, games, safety, and health education.', 'basic')
 			ON CONFLICT (slug) DO NOTHING`},
 	}
 
