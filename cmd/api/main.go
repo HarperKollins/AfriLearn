@@ -50,7 +50,8 @@ func main() {
 		c.Next()
 	})
 
-	// ── Public Web Routes (Health, Portal Dashboard, Swagger Docs) ────────────
+	// ── Public Web Routes (Root, Health, Portal Dashboard, Swagger Docs) ──────
+	router.GET("/", handlers.ServeDeveloperPortal)
 	router.GET("/health", handlers.HealthCheck)
 	router.GET("/portal", handlers.ServeDeveloperPortal)
 	router.GET("/docs", handlers.ServeSwaggerUI)
@@ -74,8 +75,8 @@ func main() {
 				"service":     "AfriLearn Curriculum API",
 				"version":     "v1",
 				"description": "African Curriculum Infrastructure — BECE, WAEC, JAMB, NUC University Degrees, NBTE Polytechnics",
-				"portal_url":  "http://localhost:8080/portal",
-				"docs_url":    "http://localhost:8080/docs",
+				"portal_url":  "/portal",
+				"docs_url":    "/docs",
 				"authentication": gin.H{
 					"header":      "X-API-Key",
 					"query_param": "api_key",
@@ -123,7 +124,7 @@ func main() {
 
 	// Start server
 	log.Printf("🚀 AfriLearn Curriculum API running on http://localhost:%s\n", port)
-	log.Printf("🔑 Developer Portal:          http://localhost:%s/portal\n", port)
+	log.Printf("🔑 Developer Portal:          http://localhost:%s/\n", port)
 	log.Printf("📖 Interactive Swagger Docs: http://localhost:%s/docs\n", port)
 	log.Printf("💚 Health Check:              http://localhost:%s/health\n", port)
 	log.Println("──────────────────────────────────────────────────────")

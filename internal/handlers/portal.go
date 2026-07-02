@@ -83,7 +83,7 @@ func GenerateAPIKey(c *gin.Context) {
 }
 
 // ServeDeveloperPortal serves the self-service Developer Portal HTML dashboard
-// GET /portal
+// GET /portal and GET /
 func ServeDeveloperPortal(c *gin.Context) {
 	html := `<!DOCTYPE html>
 <html lang="en">
@@ -196,13 +196,7 @@ func ServeDeveloperPortal(c *gin.Context) {
             <div class="card">
                 <h2>⚡ Quick Integration Code</h2>
                 <p style="font-size: 0.9rem; color: var(--text-muted);">Use your API key in the <code>X-API-Key</code> HTTP header:</p>
-                <div class="code-block" id="curlBlock"># 🤖 Get AI Tutor LLM System Prompt
-curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
-  http://localhost:8080/api/v1/curriculum/waec/physics/llm-prompt
-
-# 🎓 Get University Degree Curriculum (NUC Computer Science)
-curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
-  http://localhost:8080/api/v1/curriculum/nuc/computer-science</div>
+                <div class="code-block" id="curlBlock"></div>
             </div>
         </div>
 
@@ -214,6 +208,21 @@ curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
     </div>
 
     <script>
+        const baseUrl = window.location.origin;
+        const defaultKey = "afr_live_demo_9f8e2b7a";
+
+        function updateSnippet(key) {
+            document.getElementById('curlBlock').innerText = 
+'# 🤖 Get AI Tutor LLM System Prompt\n' +
+'curl -H "X-API-Key: ' + key + '" \\\n' +
+'  ' + baseUrl + '/api/v1/curriculum/waec/physics/llm-prompt\n\n' +
+'# 🎓 Get University Degree Curriculum (NUC Computer Science)\n' +
+'curl -H "X-API-Key: ' + key + '" \\\n' +
+'  ' + baseUrl + '/api/v1/curriculum/nuc/computer-science';
+        }
+
+        updateSnippet(defaultKey);
+
         document.getElementById('keyForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const devName = document.getElementById('devName').value;
@@ -234,14 +243,7 @@ curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
                     document.getElementById('tierInfo').innerText = 'Tier: ' + json.data.tier.toUpperCase() + ' (' + json.data.rate_limit + ')';
                     document.getElementById('resultBox').style.display = 'block';
 
-                    // Update curl snippet
-                    document.getElementById('curlBlock').innerText = 
-'# 🤖 Get AI Tutor LLM System Prompt\n' +
-'curl -H "X-API-Key: ' + apiKey + '" \\\n' +
-'  http://localhost:8080/api/v1/curriculum/waec/physics/llm-prompt\n\n' +
-'# 🎓 Get University Degree Curriculum\n' +
-'curl -H "X-API-Key: ' + apiKey + '" \\\n' +
-'  http://localhost:8080/api/v1/curriculum/nuc/computer-science';
+                    updateSnippet(apiKey);
                 } else {
                     alert('Failed: ' + json.message);
                 }
