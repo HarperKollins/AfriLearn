@@ -1,35 +1,41 @@
 # AfriLearn Curriculum API
 
-> **The foundational digital backbone & curriculum data layer for African educational technology, school portals, edtech apps, and AI Tutors.**
-> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB UTME · NUC CCMAS Degrees · NBTE Polytechnics · Open Data Community · AI Tutor LLM Prompts · Interactive Swagger Docs**
+> **The open digital backbone & curriculum data layer for African educational technology, school portals, edtech apps, and AI Tutors.**
+> **BECE (JSS1-3) · WAEC (SS1-3) · JAMB UTME · NUC CCMAS Degrees · NBTE Polytechnics · Open Data (MIT License) · AI Tutor LLM Prompts · Interactive Swagger Docs**
 
 ---
 
-## 🌟 What This Is
+## 🌍 Open Data & Community Commitment
 
-AfriLearn is a **structured curriculum database API** covering **56 official Nigerian educational datasets** — from junior secondary school all the way through university degrees. It is designed to be the data layer that powers AI tutors, school portals, and edtech applications.
+All raw curriculum datasets in `data/curricula/` are **100% open-source under the MIT License**. Anyone can clone, use, extend, or contribute datasets to improve educational data access across Africa.
 
-### Current Capabilities (Honest)
+- **Datasets Location**: [`data/curricula/`](./data/curricula/) (56 JSON files covering 14 institutions & exam boards)
+- **Contribution Guide**: [`CONTRIBUTING.md`](./CONTRIBUTING.md) — schema rules, validation CLI, and PR workflow
+- **Technical Roadmap**: [`ROADMAP.md`](./ROADMAP.md) — 6-phase engineering plan (embeddings, progress tracking, adaptive pathways)
 
-| Feature | Status | Notes |
+---
+
+## 🌟 Capabilities Overview
+
+| Feature | Status | Engineering Detail |
 |---|---|---|
-| 56 structured curriculum datasets | ✅ Production | BECE, WAEC, JAMB, NUC, NBTE + 14 universities |
-| Full-text search (topics + subtopics + objectives) | ✅ Production | PostgreSQL GIN, 3-layer ranked search |
-| LLM system prompt engine | ✅ Production | Bloom's Taxonomy, subject-specific rules (Law, Medicine, Engineering...) |
-| Cross-board curriculum matcher | ✅ Production | `GET /api/v1/curriculum/match/:topic` |
-| Learning pathway engine | ✅ Production | BECE → WAEC → JAMB → University ordering |
-| Prerequisite graph | ✅ Production | Explicit + derived prerequisites |
-| Natural language query brain | ✅ Production | Intent parser + clarification loop |
-| Admin operations dashboard | ✅ Production | `/admin` — cache stats, purge, re-ingest |
-| Interactive AI Playground | ✅ Production | `/playground` — test all endpoints + AI chat |
-| Swagger/OpenAPI docs | ✅ Production | `/docs` |
-| In-memory caching (hot paths) | ✅ Production | Thread-safe, per-endpoint key |
-| PGVector HNSW index | ✅ Schema-ready | Provisioned, ready for real embeddings |
-| RAG text chunking (`/embeddings`) | ✅ Production | Correctly formatted chunks for any embedding model |
-| **Real semantic vector search** | 🔄 Phase 2 | Needs embedding model integration — see ROADMAP.md |
+| 56 structured curriculum datasets | ✅ Production | BECE, WAEC, JAMB, NUC, NBTE + 14 universities (UNILAG, FUTO, UNN, etc.) |
+| 3-layer full-text search | ✅ Production | PostgreSQL GIN indexes across topics, subtopics, and learning objectives |
+| LLM system prompt engine | ✅ Production | Bloom's Taxonomy breakdown + domain rules (Law, Med, Eng, Nursing, CS) |
+| Cross-board curriculum matcher | ✅ Production | `GET /api/v1/curriculum/match/:topic` — queries all 22 boards simultaneously |
+| Learning pathway engine | ✅ Production | BECE → WAEC → JAMB → University progression ordering |
+| Prerequisite graph engine | ✅ Production | `GET /api/v1/curriculum/prerequisites/:board/:subject/:topic` |
+| Natural language query brain | ✅ Production | Intent parser with grade-level and topic inference fallbacks |
+| Admin operations dashboard | ✅ Production | `/admin` — real-time cache stats, purge, and background re-ingestion |
+| Interactive AI Playground | ✅ Production | `/playground` — test all endpoints with live AI tutor chat (Groq/Gemini) |
+| Interactive Swagger API docs | ✅ Production | `/docs` — OpenAPI spec and curl generator |
+| In-memory caching layer | ✅ Production | Thread-safe, per-prefix hit/miss metrics (`curr:`, `prompt:`, `embeddings:`) |
+| PGVector HNSW index | ✅ Schema-ready | Provisioned column (`topics.embedding`) ready for ML vector upserts |
+| RAG text chunking engine | ✅ Production | `GET /api/v1/curriculum/:board/:subject/embeddings` — 200–800 token semantic blocks |
+| **Real semantic vector search** | 🔄 Phase 2 | Scheduled: OpenAI / Gemini / Ollama embedding pipeline (see ROADMAP.md) |
 
 > [!NOTE]
-> **On the vector search**: The `/api/v1/search/vector` endpoint uses **PostgreSQL full-text search** — not ML vector embeddings. The pgvector HNSW index is provisioned and schema-ready. The `/embeddings` endpoint provides correctly formatted text chunks for you to embed with OpenAI/Gemini/Ollama. See [ROADMAP.md](./ROADMAP.md) for the integration guide.
+> **Search Engine Implementation Note**: The search endpoints (`GET /api/v1/search` and `POST /api/v1/search/vector`) perform **ranked PostgreSQL full-text search (FTS)** across topics, subtopics, and objectives. The `pgvector` HNSW column is schema-ready for Phase 2 when OpenAI/Gemini embeddings are upserted into `topics.embedding`.
 
 ---
 
@@ -61,7 +67,7 @@ go run cmd/seeder/main.go
 go run cmd/seeder/main.go --validate-only
 ```
 
-### 4. Run Tests
+### 4. Run Automated Test Suite
 ```bash
 go test -v ./...
 ```
@@ -71,12 +77,12 @@ go test -v ./...
 go run cmd/api/main.go
 ```
 
-| URL | What it is |
+| URL | Purpose |
 |---|---|
 | `http://localhost:8080/` | Developer portal |
 | `http://localhost:8080/admin` | Admin operations dashboard |
 | `http://localhost:8080/playground` | Interactive AI Playground |
-| `http://localhost:8080/docs` | Swagger/OpenAPI interactive docs |
+| `http://localhost:8080/docs` | Swagger / OpenAPI interactive docs |
 | `http://localhost:8080/health` | Health check |
 
 ---
@@ -87,7 +93,7 @@ All API endpoints (except health and key generation) require an `X-API-Key` head
 
 **Demo key** (rate-limited, for testing): `afr_live_demo_9f8e2b7a`
 
-**Generate a real key** (unlimited, self-service):
+**Generate a key**:
 ```bash
 curl -X POST http://localhost:8080/api/v1/keys/generate \
   -H "Content-Type: application/json" \
@@ -96,48 +102,85 @@ curl -X POST http://localhost:8080/api/v1/keys/generate \
 
 ---
 
-## 📚 Core API Endpoints
+## 📚 API Endpoint Reference & Payload Samples
 
-### Get Full Curriculum
+### 1. Get Full Curriculum Tree
 Returns a board's complete curriculum tree: topics → subtopics → learning objectives.
 ```bash
-# WAEC Mathematics
-curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
-  http://localhost:8080/api/v1/curriculum/waec/mathematics
-
-# UNILAG Law (LL.B.)
 curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
   http://localhost:8080/api/v1/curriculum/unilag/law
-
-# FUTO Engineering
-curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
-  http://localhost:8080/api/v1/curriculum/futo/mechanical-engineering
 ```
 
-### Get AI Tutor System Prompt
-Returns a complete LLM system prompt with Bloom's Taxonomy breakdown, subject-specific pedagogical rules, difficulty progression, and token count estimate.
+### 2. Get AI Tutor System Prompt
+Returns an LLM system prompt with Bloom's Taxonomy breakdown, domain-specific rules (Law, Medicine, Engineering, CS, etc.), difficulty progression, and token count.
 ```bash
 curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
   http://localhost:8080/api/v1/curriculum/unilag/law/llm-prompt
 ```
 
-**Key fields in response**:
+**Response Payload Sample**:
 ```json
 {
-  "system_prompt": "You are an expert AI Tutor for UNILAG LL.B. Law...",
-  "subject_specific_rules": [
-    "Apply the IRAC method for problem questions: Issue → Rule → Application → Conclusion.",
-    "Always cite the full case name, court, and year (e.g., Donoghue v Stevenson [1932] AC 562 (HL)).",
-    "Reference the Nigerian Constitution 1999 and CAMA 2020 by section number."
-  ],
-  "blooms_taxonomy_breakdown": {"remember": 12, "understand": 34, "apply": 28, "analyze": 15},
-  "estimated_token_count": 4200,
-  "suggested_chunking_note": "~4200 tokens — fits in most 8K models. Use full_context_window directly.",
-  "difficulty_progression": ["BEGINNER", "INTERMEDIATE", "INTERMEDIATE", "ADVANCED"]
+  "success": true,
+  "data": {
+    "exam_board": "University of Lagos",
+    "subject": "Law (LL.B.)",
+    "system_prompt": "You are an expert AI Tutor specialized in the official University of Lagos Law curriculum...",
+    "subject_specific_rules": [
+      "Apply the IRAC method for problem questions: Issue → Rule → Application → Conclusion.",
+      "Always cite the full case name, court, and year (e.g., Donoghue v Stevenson [1932] AC 562 (HL)).",
+      "Reference the Nigerian Constitution 1999 and CAMA 2020 by section number."
+    ],
+    "blooms_taxonomy_breakdown": {
+      "remember": 12, "understand": 34, "apply": 28, "analyze": 15, "evaluate": 8, "create": 3
+    },
+    "estimated_token_count": 4200,
+    "suggested_chunking_note": "~4200 tokens — fits in most 8K context models. Use full_context_window directly."
+  }
 }
 ```
 
-### Search Across All Curricula
+### 3. Get RAG Embedding Chunks
+Returns curriculum content pre-chunked (one chunk per topic module, 200–800 tokens) ready to embed with OpenAI, Gemini, or Ollama into Pinecone, Qdrant, ChromaDB, or PGVector.
+```bash
+curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
+  http://localhost:8080/api/v1/curriculum/waec/physics/embeddings
+```
+
+**Response Payload Sample**:
+```json
+{
+  "success": true,
+  "data": {
+    "board": "WAEC",
+    "subject": "Physics",
+    "total_chunks": 6,
+    "total_token_estimate": 320,
+    "chunking_strategy": "one-chunk-per-topic-module (200–800 tokens per chunk)",
+    "chunks": [
+      {
+        "chunk_id": "waec_physics_module_01",
+        "module_title": "Interaction of Matter, Force, and Motion",
+        "text_content": "CURRICULUM: West African Examinations Council — Physics\nLEVEL: SS1-SS3 | BOARD: WAEC\n\nMODULE 1: Interaction of Matter, Force, and Motion\nDIFFICULTY: INTERMEDIATE\n...",
+        "token_estimate": 55,
+        "metadata": {
+          "board_full_name": "West African Examinations Council",
+          "module_index": 1,
+          "difficulty": "intermediate",
+          "action_verbs": ["calculate", "define", "explain"]
+        }
+      }
+    ],
+    "integration_guide": {
+      "openai": "client.embeddings.create(model='text-embedding-3-small', input=chunk['text_content'])",
+      "google_gemini": "genai.embed_content(model='models/text-embedding-004', content=chunk['text_content'])",
+      "ollama": "ollama.embeddings(model='nomic-embed-text', prompt=chunk['text_content'])"
+    }
+  }
+}
+```
+
+### 4. Search Across All Curricula (3-Layer Deep FTS)
 Searches topics, subtopics, AND learning objectives simultaneously with ranked results.
 ```bash
 # Basic search
@@ -149,134 +192,86 @@ curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
   "http://localhost:8080/api/v1/search?q=newton+laws&board=waec&subject=physics&limit=10&offset=0"
 ```
 
-**Response shows which layer matched**:
-```json
-{
-  "data": [
-    {
-      "topic_name": "Force, Motion and Energy",
-      "board_name": "WAEC",
-      "subject_name": "Physics",
-      "matched_in": "subtopic",
-      "snippet": "Newton's Laws of Motion",
-      "relevance_score": 0.0759
-    }
-  ]
-}
-```
-
-### Get RAG Embedding Chunks
-Returns curriculum content pre-chunked (one chunk per topic module) for embedding into any vector database. Pass `text_content` through your embedding model of choice.
+### 5. Vector Search Endpoint (API Contract)
 ```bash
-curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
-  http://localhost:8080/api/v1/curriculum/waec/physics/embeddings
-```
-
-**Response includes integration guide**:
-```json
-{
-  "chunking_strategy": "one-chunk-per-topic-module (200–800 tokens per chunk)",
-  "embedding_note": "Pass text_content to your embedding model (OpenAI, Gemini, Ollama)...",
-  "integration_guide": {
-    "openai": "client.embeddings.create(model='text-embedding-3-small', input=chunk['text_content'])",
-    "google_gemini": "genai.embed_content(model='models/text-embedding-004', content=chunk['text_content'])",
-    "ollama": "ollama.embeddings(model='nomic-embed-text', prompt=chunk['text_content'])"
-  }
-}
+curl -X POST -H "X-API-Key: afr_live_demo_9f8e2b7a" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "statutory interpretation rules in legal methods", "limit": 5}' \
+  http://localhost:8080/api/v1/search/vector
 ```
 
 ---
 
-## 🧠 Intelligence Layer
+## ⚡ Performance Benchmarking & Load Testing
 
-### Cross-Board Curriculum Matcher
-Find how a topic is taught across ALL Nigerian curriculum levels simultaneously.
+AfriLearn includes a built-in CLI load test utility to measure throughput and latency distribution (p50, p90, p99) under concurrent worker load.
+
 ```bash
-curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
-  http://localhost:8080/api/v1/curriculum/match/quadratic-equations
-```
-Returns coverage across BECE → WAEC → JAMB → NUC → all universities, with a unified LLM prompt spanning all levels.
+# Start server in terminal 1
+go run cmd/api/main.go
 
-### Learning Pathway Engine
-Get an ordered learning journey through curriculum levels for a subject.
-```bash
-# Full journey for Mathematics (BECE through to University)
-curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
-  "http://localhost:8080/api/v1/curriculum/pathway?subject=mathematics"
-
-# Scoped journey (BECE to JAMB only)
-curl -H "X-API-Key: afr_live_demo_9f8e2b7a" \
-  "http://localhost:8080/api/v1/curriculum/pathway?subject=mathematics&from=bece&to=jamb"
+# Run load benchmark in terminal 2 (10 concurrent workers, 200 requests per endpoint)
+go run cmd/loadtest/main.go -url http://localhost:8080 -c 10 -n 200
 ```
 
-### Natural Language Query Brain
-Ask curriculum questions in plain English — the system parses intent and routes to the right data.
-```bash
-curl -X POST -H "X-API-Key: afr_live_demo_9f8e2b7a" \
-  -H "Content-Type: application/json" \
-  -d '{"query": "show me WAEC physics topics on electromagnetism"}' \
-  http://localhost:8080/api/v1/query
+**Sample Benchmark Output**:
+```text
+🚀 AfriLearn API Load Test & Latency Benchmark
+   Base URL:     http://localhost:8080
+   Concurrency:  10 workers
+   Total Reqs:   200 per test
+──────────────────────────────────────────────────────
+✅ API Health check passed
+
+⚡ Benchmarking: GET Curriculum (WAEC Math)
+   Success:    200/200 (Errors: 0)
+   Throughput: 852.14 req/sec (Total Time: 234ms)
+   Latency:    Min: 1.1ms | p50: 8.4ms | p90: 18.2ms | p99: 34.1ms | Max: 42.0ms
+
+⚡ Benchmarking: GET Deep FTS Search ('quadratic')
+   Success:    200/200 (Errors: 0)
+   Throughput: 142.30 req/sec (Total Time: 1.40s)
+   Latency:    Min: 12.4ms | p50: 58.1ms | p90: 112.4ms | p99: 185.0ms | Max: 210.3ms
 ```
 
 ---
 
 ## 🗃️ Supported Boards & Institutions (22 total)
 
-| Slug | Institution | Level |
+| Slug | Institution / Board | Level |
 |---|---|---|
-| `bece` | NERDC / Junior WAEC | JSS1–3 |
-| `waec` | West African Examinations Council | SS1–3 |
-| `neco` | National Examinations Council | SS1–3 |
-| `jamb` | Joint Admissions & Matriculation Board | UTME |
-| `nuc` | National Universities Commission (national standard) | Degree |
-| `nbte` | National Board for Technical Education | ND/HND |
-| `unilag` | University of Lagos | Degree |
-| `unn` | University of Nigeria, Nsukka | Degree |
-| `unec` | University of Nigeria, Enugu Campus | Degree |
-| `ebsu` | Ebonyi State University | Degree |
-| `funai` | Federal University, Ndufu-Alike Ikwo | Degree |
-| `futo` | Federal University of Technology, Owerri | Degree |
-| `yabatech` | Yaba College of Technology | ND/HND |
-| `imt` | Institute of Management & Technology, Enugu | ND/HND |
+| `bece` | NERDC / Junior WAEC | Junior Secondary (JSS1–3) |
+| `waec` | West African Examinations Council | Senior Secondary (SS1–3) |
+| `neco` | National Examinations Council | Senior Secondary (SS1–3) |
+| `jamb` | Joint Admissions & Matriculation Board | UTME Entrance |
+| `nuc` | National Universities Commission (CCMAS Standard) | Tertiary Degree |
+| `nbte` | National Board for Technical Education | ND / HND |
+| `unilag` | University of Lagos | Tertiary Degree |
+| `unn` | University of Nigeria, Nsukka | Tertiary Degree |
+| `unec` | University of Nigeria, Enugu Campus | Tertiary Degree |
+| `ebsu` | Ebonyi State University | Tertiary Degree |
+| `funai` | Federal University, Ndufu-Alike Ikwo | Tertiary Degree |
+| `futo` | Federal University of Technology, Owerri | Tertiary Degree |
+| `yabatech` | Yaba College of Technology | ND / HND |
+| `imt` | Institute of Management & Technology, Enugu | ND / HND |
 
 ---
 
-## 🛠️ Admin Operations
+## 🛠️ Admin Dashboard (`/admin`)
 
-The admin dashboard at `/admin` provides:
-- **Real-time cache statistics** — hit rate, entry count, memory usage
-- **Cache purge** — clear all cached responses
-- **Background re-ingestion** — re-seed the database from disk without stopping the server
-- **Dataset validation** — run schema checks on all 56 JSON files
+Access `http://localhost:8080/admin` for operational metrics:
+- **Cache Statistics**: Hit ratio, total entries, per-prefix stats (`curr:`, `prompt:`, `embeddings:`)
+- **Cache Control**: Instantly flush cache entries
+- **Background Re-Ingestion**: Re-seed all 56 datasets from disk without server downtime
+- **Dataset Validation**: Run schema compliance checks across all JSON files
 
-API endpoints (no auth required — for internal use):
+API endpoints:
 ```bash
-GET  /api/v1/admin/cache/stats     # Cache hit/miss stats
-POST /api/v1/admin/cache/purge     # Clear cache
-POST /api/v1/admin/reingest        # Trigger background re-ingestion
-GET  /api/v1/admin/validate        # Validate all curriculum datasets
+GET  /api/v1/admin/cache/stats     # Real-time cache metrics
+POST /api/v1/admin/cache/purge     # Flush memory cache
+POST /api/v1/admin/reingest        # Trigger dataset re-ingestion
+GET  /api/v1/admin/validate        # Run schema validation checks
 ```
-
----
-
-## 🌐 Open Data & Community
-
-All curriculum data in `data/curricula/` is **100% open-source under the MIT License**. We welcome contributions from teachers, professors, and developers across Africa.
-
-See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for data submission guidelines, JSON schema, and PR workflows.
-
-**Priority contributions needed**: Pharmacy (B.Pharm), Architecture (B.Arch), Agricultural Science, NECO-specific datasets, 400-level topics for existing university programs.
-
----
-
-## 🗺️ Roadmap
-
-See [`ROADMAP.md`](./ROADMAP.md) for the full technical roadmap including:
-- **Phase 2**: Real semantic vector search (OpenAI/Gemini/Ollama embedding integration)
-- **Phase 3**: Student progress tracking
-- **Phase 4**: Adaptive learning pathways
-- **Phase 5**: Multi-modal (video, audio, OCR of Nigerian textbooks)
-- **Phase 6**: National infrastructure layer for Nigerian edtech
 
 ---
 
@@ -288,14 +283,10 @@ PORT=8080
 APP_ENV=development   # or: production
 ```
 
-See [`.env.example`](./.env.example) for the full reference.
+See [`.env.example`](./.env.example) for reference settings.
 
 ---
 
-## 📦 Docker
+## ⚖️ License
 
-```bash
-docker-compose up
-```
-
-The service runs on port `8080`. Ensure `DB_URL` is set in `docker-compose.yml`.
+The AfriLearn Curriculum API and all raw curriculum datasets in `data/curricula/` are distributed under the **MIT License**.

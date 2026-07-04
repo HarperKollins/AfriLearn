@@ -1,50 +1,60 @@
 # Contributing to AfriLearn Curriculum Datasets
 
-Thank you for helping democratize and standardize African educational curriculum data! 🌍
+Thank you for helping build Africa's open curriculum data primitive! 🌍
 
-AfriLearn's mission is to become the **open-source foundational data primitive** for edtech applications, AI tutors, and school portals across Africa. All raw curriculum data in `data/curricula/` is 100% open-source under the MIT License.
+AfriLearn's mission is to become the **open-source foundational data layer** for edtech applications, AI tutors, and school portals across Africa. All raw curriculum datasets in `data/curricula/` are **100% open-source under the MIT License**.
 
 ---
 
-## 📁 Repository Data Structure
+## 📁 Dataset Folder Structure
 
-All curricula are organized under `data/curricula/`:
-```
+All datasets live in `data/curricula/`, organized by board or institution slug:
+
+```text
 data/curricula/
-├── bece/                  # Junior Secondary (JSS1-3)
-├── waec/                  # Senior Secondary (SS1-3)
-├── jamb/                  # UTME Entrance Syllabus
-├── nuc/                   # National Universities Commission (CCMAS Standards)
-├── [university_slug]/     # University-specific programs (e.g., unilag, unn, futo)
-└── [polytechnic_slug]/    # Polytechnic programs (e.g., yabatech, imt)
+├── bece/                      # Junior Secondary (JSS1-3 / NERDC standard)
+│   ├── mathematics.json
+│   └── basic-science.json
+├── waec/                      # Senior Secondary (SS1-3 / WAEC standard)
+│   ├── physics.json
+│   └── chemistry.json
+├── jamb/                      # UTME Entrance Syllabus
+├── nuc/                       # National Universities Commission (CCMAS Degree benchmarks)
+│   ├── computer-science.json
+│   └── law.json
+├── nbte/                      # National Board for Technical Education (Polytechnics)
+├── unilag/                    # University-specific (e.g. UNILAG Law, Pharmacy)
+├── futo/                      # Federal University of Technology Owerri
+└── yabatech/                  # Yaba College of Technology
 ```
 
 ---
 
-## 📜 Curriculum JSON Schema Specification
+## 📋 Standard Curriculum JSON Template
 
-Every JSON file in `data/curricula/` must strictly follow this structure:
+Copy this template when adding a new subject dataset:
 
 ```json
 {
   "board": "unilag",
-  "subject": "law",
+  "subject": "pharmacy",
   "level": "tertiary-degree",
-  "source_url": "https://unilag.edu.ng/academics/faculty-of-law",
+  "source_url": "https://unilag.edu.ng/academics/faculty-of-pharmacy",
   "topics": [
     {
-      "name": "Year 1 (100 Level): Legal Foundations & Methodologies",
-      "description": "Foundational law courses setting up legal reasoning, legal systems, and statutory interpretation.",
-      "difficulty": "easy",
+      "name": "Year 1 (100 Level): Pharmaceutical Chemistry & Biochemistry",
+      "description": "Foundational topics covering organic reaction mechanisms, functional groups, and biomolecules in pharmacy.",
+      "difficulty": "medium",
       "subtopics": [
         {
-          "name": "Legal Methods I: Sources & Statutory Interpretation",
-          "course_code": "LAW 101",
-          "credit_units": "4 Units",
+          "name": "PCH 101: Basic Pharmaceutical Organic Chemistry",
+          "course_code": "PCH 101",
+          "credit_units": "3 Units",
           "semester": "First Semester",
           "objectives": [
-            "Apply common law rules of statutory interpretation including the literal, golden, and mischief rules",
-            "Evaluate judicial precedent (stare decisis) and ratio decidendi versus obiter dictum in Nigerian case law"
+            "Identify functional groups and stereochemical centers in synthetic drug molecules",
+            "Explain reaction mechanisms for electrophilic aromatic substitution in aromatic drug synthesis",
+            "Calculate reaction yields and purity percentages from experimental synthesis data"
           ]
         }
       ]
@@ -53,34 +63,67 @@ Every JSON file in `data/curricula/` must strictly follow this structure:
 }
 ```
 
-### Required Fields & Rules:
-1. **`board`**: Must match an existing exam board or institution slug (`waec`, `jamb`, `bece`, `nuc`, `unilag`, `futo`, etc.).
-2. **`subject`**: Must match standard subject slug (`mathematics`, `physics`, `law`, `computer-science`, `medicine-and-surgery`).
-3. **`difficulty`**: Must be one of `"easy"`, `"medium"`, or `"hard"`.
-4. **`objectives`**: Each learning objective MUST start with an explicit Bloom's Taxonomy action verb (`calculate`, `define`, `explain`, `apply`, `analyse`, `evaluate`, `create`, `design`, `solve`).
-5. **Tertiary Degree Attributes** (`course_code`, `credit_units`, `semester`): Highly encouraged for university and polytechnic courses (e.g. `"LAW 101"`, `"4 Units"`, `"First Semester"`).
+---
+
+## 📏 Schema Validation Rules
+
+Every dataset must pass `go run cmd/seeder/main.go --validate-only` before PR submission. The validator checks:
+
+| Field | Requirement | Allowed Values / Examples |
+|---|---|---|
+| `board` | Required, string | Must match board slug (`waec`, `jamb`, `bece`, `nuc`, `unilag`, etc.) |
+| `subject` | Required, string | Standard subject slug (`mathematics`, `physics`, `law`, `pharmacy`) |
+| `level` | Required, string | `"junior-secondary"`, `"senior-secondary"`, `"utme"`, `"tertiary-degree"`, `"polytechnic-diploma"` |
+| `source_url` | Required, valid URL | URL to official syllabus, faculty handbook, or accreditation document |
+| `topics` | Non-empty array | Minimum 1 topic required per curriculum |
+| `topics[].name` | Required, string | Must be descriptive (min 5 characters) |
+| `topics[].difficulty` | Required, string | **Must be exactly**: `"easy"`, `"medium"`, or `"hard"` |
+| `subtopics[].name` | Required, string | Must be descriptive (min 3 characters) |
+| `objectives` | Array of strings | Minimum 1 objective per subtopic recommended |
+| **Bloom's Action Verb** | First word of objective | **Must start with an action verb**: `calculate`, `define`, `explain`, `apply`, `analyse`, `evaluate`, `create`, `design`, `solve`, `identify`, `list`, `state`, `describe` |
 
 ---
 
-## 🛠️ Pre-Commit Quality & Validation Check
+## 🛠️ Step-by-Step Contribution & PR Workflow
 
-Before submitting a Pull Request, run the local dataset validator:
-
+### Step 1: Fork & Clone
 ```bash
-# Verify schema compliance across all JSON files
-go run cmd/seeder/main.go --validate-only
+git clone https://github.com/YOUR_USERNAME/AfriLearn.git
+cd AfriLearn
 ```
 
-If any file contains invalid difficulty tags, missing fields, or objectives under 10 characters, the validator will highlight the exact line and file.
+### Step 2: Create a Branch
+```bash
+git checkout -b data/add-unilag-pharmacy
+```
+
+### Step 3: Add Your Dataset
+Create your file under `data/curricula/[board_slug]/[subject_slug].json`.
+
+### Step 4: Run Schema Validation
+```bash
+go run cmd/seeder/main.go --validate-only
+```
+*Expected output*: `✅ Validation passed for data/curricula/unilag/pharmacy.json`
+
+### Step 5: Test Full Ingestion (Local DB)
+```bash
+go run cmd/seeder/main.go
+go test -v ./...
+```
+
+### Step 6: Commit & Push
+```bash
+git add data/curricula/unilag/pharmacy.json
+git commit -m "data: add UNILAG Pharmacy curriculum dataset"
+git push origin data/add-unilag-pharmacy
+```
+
+### Step 7: Open Pull Request
+Open a PR on GitHub referencing the source institution handbook or syllabus URL. Maintainers will review within 48 hours.
 
 ---
 
-## 🚀 How to Submit a Pull Request
+## ⚖️ License
 
-1. Fork the repository on GitHub: `https://github.com/HarperKollins/AfriLearn`
-2. Create a new branch: `git checkout -b feature/add-unilag-engineering`
-3. Add your new curriculum file under `data/curricula/[board]/[subject].json`
-4. Run validation: `go run cmd/seeder/main.go --validate-only`
-5. Run tests: `go test -v ./...`
-6. Commit and push: `git commit -m "feat: add UNILAG Mechanical Engineering curriculum"`
-7. Open a Pull Request on GitHub.
+By contributing, you agree that your data submissions will be licensed under the **MIT License**. All curriculum datasets are 100% open data for public benefit.
