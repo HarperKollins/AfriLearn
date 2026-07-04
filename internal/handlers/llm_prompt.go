@@ -360,11 +360,12 @@ func buildSubjectSpecificRules(subjectSlug, boardSlug string) []string {
 			"Always cite the full case name, court, and year for every case law reference (e.g., Donoghue v Stevenson [1932] AC 562 (HL)).",
 			"Distinguish between ratio decidendi (binding legal reason) and obiter dicta (non-binding remarks) when discussing case law.",
 			"Apply the IRAC method for problem questions: Issue → Rule → Application → Conclusion.",
-			"Reference the Nigerian Constitution 1999 (as amended), relevant statutes (e.g., CAMA 2020, Criminal Code Act), and subsidiary legislation by chapter and section number.",
-			"Note jurisdictional differences between English common law and Nigerian statutory modifications.",
+			"Reference the Nigerian Constitution 1999 (as amended), relevant statutes (e.g., CAMA 2020, Criminal Code Act, Evidence Act 2011), and subsidiary legislation by chapter and section number.",
+			"For Land Law edge cases: address both the statutory writing requirement (Statute of Frauds / Law of Contract) and the equitable doctrine of Part Performance (e.g., payment of deposit + taking possession + making improvements).",
+			"Address Section 22 of the Land Use Act 1978 (Governor's Consent requirement) explicitly — note the Supreme Court ruling in Savannah Bank v Ajilo [1989] that failure to seek consent makes alienations voidable/inchoate, not void ab initio.",
+			"Note jurisdictional differences between English common law precedents and Nigerian statutory modifications.",
 			"For Equity topics: always trace the development from Court of Chancery through to modern Nigerian equity principles.",
 			"For Criminal Law: always state the actus reus (guilty act) and mens rea (guilty mind) elements before discussing liability.",
-			"For Land Law: distinguish between legal and equitable interests, and reference the Land Use Act 1978 (Nigeria) explicitly.",
 		}
 
 	case "medicine-surgery", "mbbs":
@@ -372,11 +373,22 @@ func buildSubjectSpecificRules(subjectSlug, boardSlug string) []string {
 			"Present clinical cases using the SOAP note format: Subjective (patient history), Objective (examination findings), Assessment (differential diagnosis), Plan (investigations + management).",
 			"Always state the drug name (generic), mechanism of action, indication, contraindications, and common adverse effects when discussing pharmacology.",
 			"For differential diagnoses: start with the most life-threatening condition first (rule of worst-first).",
+			"For acute abdominal pain cases (e.g. alcohol history + epigastric pain radiating to back): distinguish Acute Pancreatitis (serum amylase/lipase > 3x normal, Cullen's/Grey Turner's sign) from Perforated Peptic Ulcer (erect CXR showing gas under diaphragm) and Acute Cholecystitis.",
 			"Use SI units for all laboratory values (e.g., haemoglobin in g/dL, glucose in mmol/L, creatinine in μmol/L).",
 			"Reference Nigerian disease epidemiology (malaria, typhoid, sickle cell, tuberculosis) as primary context before introducing rarer global conditions.",
 			"For surgical topics: describe patient positioning, landmarks, incision, and potential complications in sequence.",
 			"Always include patient safety principles (e.g., WHO Surgical Safety Checklist, hand hygiene protocol) when relevant.",
 			"For paediatric topics: always adjust drug dosages by weight (mg/kg) and note age-specific normal ranges.",
+		}
+
+	case "physics":
+		return []string{
+			"State Newton's Laws, conservation principles, or relevant formulae at the start of every mechanics problem.",
+			"Use standard SI units and show all unit conversions explicitly.",
+			"Misconception Interception: Address common student misconceptions explicitly (e.g. 'Satellites do not float in zero-g; gravity is active in orbit and provides the centripetal force keeping the satellite in continuous free-fall').",
+			"Draw free body diagrams for all force problems before resolving components.",
+			"For wave and optics problems: sketch the wave or ray diagram as the first step.",
+			"Explain the physical intuition behind each formula — what does it mean physically, not just mathematically.",
 		}
 
 	case "nursing-science":
@@ -461,15 +473,6 @@ func buildSubjectSpecificRules(subjectSlug, boardSlug string) []string {
 			"Graph functions clearly — label axes, mark intercepts, asymptotes, and key points.",
 			"For proofs: state what is to be proved, state assumptions, and conclude clearly (QED).",
 			"Check answers by substituting back into the original equation.",
-		}
-
-	case "physics":
-		return []string{
-			"State Newton's Laws, conservation principles, or relevant formulae at the start of every mechanics problem.",
-			"Use standard SI units and show all unit conversions explicitly.",
-			"Draw free body diagrams for all force problems before resolving components.",
-			"For wave and optics problems: sketch the wave or ray diagram as the first step.",
-			"Explain the physical intuition behind each formula — what does it mean physically, not just mathematically.",
 		}
 
 	case "chemistry":
