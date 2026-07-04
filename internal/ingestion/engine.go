@@ -326,6 +326,8 @@ func (e *Engine) upsertObjective(subtopicID, description string, order int) erro
 // Slugify converts any string to a URL-safe slug.
 func Slugify(s string) string {
 	s = strings.ToLower(strings.TrimSpace(s))
+	s = strings.ReplaceAll(s, "–", "-")
+	s = strings.ReplaceAll(s, "—", "-")
 	s = strings.ReplaceAll(s, " & ", "-and-")
 	s = strings.ReplaceAll(s, " ", "-")
 	s = strings.ReplaceAll(s, "/", "-")
@@ -360,9 +362,10 @@ func ClassifyDifficulty(topicName string) string {
 func ExtractBloomsVerb(objective string) string {
 	bloomsVerbs := []string{
 		"define", "identify", "calculate", "solve", "apply", "analyze", "analyse",
-		"evaluate", "create", "construct", "interpret", "explain", "distinguish",
+		"evaluate", "create", "construct", "design", "build", "interpret", "explain", "distinguish",
 		"state", "use", "find", "draw", "describe", "determine", "perform", "express",
 		"compare", "differentiate", "illustrate", "demonstrate", "relate", "formulate",
+		"list", "name", "recall",
 	}
 	lower := strings.ToLower(strings.TrimSpace(objective))
 	for _, verb := range bloomsVerbs {

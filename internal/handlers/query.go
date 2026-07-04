@@ -215,7 +215,12 @@ var actionKeywords = map[string]string{
 	"need to know":  "prerequisites",
 }
 
-func parseIntent(text string, existing *ParsedIntent) ParsedIntent {
+// ParseUserIntent parses natural language queries into structured ParsedIntent
+func ParseUserIntent(text string) ParsedIntent {
+	return ParseIntent(text, nil)
+}
+
+func ParseIntent(text string, existing *ParsedIntent) ParsedIntent {
 	lower := strings.ToLower(text)
 	intent := ParsedIntent{Raw: text}
 	if existing != nil {
@@ -604,7 +609,7 @@ func HandleCurriculumQuery(c *gin.Context) {
 			existingIntent = &session.Intent
 		}
 	}
-	intent := parseIntent(rawQuestion, existingIntent)
+	intent := ParseIntent(rawQuestion, existingIntent)
 
 	// ── Stage 3: Clarification check ─────────────────────────────────────────
 	missing := missingFields(intent)

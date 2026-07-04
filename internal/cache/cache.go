@@ -89,11 +89,13 @@ func (c *MemoryCache) Delete(key string) {
 	delete(c.items, key)
 }
 
-// Clear flushes all cached items
+// Clear flushes all cached items and resets hit/miss counters
 func (c *MemoryCache) Clear() {
 	c.mu.Lock()
 	defer c.mu.Unlock()
 	c.items = make(map[string]cacheItem)
+	c.hits = 0
+	c.misses = 0
 }
 
 // Stats returns current cache metrics

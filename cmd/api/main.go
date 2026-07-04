@@ -122,6 +122,7 @@ func main() {
 		// Curriculum — main endpoints
 		v1Protected.GET("/curriculum/:board/:subject", handlers.GetCurriculum)
 		v1Protected.GET("/curriculum/:board/:subject/llm-prompt", handlers.GetLLMPrompt)
+		v1Protected.GET("/curriculum/:board/:subject/embeddings", handlers.GetCurriculumEmbeddings)
 
 		// ── Intelligence Layer ────────────────────────────────────────────
 		// Cross-Board Curriculum Matching — query all 22 boards simultaneously
