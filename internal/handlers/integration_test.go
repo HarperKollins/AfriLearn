@@ -8,11 +8,17 @@ import (
 	"testing"
 
 	"github.com/afrilearn/curriculum-api/internal/cache"
+	"github.com/afrilearn/curriculum-api/internal/database"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
 )
 
 func setupTestRouter() *gin.Engine {
 	gin.SetMode(gin.TestMode)
+	_ = godotenv.Load("../../.env")
+	if database.DB == nil {
+		_ = database.Connect()
+	}
 	r := gin.New()
 	cache.InitCache(0)
 
