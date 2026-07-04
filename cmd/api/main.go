@@ -137,8 +137,9 @@ func main() {
 		// Curriculum Query Brain — natural language + clarification + smart cache
 		v1Protected.POST("/query", handlers.HandleCurriculumQuery)
 
-		// Search
+		// Search & Native PGVector Cosine Search
 		v1Protected.GET("/search", handlers.SearchTopics)
+		v1Protected.POST("/search/vector", handlers.HandleVectorSearch)
 	}
 
 	// Get port

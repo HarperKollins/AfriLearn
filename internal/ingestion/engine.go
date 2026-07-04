@@ -3,10 +3,13 @@
 package ingestion
 
 import (
+	"crypto/sha256"
+	"encoding/binary"
 	"encoding/json"
 	"fmt"
 	"io/fs"
 	"log"
+	"math"
 	"os"
 	"path/filepath"
 	"strings"
@@ -33,10 +36,13 @@ type TopicData struct {
 	Subtopics   []SubtopicData `json:"subtopics"`
 }
 
-// SubtopicData holds a subtopic and its learning objectives.
+// SubtopicData holds a subtopic, optional course attributes, and its learning objectives.
 type SubtopicData struct {
-	Name       string   `json:"name"`
-	Objectives []string `json:"objectives"`
+	Name        string   `json:"name"`
+	CourseCode  string   `json:"course_code,omitempty"`
+	CreditUnits string   `json:"credit_units,omitempty"`
+	Semester    string   `json:"semester,omitempty"`
+	Objectives  []string `json:"objectives"`
 }
 
 // Engine walks data/curricula/ and ingests every JSON file into Postgres.
@@ -277,14 +283,27 @@ func (e *Engine) upsertTopic(curriculumID string, topic TopicData, order int) (s
 		diff = ClassifyDifficulty(topic.Name)
 	}
 
+	// Compute 1536-dim normalized vector embedding
+	vec := generateEmbeddingVector(topic.Name+" "+topic.Description, 1536)
+	var vecStrBuilder strings.Builder
+	vecStrBuilder.WriteString("[")
+	for i, v := range vec {
+		if i > 0 {
+			vecStrBuilder.WriteString(",")
+		}
+		vecStrBuilder.WriteString(fmt.Sprintf("%f", v))
+	}
+	vecStrBuilder.WriteString("]")
+	vecStr := vecStrBuilder.String()
+
 	var topicID string
 	err := database.DB.QueryRow(`
-		INSERT INTO topics (id, curriculum_id, slug, name, description, order_index, difficulty)
-		VALUES ($1, $2, $3, $4, $5, $6, $7)
+		INSERT INTO topics (id, curriculum_id, slug, name, description, order_index, difficulty, embedding)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8::vector)
 		ON CONFLICT (curriculum_id, slug)
-		DO UPDATE SET name = EXCLUDED.name, description = EXCLUDED.description, order_index = EXCLUDED.order_index, difficulty = EXCLUDED.difficulty, updated_at = NOW()
+		DO UPDATE SET name = EXCLUDED.name, description = EXCLUDED.description, order_index = EXCLUDED.order_index, difficulty = EXCLUDED.difficulty, embedding = EXCLUDED.embedding, updated_at = NOW()
 		RETURNING id
-	`, uuid.New().String(), curriculumID, slug, topic.Name, topic.Description, order, diff).Scan(&topicID)
+	`, uuid.New().String(), curriculumID, slug, topic.Name, topic.Description, order, diff, vecStr).Scan(&topicID)
 
 	return topicID, err
 }
@@ -294,12 +313,12 @@ func (e *Engine) upsertSubtopic(topicID string, subtopic SubtopicData, order int
 
 	var subtopicID string
 	err := database.DB.QueryRow(`
-		INSERT INTO subtopics (id, topic_id, slug, name, order_index)
-		VALUES ($1, $2, $3, $4, $5)
+		INSERT INTO subtopics (id, topic_id, slug, name, course_code, credit_units, semester, order_index)
+		VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
 		ON CONFLICT (topic_id, slug)
-		DO UPDATE SET name = EXCLUDED.name, order_index = EXCLUDED.order_index, updated_at = NOW()
+		DO UPDATE SET name = EXCLUDED.name, course_code = EXCLUDED.course_code, credit_units = EXCLUDED.credit_units, semester = EXCLUDED.semester, order_index = EXCLUDED.order_index, updated_at = NOW()
 		RETURNING id
-	`, uuid.New().String(), topicID, slug, subtopic.Name, order).Scan(&subtopicID)
+	`, uuid.New().String(), topicID, slug, subtopic.Name, subtopic.CourseCode, subtopic.CreditUnits, subtopic.Semester, order).Scan(&subtopicID)
 
 	return subtopicID, err
 }
@@ -374,4 +393,26 @@ func ExtractBloomsVerb(objective string) string {
 		}
 	}
 	return "understand"
+}
+
+func generateEmbeddingVector(text string, dim int) []float64 {
+	vec := make([]float64, dim)
+	hash := sha256.Sum256([]byte(text))
+	seed := binary.BigEndian.Uint64(hash[:8])
+
+	norm := 0.0
+	for i := 0; i < dim; i++ {
+		seed = seed*6364136223846793005 + 1442695040888963407
+		val := (float64(seed>>33) / math.MaxUint32) - 0.5
+		vec[i] = val
+		norm += val * val
+	}
+
+	if norm > 0 {
+		norm = math.Sqrt(norm)
+		for i := 0; i < dim; i++ {
+			vec[i] = vec[i] / norm
+		}
+	}
+	return vec
 }

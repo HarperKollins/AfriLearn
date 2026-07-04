@@ -5,30 +5,118 @@
   "source_url": "https://unilag.edu.ng/academics/faculty-of-law",
   "topics": [
     {
-      "name": "100 Level: Legal Methods, Nigerian Legal System, and Use of English",
-      "description": "LAW 101 Legal Methods, LAW 111 Nigerian Legal System, GST 111 Use of English.",
+      "name": "Year 1 (100 Level): Legal Foundations & Methodologies",
+      "description": "Foundational law courses setting up legal reasoning, legal systems, and statutory interpretation.",
       "difficulty": "easy",
       "subtopics": [
-        {"name": "LAW 101: Legal Methods and Reasoning at UNILAG", "objectives": ["Apply common law rules of statutory interpretation including the literal, golden, and mischief rules", "Write legal essays, case analyses, and problem-question answers in standard UNILAG law format"]},
-        {"name": "LAW 111: Foundations of the Nigerian Legal System", "objectives": ["Explain the historical development of Nigerian law from pre-colonial to post-independence era", "Identify the hierarchy of courts in Nigeria and jurisdiction of the Supreme Court, Court of Appeal, and High Courts"]}
+        {
+          "name": "Legal Methods I: Sources & Statutory Interpretation",
+          "course_code": "LAW 101",
+          "credit_units": "4 Units",
+          "semester": "First Semester",
+          "objectives": [
+            "Apply common law rules of statutory interpretation including the literal, golden, and mischief rules",
+            "Evaluate judicial precedent (stare decisis) and ratio decidendi versus obiter dictum in Nigerian case law",
+            "Write legal essays, case analyses, and problem-question answers in standard UNILAG law format"
+          ]
+        },
+        {
+          "name": "Nigerian Legal System I: History & Court Hierarchy",
+          "course_code": "LAW 111",
+          "credit_units": "4 Units",
+          "semester": "First Semester",
+          "objectives": [
+            "Explain the historical development of Nigerian law from pre-colonial customary laws to post-independence statutory framework",
+            "Identify the hierarchy of courts in Nigeria and the original versus appellate jurisdiction of the Supreme Court, Court of Appeal, and High Courts",
+            "Compare customary law, Islamic law (Sharia), and received English law in Nigeria's pluralistic legal order"
+          ]
+        }
       ]
     },
     {
-      "name": "200–300 Level: Constitutional Law, Contract, Torts, Criminal Law & Property",
-      "description": "LAW 201 Constitutional Law, LAW 211 Contract, LAW 221 Torts, LAW 301 Criminal Law, LAW 311 Land Law.",
+      "name": "Year 2 & 3 (200–300 Level): Core Private & Public Law",
+      "description": "Constitutional Law, Law of Contract, Law of Torts, Criminal Law, and Land Law.",
       "difficulty": "medium",
       "subtopics": [
-        {"name": "LAW 201 & LAW 211: Constitutional Law and Contract", "objectives": ["Analyse separation of powers and federalism under Nigeria's 1999 Constitution (as amended)", "Identify formation, terms, breach, and remedies for contract disputes under Nigerian law"]},
-        {"name": "LAW 301 & LAW 311: Criminal Law and Property Law", "objectives": ["Explain criminal liability, defences, and penalties under the Criminal Code Act and Penal Code", "Distinguish freehold and leasehold estates, co-ownership, and land registration under the Land Use Act"]}
+        {
+          "name": "Constitutional Law I: Separation of Powers & Federalism",
+          "course_code": "LAW 201",
+          "credit_units": "4 Units",
+          "semester": "First Semester",
+          "objectives": [
+            "Analyse separation of powers and federalism under Nigeria's 1999 Constitution (as amended)",
+            "Evaluate fundamental human rights enforcement procedures under Chapter IV of the Nigerian Constitution",
+            "Examine judicial review of executive and legislative actions by superior courts of record"
+          ]
+        },
+        {
+          "name": "Law of Contract I: Offer, Acceptance, Consideration & Terms",
+          "course_code": "LAW 211",
+          "credit_units": "4 Units",
+          "semester": "First Semester",
+          "objectives": [
+            "Identify offer, acceptance, consideration, and intention to create legal relations in contract formation",
+            "Distinguish express versus implied terms, condition versus warranty, and exclusion clauses under Nigerian law",
+            "Evaluate remedies for breach of contract including specific performance, injunction, and damages"
+          ]
+        },
+        {
+          "name": "Criminal Law I: Offences Against Persons & Property",
+          "course_code": "LAW 301",
+          "credit_units": "4 Units",
+          "semester": "First Semester",
+          "objectives": [
+            "Explain criminal liability, mens rea, actus reus, and defences under the Criminal Code Act and Penal Code",
+            "Analyse elements of murder, manslaughter, assault, theft, robbery, and fraud offences in Nigerian jurisprudence"
+          ]
+        },
+        {
+          "name": "Land Law I: Customary Tenure & Land Use Act 1978",
+          "course_code": "LAW 311",
+          "credit_units": "4 Units",
+          "semester": "First Semester",
+          "objectives": [
+            "Examine customary land tenure systems, family land ownership, and alienation of family land",
+            "Apply the Land Use Act 1978 regarding state governor's consent, certificate of occupancy, and compulsory acquisition"
+          ]
+        }
       ]
     },
     {
-      "name": "400–500 Level: Commercial Law, Evidence, ADR, Clinic & Bar Preparation",
-      "description": "LAW 401 Company Law, LAW 411 Evidence, LAW 421 ADR, LAW 501 Clinical Legal Education, LAW 599 Law Project.",
+      "name": "Year 4 & 5 (400–500 Level): Commercial Law, Evidence & Clinical Practice",
+      "description": "Company Law, Evidence, Alternative Dispute Resolution (ADR), Law Clinic, and Bar Preparation.",
       "difficulty": "hard",
       "subtopics": [
-        {"name": "LAW 401 & LAW 411: Company Law and Law of Evidence", "objectives": ["Explain incorporation, management, and winding-up of companies under the Companies and Allied Matters Act (CAMA 2020)", "Apply rules of admissibility, burden of proof, and judicial notice under the Evidence Act 2011"]},
-        {"name": "LAW 501 & LAW 599: Law Clinic and Research Dissertation", "objectives": ["Provide supervised legal advice to clients in UNILAG Law Clinic and draft basic legal documents", "Conduct original legal research and defend a dissertation before the UNILAG Faculty of Law board"]}
+        {
+          "name": "Company Law: CAMA 2020 & Corporate Governance",
+          "course_code": "LAW 401",
+          "credit_units": "4 Units",
+          "semester": "First Semester",
+          "objectives": [
+            "Explain incorporation, corporate personality, directors' duties, and shareholder remedies under CAMA 2020",
+            "Analyse corporate insolvency, receivership, restructuring, and winding-up procedures in Nigeria"
+          ]
+        },
+        {
+          "name": "Law of Evidence: Admissibility & Judicial Notice",
+          "course_code": "LAW 411",
+          "credit_units": "4 Units",
+          "semester": "First Semester",
+          "objectives": [
+            "Apply rules of admissibility of oral, documentary, and electronic evidence under the Evidence Act 2011",
+            "Evaluate burden of proof, standard of proof, competence and compellability of witnesses"
+          ]
+        },
+        {
+          "name": "Clinical Legal Education & UNILAG Law Clinic",
+          "course_code": "LAW 501",
+          "credit_units": "3 Units",
+          "semester": "Full Session",
+          "objectives": [
+            "Provide supervised legal advice to indigent clients at the UNILAG Law Clinic and draft client intake notes",
+            "Conduct original empirical legal research and defend a 10,000-word dissertation before the Faculty of Law board"
+          ]
+        }
       ]
     }
   ]

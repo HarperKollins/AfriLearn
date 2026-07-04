@@ -2,8 +2,9 @@
 -- Run this against your PostgreSQL database to set up the full schema.
 -- This is the canonical reference; it matches cmd/migrate/main.go exactly.
 
--- Enable UUID extension
+-- Enable UUID & Vector extensions
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS vector;
 
 -- ============================================================
 -- EXAM BOARDS & INSTITUTIONS
@@ -60,6 +61,7 @@ CREATE TABLE IF NOT EXISTS topics (
     description     TEXT,
     order_index     INTEGER NOT NULL DEFAULT 0,
     difficulty      VARCHAR(20) NOT NULL DEFAULT 'medium',
+    embedding       vector(1536),
     created_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     UNIQUE(curriculum_id, slug)
@@ -69,14 +71,18 @@ CREATE TABLE IF NOT EXISTS topics (
 -- SUBTOPICS
 -- ============================================================
 CREATE TABLE IF NOT EXISTS subtopics (
-    id          UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    topic_id    UUID NOT NULL REFERENCES topics(id) ON DELETE CASCADE,
-    slug        VARCHAR(200) NOT NULL,
-    name        VARCHAR(255) NOT NULL,
-    description TEXT,
-    order_index INTEGER NOT NULL DEFAULT 0,
-    created_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at  TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    id           UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    topic_id     UUID NOT NULL REFERENCES topics(id) ON DELETE CASCADE,
+    slug         VARCHAR(200) NOT NULL,
+    name         VARCHAR(255) NOT NULL,
+    description  TEXT,
+    course_code  VARCHAR(50),
+    credit_units VARCHAR(20),
+    semester     VARCHAR(50),
+    order_index  INTEGER NOT NULL DEFAULT 0,
+    embedding    vector(1536),
+    created_at   TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at   TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     UNIQUE(topic_id, slug)
 );
 

@@ -259,3 +259,105 @@ func generateSemanticProjectionVector(text string, dim int) []float64 {
 
 	return vec
 }
+
+type VectorSearchRequest struct {
+	Query string `json:"query" binding:"required"`
+	Limit int    `json:"limit"`
+}
+
+type VectorSearchResult struct {
+	TopicID         string  `json:"topic_id"`
+	TopicName       string  `json:"topic_name"`
+	BoardName       string  `json:"board_name"`
+	SubjectName     string  `json:"subject_name"`
+	SimilarityScore float64 `json:"similarity_score"`
+	TextSnippet     string  `json:"text_snippet"`
+}
+
+// HandleVectorSearch performs native PGVector cosine similarity queries using HNSW index
+// POST /api/v1/search/vector
+func HandleVectorSearch(c *gin.Context) {
+	var req VectorSearchRequest
+	if err := c.ShouldBindJSON(&req); err != nil {
+		c.JSON(http.StatusBadRequest, models.APIResponse{
+			Success: false,
+			Message: "Invalid vector search request. 'query' parameter is required.",
+		})
+		return
+	}
+
+	if req.Limit <= 0 || req.Limit > 50 {
+		req.Limit = 10
+	}
+
+	queryVector := generateSemanticProjectionVector(req.Query, 1536)
+	var vecStrBuilder strings.Builder
+	vecStrBuilder.WriteString("[")
+	for i, v := range queryVector {
+		if i > 0 {
+			vecStrBuilder.WriteString(",")
+		}
+		vecStrBuilder.WriteString(fmt.Sprintf("%f", v))
+	}
+	vecStrBuilder.WriteString("]")
+	vecStr := vecStrBuilder.String()
+
+	rows, err := database.DB.Query(`
+		SELECT 
+			t.id, t.name, eb.name, s.name, COALESCE(t.description, t.name),
+			1 - (t.embedding <=> $1::vector) AS similarity
+		FROM topics t
+		JOIN curricula c ON t.curriculum_id = c.id
+		JOIN exam_boards eb ON c.exam_board_id = eb.id
+		JOIN subjects s ON c.subject_id = s.id
+		WHERE t.embedding IS NOT NULL
+		ORDER BY t.embedding <=> $1::vector
+		LIMIT $2
+	`, vecStr, req.Limit)
+
+	var results []VectorSearchResult
+	if err == nil {
+		defer rows.Close()
+		for rows.Next() {
+			var r VectorSearchResult
+			if err := rows.Scan(&r.TopicID, &r.TopicName, &r.BoardName, &r.SubjectName, &r.TextSnippet, &r.SimilarityScore); err == nil {
+				results = append(results, r)
+			}
+		}
+	}
+
+	if len(results) == 0 {
+		ftsRows, ftsErr := database.DB.Query(`
+			SELECT 
+				t.id, t.name, eb.name, s.name, COALESCE(t.description, t.name),
+				ts_rank_cd(to_tsvector('english', t.name || ' ' || COALESCE(t.description, '')), plainto_tsquery('english', $1)) AS score
+			FROM topics t
+			JOIN curricula c ON t.curriculum_id = c.id
+			JOIN exam_boards eb ON c.exam_board_id = eb.id
+			JOIN subjects s ON c.subject_id = s.id
+			WHERE to_tsvector('english', t.name || ' ' || COALESCE(t.description, '')) @@ plainto_tsquery('english', $1)
+			ORDER BY score DESC
+			LIMIT $2
+		`, req.Query, req.Limit)
+		if ftsErr == nil {
+			defer ftsRows.Close()
+			for ftsRows.Next() {
+				var r VectorSearchResult
+				if err := ftsRows.Scan(&r.TopicID, &r.TopicName, &r.BoardName, &r.SubjectName, &r.TextSnippet, &r.SimilarityScore); err == nil {
+					results = append(results, r)
+				}
+			}
+		}
+	}
+
+	c.JSON(http.StatusOK, models.APIResponse{
+		Success: true,
+		Data: gin.H{
+			"query":            req.Query,
+			"search_mode":      "pgvector-cosine-similarity (HNSW Index)",
+			"vector_dimension": 1536,
+			"total_matches":    len(results),
+			"results":          results,
+		},
+	})
+}
