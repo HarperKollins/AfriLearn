@@ -10,5 +10,5 @@ services:
     environment:
       - PORT=8080
       - APP_ENV=production
-      - DB_URL=postgresql://neondb_owner:npg_LfjKd3qP2wGk@ep-polished-thunder-aiss16k9.c-4.us-east-1.aws.neon.tech/neondb?sslmode=require
+      - DB_URL=${DB_URL}
     restart: always
