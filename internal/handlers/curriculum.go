@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/afrilearn/curriculum-api/internal/cache"
 	"github.com/afrilearn/curriculum-api/internal/database"
@@ -274,66 +275,217 @@ func GetCurriculum(c *gin.Context) {
 	c.JSON(http.StatusOK, apiResp)
 }
 
-// SearchTopics searches across topics and subtopics
+// SearchTopics performs deep full-text search across topics, subtopics, AND learning objectives.
+// Supports pagination (?limit=20&offset=0) and filtering (?board=waec&subject=mathematics).
 // GET /api/v1/search?q=quadratic
 func SearchTopics(c *gin.Context) {
 	query := c.Query("q")
 	if query == "" {
 		c.JSON(http.StatusBadRequest, models.APIResponse{
 			Success: false,
-			Message: "Query parameter 'q' is required",
+			Message: "Query parameter 'q' is required. Example: /api/v1/search?q=quadratic+equations",
 		})
 		return
 	}
 
+	boardFilter := strings.ToLower(strings.TrimSpace(c.Query("board")))
+	subjectFilter := strings.ToLower(strings.TrimSpace(c.Query("subject")))
 
-	rows, err := database.DB.Query(`
-		SELECT 
+	limit := 20
+	offset := 0
+	if l := c.Query("limit"); l != "" {
+		fmt.Sscanf(l, "%d", &limit)
+		if limit <= 0 || limit > 100 {
+			limit = 20
+		}
+	}
+	if o := c.Query("offset"); o != "" {
+		fmt.Sscanf(o, "%d", &offset)
+		if offset < 0 {
+			offset = 0
+		}
+	}
+
+	type SearchResult struct {
+		TopicID     string  `json:"topic_id"`
+		TopicSlug   string  `json:"topic_slug"`
+		TopicName   string  `json:"topic_name"`
+		Difficulty  string  `json:"difficulty"`
+		BoardSlug   string  `json:"board_slug"`
+		BoardName   string  `json:"board_name"`
+		SubjectSlug string  `json:"subject_slug"`
+		SubjectName string  `json:"subject_name"`
+		Level       string  `json:"level"`
+		MatchedIn   string  `json:"matched_in"`
+		Snippet     string  `json:"snippet"`
+		Score       float64 `json:"relevance_score"`
+	}
+
+	var results []SearchResult
+	seenTopics := make(map[string]bool)
+
+	// Build filter clause helpers
+	buildFilters := func(boardParam, subjectParam string, startIdx int) (string, []interface{}) {
+		var clauses []string
+		var extra []interface{}
+		idx := startIdx
+		if boardParam != "" {
+			clauses = append(clauses, fmt.Sprintf("AND eb.slug = $%d", idx))
+			extra = append(extra, boardParam)
+			idx++
+		}
+		if subjectParam != "" {
+			clauses = append(clauses, fmt.Sprintf("AND s.slug = $%d", idx))
+			extra = append(extra, subjectParam)
+		}
+		return strings.Join(clauses, " "), extra
+	}
+
+	// ── Layer 1: Topics (name + description) ──────────────────────────────────
+	f1, f1args := buildFilters(boardFilter, subjectFilter, 2)
+	args1 := append([]interface{}{query}, f1args...)
+	topicRows, err := database.DB.Query(fmt.Sprintf(`
+		SELECT
 			t.id, t.slug, t.name, t.difficulty,
-			eb.slug as board_slug, eb.name as board_name,
-			s.slug as subject_slug, s.name as subject_name
+			eb.slug, eb.name,
+			s.slug, s.name,
+			c.level,
+			'topic' AS matched_in,
+			COALESCE(t.description, t.name) AS snippet,
+			ts_rank_cd(
+				to_tsvector('english', t.name || ' ' || COALESCE(t.description, '')),
+				plainto_tsquery('english', $1)
+			) AS score
 		FROM topics t
 		JOIN curricula c ON t.curriculum_id = c.id
 		JOIN exam_boards eb ON c.exam_board_id = eb.id
 		JOIN subjects s ON c.subject_id = s.id
-		WHERE to_tsvector('english', t.name) @@ plainto_tsquery('english', $1)
-		ORDER BY ts_rank(to_tsvector('english', t.name), plainto_tsquery('english', $1)) DESC
+		WHERE to_tsvector('english', t.name || ' ' || COALESCE(t.description, ''))
+		      @@ plainto_tsquery('english', $1)
+		%s
+		ORDER BY score DESC
 		LIMIT 50
-	`, query)
+	`, f1), args1...)
 
-	if err != nil {
-		c.JSON(http.StatusInternalServerError, models.APIResponse{
-			Success: false,
-			Message: "Search failed",
-		})
-		return
-	}
-	defer rows.Close()
-
-	type SearchResult struct {
-		ID          string `json:"id"`
-		Slug        string `json:"slug"`
-		Name        string `json:"name"`
-		Difficulty  string `json:"difficulty"`
-		BoardSlug   string `json:"board_slug"`
-		BoardName   string `json:"board_name"`
-		SubjectSlug string `json:"subject_slug"`
-		SubjectName string `json:"subject_name"`
-	}
-
-	var results []SearchResult
-	for rows.Next() {
-		var r SearchResult
-		if err := rows.Scan(&r.ID, &r.Slug, &r.Name, &r.Difficulty, &r.BoardSlug, &r.BoardName, &r.SubjectSlug, &r.SubjectName); err != nil {
-			continue
+	if err == nil {
+		defer topicRows.Close()
+		for topicRows.Next() {
+			var r SearchResult
+			if err := topicRows.Scan(
+				&r.TopicID, &r.TopicSlug, &r.TopicName, &r.Difficulty,
+				&r.BoardSlug, &r.BoardName, &r.SubjectSlug, &r.SubjectName,
+				&r.Level, &r.MatchedIn, &r.Snippet, &r.Score,
+			); err == nil {
+				results = append(results, r)
+				seenTopics[r.TopicID] = true
+			}
 		}
-		results = append(results, r)
+	}
+
+	// ── Layer 2: Subtopics (name + description) → parent topic ────────────────
+	f2, f2args := buildFilters(boardFilter, subjectFilter, 2)
+	args2 := append([]interface{}{query}, f2args...)
+	subRows, err := database.DB.Query(fmt.Sprintf(`
+		SELECT DISTINCT ON (t.id)
+			t.id, t.slug, t.name, t.difficulty,
+			eb.slug, eb.name,
+			s.slug, s.name,
+			c.level,
+			'subtopic' AS matched_in,
+			st.name AS snippet,
+			ts_rank_cd(
+				to_tsvector('english', st.name || ' ' || COALESCE(st.description, '')),
+				plainto_tsquery('english', $1)
+			) AS score
+		FROM subtopics st
+		JOIN topics t ON st.topic_id = t.id
+		JOIN curricula c ON t.curriculum_id = c.id
+		JOIN exam_boards eb ON c.exam_board_id = eb.id
+		JOIN subjects s ON c.subject_id = s.id
+		WHERE to_tsvector('english', st.name || ' ' || COALESCE(st.description, ''))
+		      @@ plainto_tsquery('english', $1)
+		%s
+		ORDER BY t.id, score DESC
+		LIMIT 50
+	`, f2), args2...)
+
+	if err == nil {
+		defer subRows.Close()
+		for subRows.Next() {
+			var r SearchResult
+			if err := subRows.Scan(
+				&r.TopicID, &r.TopicSlug, &r.TopicName, &r.Difficulty,
+				&r.BoardSlug, &r.BoardName, &r.SubjectSlug, &r.SubjectName,
+				&r.Level, &r.MatchedIn, &r.Snippet, &r.Score,
+			); err == nil && !seenTopics[r.TopicID] {
+				results = append(results, r)
+				seenTopics[r.TopicID] = true
+			}
+		}
+	}
+
+	// ── Layer 3: Learning Objectives → parent topic ────────────────────────────
+	f3, f3args := buildFilters(boardFilter, subjectFilter, 2)
+	args3 := append([]interface{}{query}, f3args...)
+	objRows, err := database.DB.Query(fmt.Sprintf(`
+		SELECT DISTINCT ON (t.id)
+			t.id, t.slug, t.name, t.difficulty,
+			eb.slug, eb.name,
+			s.slug, s.name,
+			c.level,
+			'objective' AS matched_in,
+			lo.description AS snippet,
+			ts_rank_cd(
+				to_tsvector('english', lo.description),
+				plainto_tsquery('english', $1)
+			) AS score
+		FROM learning_objectives lo
+		JOIN subtopics st ON lo.subtopic_id = st.id
+		JOIN topics t ON st.topic_id = t.id
+		JOIN curricula c ON t.curriculum_id = c.id
+		JOIN exam_boards eb ON c.exam_board_id = eb.id
+		JOIN subjects s ON c.subject_id = s.id
+		WHERE to_tsvector('english', lo.description) @@ plainto_tsquery('english', $1)
+		%s
+		ORDER BY t.id, score DESC
+		LIMIT 50
+	`, f3), args3...)
+
+	if err == nil {
+		defer objRows.Close()
+		for objRows.Next() {
+			var r SearchResult
+			if err := objRows.Scan(
+				&r.TopicID, &r.TopicSlug, &r.TopicName, &r.Difficulty,
+				&r.BoardSlug, &r.BoardName, &r.SubjectSlug, &r.SubjectName,
+				&r.Level, &r.MatchedIn, &r.Snippet, &r.Score,
+			); err == nil && !seenTopics[r.TopicID] {
+				results = append(results, r)
+				seenTopics[r.TopicID] = true
+			}
+		}
+	}
+
+	// Apply pagination
+	total := len(results)
+	if offset >= total {
+		results = []SearchResult{}
+	} else {
+		end := offset + limit
+		if end > total {
+			end = total
+		}
+		results = results[offset:end]
 	}
 
 	c.JSON(http.StatusOK, models.APIResponse{
 		Success: true,
 		Data:    results,
-		Meta:    &models.Meta{Total: len(results), Version: "v1"},
+		Meta: &models.Meta{
+			Total:   total,
+			Version: "v1",
+		},
+		Message: fmt.Sprintf("Searched topics, subtopics, and learning objectives for '%s'", query),
 	})
 }
 
