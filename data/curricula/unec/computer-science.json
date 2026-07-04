@@ -1,0 +1,35 @@
+{
+  "board": "unec",
+  "subject": "computer-science",
+  "level": "tertiary-degree",
+  "source_url": "https://unn.edu.ng/academics/faculty-of-physical-sciences/computer-science",
+  "topics": [
+    {
+      "name": "100–200 Level: Programming Fundamentals and Computer Organisation (UNEC Campus)",
+      "description": "COS 101 Introduction to Computing, COS 211 Programming I, COS 221 Computer Organisation.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "COS 101 & COS 211: Introduction to Computing and Structured Programming (UNEC)", "objectives": ["Describe the history and applications of computing at UNEC Enugu campus", "Write, test, and debug structured programs in Python/C solving mathematical and text-processing problems"]},
+        {"name": "COS 221: Computer Architecture and Number Systems", "objectives": ["Convert between binary, octal, hexadecimal, and decimal number systems", "Explain CPU architecture, instruction set, memory hierarchy, and I/O subsystems"]}
+      ]
+    },
+    {
+      "name": "300 Level: Data Structures, Operating Systems, Databases & Computer Networks",
+      "description": "COS 301 Data Structures, COS 311 Operating Systems, COS 321 Database Systems, COS 331 Networks.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "COS 301 & COS 311: Data Structures and OS at UNEC", "objectives": ["Implement arrays, linked lists, trees, heaps, and graph algorithms in C/Java/Python", "Explain process management, scheduling algorithms, virtual memory, and file system organisation"]},
+        {"name": "COS 321 & COS 331: DBMS and Computer Networking", "objectives": ["Design normalised relational databases and write complex SQL queries including joins and subqueries", "Describe OSI and TCP/IP models, routing protocols, and network security fundamentals"]}
+      ]
+    },
+    {
+      "name": "400 Level: Software Engineering, AI, Cybersecurity & Final Project",
+      "description": "COS 401 Software Engineering, COS 411 Artificial Intelligence, COS 421 Cybersecurity, COS 499 Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "COS 401 & COS 421: Software Engineering and Cybersecurity", "objectives": ["Apply software development methodologies and UML modelling to design large-scale systems", "Identify common security vulnerabilities (SQL injection, XSS, buffer overflow) and mitigation strategies"]},
+        {"name": "COS 499: UNEC Computer Science Research Project", "objectives": ["Design and implement an original software system or conduct formal computer science research", "Present project report and defend before UNN (Enugu Campus) Department of Computer Science examiners"]}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "board": "nuc",
+  "subject": "nursing-science",
+  "level": "tertiary-degree",
+  "source_url": "https://nuc.edu.ng/ccmas/allied-health/nursing-science",
+  "topics": [
+    {
+      "name": "100 - 200 Level: Foundation Science, Anatomy, and Fundamentals of Nursing",
+      "description": "Anatomy, Physiology, Biochemistry, Microbiology, and Foundations of Professional Nursing.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "NUR 201: Foundations of Nursing and Health Assessment", "objectives": ["Understand nursing history, nursing process (Assessment, Diagnosis, Planning, Implementation, Evaluation)","Perform vital signs measurement, physical health assessment, and aseptic technique infection control"]},
+        {"name": "ANAT 201 & PHYS 201: Human Anatomy and Physiology for Nurses", "objectives": ["Study structural anatomy and physiological mechanisms of human organ systems"]}
+      ]
+    },
+    {
+      "name": "300 Level: Medical-Surgical Nursing and Pharmacology",
+      "description": "Medical-Surgical Nursing I & II, Pharmacology, Pathology, and Clinical Practicum.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "NUR 301: Medical-Surgical Nursing", "objectives": ["Manage nursing care for cardiovascular, respiratory, endocrine, renal, and gastrointestinal diseases","Perform peri-operative nursing care, wound management, and emergency clinical procedures"]},
+        {"name": "PHARM 301: Pharmacology in Nursing Practice", "objectives": ["Calculate drug dosages, administer medications via oral, IV, IM routes safely, and monitor side effects"]}
+      ]
+    },
+    {
+      "name": "400 - 500 Level: Maternal, Paediatric, Mental Health Nursing, and Final Board Defense",
+      "description": "Maternal & Child Health Nursing, Psychiatric Nursing, Community Health Nursing, and B.N.Sc. Thesis.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "NUR 401: Maternal & Child Health Nursing (Midwifery)", "objectives": ["Provide comprehensive antenatal, intrapartum, postpartum nursing care, and newborn care"]},
+        {"name": "NUR 501: Mental Health, Community Nursing, and Research Project", "objectives": ["Manage psychiatric nursing interventions for mental health disorders","Execute community health assessment, epidemiology, disease surveillance, and defend original B.N.Sc. thesis"]}
+      ]
+    }
+  ]
+}

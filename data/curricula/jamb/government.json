@@ -1,0 +1,35 @@
+{
+  "board": "jamb",
+  "subject": "government",
+  "level": "tertiary-entry",
+  "source_url": "https://ibass.jamb.gov.ng/syllabus/government",
+  "topics": [
+    {
+      "name": "Political Theory and Concepts of Government",
+      "description": "JAMB UTME Section I: Definition of government, state, sovereignty, power, legitimacy, Rule of Law, and systems.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "Basic Political Concepts", "objectives": ["Analyze government as an institution, process, and field of study","Distinguish state, nation, sovereignty, power, authority, legitimacy, political culture, and political socialization"]},
+        {"name": "Systems of Government and Ideologies", "objectives": ["Compare presidential, parliamentary, unitary, federal, confederal, monarchical, and republican systems","Distinguish capitalism, socialism, communism, fascism, and feudalism"]}
+      ]
+    },
+    {
+      "name": "Organs of Government and Political Processes",
+      "description": "JAMB UTME Section II: Legislature, Executive, Judiciary, constitutions, political parties, and elections.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Organs of Government and Rule of Law", "objectives": ["Describe composition, functions, and relationships of Legislature, Executive, and Judiciary","Analyze Separation of Powers, Checks and Balances, Rule of Law, and Constitutionalism"]},
+        {"name": "Elections, Political Parties, and Pressure Groups", "objectives": ["Compare electoral systems: First-Past-The-Post, Proportional Representation, Absolute Majority","Describe political party systems, pressure groups, public opinion, and mass media roles in governance"]}
+      ]
+    },
+    {
+      "name": "Constitutional History and Foreign Policy of Nigeria",
+      "description": "JAMB UTME Section III & IV: Pre-colonial systems, colonial administration, constitutions, federalism, and foreign policy.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "Pre-Colonial Systems and Constitutional History", "objectives": ["Compare pre-colonial political systems in Hausa/Fulani, Yoruba, and Igbo societies","Analyze Clifford (1922), Richards (1946), Macpherson (1951), Lyttelton (1954), 1960, 1963, 1979, and 1999 Constitutions"]},
+        {"name": "Nigerian Federalism and Foreign Policy", "objectives": ["Analyze state creation, revenue allocation, local government reform, and civil service in Nigeria","Describe foreign policy principles, Afrocentricity, non-alignment, and membership in UN, AU, ECOWAS, Commonwealth"]}
+      ]
+    }
+  ]
+}

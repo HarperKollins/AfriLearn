@@ -1,0 +1,62 @@
+{
+  "board": "jamb",
+  "subject": "mathematics",
+  "level": "tertiary-entry",
+  "source_url": "https://ibass.jamb.gov.ng/syllabus/mathematics",
+  "topics": [
+    {
+      "name": "Number and Numeration",
+      "description": "JAMB UTME Section I: Number bases, fractions, percentages, indices, logarithms, surds, and set theory.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "Number Bases and Operations", "objectives": ["Perform calculations in bases 2 to 10 and conversion between bases","Solve equations involving unknown number bases"]},
+        {"name": "Fractions, Decimals, Percentages, and Financial Math", "objectives": ["Perform operations on fractions, decimals, and calculate percentage errors","Calculate simple and compound interest, profit and loss, ratio, rates, shares, and Value Added Tax (VAT)"]},
+        {"name": "Indices, Logarithms, and Surds", "objectives": ["Apply laws of indices and standard form calculations","Apply laws of logarithms to solve logarithmic equations","Simplify surds and rationalise denominators of binomial surd expressions"]},
+        {"name": "Sets and Venn Diagrams", "objectives": ["Perform set operations: union, intersection, complement, difference","Use Venn diagrams to solve 2-set and 3-set practical problems"]}
+      ]
+    },
+    {
+      "name": "Algebraic Processes",
+      "description": "JAMB UTME Section II: Polynomials, equations, inequalities, variation, AP/GP, and matrices.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Polynomials and Algebraic Expressions", "objectives": ["Expand, factorise, and simplify polynomial expressions","Apply Remainder Theorem and Factor Theorem to factorise cubic polynomials"]},
+        {"name": "Linear, Quadratic, and Simultaneous Equations", "objectives": ["Solve linear equations and change subject of formula","Solve quadratic equations using factorisation, completing square, and quadratic formula","Solve simultaneous linear-linear and linear-quadratic equations in two variables"]},
+        {"name": "Inequalities and Functions", "objectives": ["Solve linear inequalities and quadratic inequalities in one variable","Represent solutions of inequalities graphically","Determine domain, range, one-to-one, composite, and inverse functions"]},
+        {"name": "Variation, Sequences, and Series", "objectives": ["Formulate and solve direct, inverse, joint, and partial variation problems","Calculate nth term and sum of Arithmetic Progression (AP) and Geometric Progression (GP)","Calculate sum to infinity of a geometric series"]},
+        {"name": "Matrices and Determinants", "objectives": ["Perform matrix addition, subtraction, and multiplication up to 3x3 matrices","Calculate determinant of 2x2 and 3x3 matrices and inverse of 2x2 matrix","Solve system of 2 linear equations using matrix inversion / Cramer's rule"]}
+      ]
+    },
+    {
+      "name": "Geometry and Trigonometry",
+      "description": "JAMB UTME Section III: Plane geometry, coordinate geometry of lines/circles, trigonometry, and solid geometry.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Plane Geometry and Mensuration", "objectives": ["Calculate perimeters, areas of plane shapes, and volumes of solid shapes (prisms, cones, spheres)","Apply angle theorems of triangles, polygons, and circle theorems"]},
+        {"name": "Coordinate Geometry of Lines and Circles", "objectives": ["Calculate distance between two points, midpoint, and gradient of a line","Determine equations of straight lines in gradient, intercept, and double-intercept forms","Determine conditions for parallel and perpendicular lines","Find equation of a circle given center (h,k) and radius r: (x-h)² + (y-k)² = r²"]},
+        {"name": "Trigonometric Ratios and Equations", "objectives": ["Calculate trigonometric ratios for standard angles (0°, 30°, 45°, 60°, 90°, 180°, 360°)","Apply sine rule and cosine rule to solve acute and obtuse triangles","Solve simple trigonometric equations within [0°, 360°]"]},
+        {"name": "Bearings and 3D Solid Geometry", "objectives": ["Calculate 3-figure compass bearings and solve navigation distance problems","Calculate angles between lines and planes in 3D solids"]}
+      ]
+    },
+    {
+      "name": "Calculus",
+      "description": "JAMB UTME Section IV: Limits, differentiation, applications of derivatives, integration, and area under curves.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "Limits and Continuity", "objectives": ["Evaluate limits of algebraic functions as x approaches a finite value or infinity","Identify continuous and discontinuous functions"]},
+        {"name": "Differentiation and Applications", "objectives": ["Differentiate polynomial, trigonometric, and explicit functions using power, product, quotient, and chain rules","Calculate rate of change, gradient of tangents and normals to curves","Locate maximum, minimum, and inflection turning points of algebraic curves"]},
+        {"name": "Integration and Definite Integrals", "objectives": ["Integrate polynomial and simple trigonometric functions","Evaluate definite integrals and calculate area bounded by a curve and axes"]}
+      ]
+    },
+    {
+      "name": "Statistics and Probability",
+      "description": "JAMB UTME Section V: Data representation, measures of central tendency/dispersion, permutations, combinations, and probability.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Data Presentation and Analysis", "objectives": ["Interpret bar charts, pie charts, histograms, frequency tables, and ogives","Calculate mean, median, mode for grouped and ungrouped data","Calculate range, mean deviation, variance, and standard deviation"]},
+        {"name": "Permutations and Combinations", "objectives": ["Apply factorial notation n! and fundamental counting principle","Calculate permutations nPr and combinations nCr in selection problems"]},
+        {"name": "Probability", "objectives": ["Calculate probability of single, mutually exclusive, and independent events","Solve conditional probability and tree diagram problems"]}
+      ]
+    }
+  ]
+}

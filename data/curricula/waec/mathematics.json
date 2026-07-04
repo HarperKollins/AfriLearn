@@ -1,0 +1,110 @@
+{
+  "board": "waec",
+  "subject": "mathematics",
+  "level": "senior-secondary",
+  "source_url": "https://waecsyllabus.com/mathematics-syllabus/",
+  "topics": [
+    {
+      "name": "Number and Numeration",
+      "description": "Covers fundamental concepts of numbers, their types, operations, and applications.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "Number Bases", "objectives": ["Convert numbers from one base to another","Perform basic operations in different number bases","Apply number bases in computing contexts"]},
+        {"name": "Modular Arithmetic", "objectives": ["Define and apply modular arithmetic","Solve problems involving congruences"]},
+        {"name": "Fractions, Decimals and Approximations", "objectives": ["Perform operations on fractions and decimals","Approximate numbers to required significant figures and decimal places","Apply rounding in real-world contexts"]},
+        {"name": "Indices and Logarithms", "objectives": ["Apply laws of indices to simplify expressions","Define logarithm and apply laws of logarithms","Solve exponential equations using logarithms"]},
+        {"name": "Surds", "objectives": ["Simplify surds","Rationalise the denominator of surd expressions","Perform operations on surds"]},
+        {"name": "Sequence and Series", "objectives": ["Identify arithmetic and geometric progressions","Find the nth term and sum of AP and GP","Solve practical problems involving sequences"]},
+        {"name": "Sets", "objectives": ["Define sets and set notation","Perform union, intersection, and complement operations","Solve problems using Venn diagrams"]},
+        {"name": "Logical Reasoning", "objectives": ["Apply basic principles of logic","Construct truth tables","Use logical reasoning to solve problems"]},
+        {"name": "Ratio, Proportion, Rates and Percentages", "objectives": ["Solve problems on ratios and proportions","Calculate rates of change","Apply percentages in financial contexts"]},
+        {"name": "Financial Arithmetic", "objectives": ["Calculate simple and compound interest","Solve problems on hire purchase, discount, and profit/loss","Apply financial arithmetic to banking and investment"]},
+        {"name": "Variation", "objectives": ["Distinguish between direct, inverse, joint, and partial variation","Formulate and solve equations involving variation"]}
+      ]
+    },
+    {
+      "name": "Algebraic Processes",
+      "description": "Covers algebraic expressions, equations, graphs, and inequalities.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Algebraic Expressions", "objectives": ["Simplify algebraic expressions","Expand and factorise expressions","Perform operations on algebraic fractions"]},
+        {"name": "Linear Equations", "objectives": ["Solve linear equations in one and two variables","Solve word problems involving linear equations","Change the subject of a formula"]},
+        {"name": "Quadratic Equations", "objectives": ["Solve quadratic equations by factorisation","Solve quadratic equations using the quadratic formula","Solve quadratic equations by completing the square","Interpret the roots of a quadratic equation"]},
+        {"name": "Graphs of Linear and Quadratic Functions", "objectives": ["Draw graphs of linear functions","Draw graphs of quadratic functions","Use graphs to solve equations and interpret solutions"]},
+        {"name": "Linear Inequalities", "objectives": ["Solve linear inequalities in one variable","Represent solutions on a number line","Solve and graph linear inequalities in two variables"]},
+        {"name": "Algebraic Fractions", "objectives": ["Simplify algebraic fractions","Perform operations on algebraic fractions","Solve equations involving algebraic fractions"]},
+        {"name": "Functions and Relations", "objectives": ["Define and identify functions and relations","Distinguish between one-to-one and many-to-one functions","Find composite and inverse functions"]},
+        {"name": "Matrices and Determinants", "objectives": ["Define matrices and perform basic operations","Find the determinant and inverse of a 2x2 matrix","Solve simultaneous equations using matrices"]}
+      ]
+    },
+    {
+      "name": "Mensuration",
+      "description": "Covers measurement of lengths, areas, and volumes of plane and solid shapes.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "Lengths and Perimeters", "objectives": ["Calculate perimeters of plane shapes","Calculate arc length of circles and sectors","Apply perimeter formulae to composite shapes"]},
+        {"name": "Areas of Plane Shapes", "objectives": ["Calculate areas of triangles, rectangles, parallelograms, and trapeziums","Calculate areas of circles and sectors","Find areas of composite shapes"]},
+        {"name": "Surface Areas and Volumes", "objectives": ["Calculate surface areas of cubes, cuboids, cylinders, cones, and spheres","Calculate volumes of prisms, pyramids, cylinders, cones, and spheres","Solve problems involving volume and surface area in context"]}
+      ]
+    },
+    {
+      "name": "Plane Geometry",
+      "description": "Covers the properties of geometric shapes and their relationships.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "Angles and Lines", "objectives": ["Identify types of angles and their properties","Apply angle properties of parallel lines","Solve problems involving angles at a point"]},
+        {"name": "Triangles and Polygons", "objectives": ["Apply the properties of triangles","Prove and apply congruence and similarity of triangles","Calculate the sum of interior and exterior angles of polygons"]},
+        {"name": "Circles and Circle Theorems", "objectives": ["State and apply circle theorems","Solve problems involving angles in circles","Apply tangent-radius and tangent-tangent theorems"]},
+        {"name": "Construction", "objectives": ["Construct triangles and quadrilaterals","Bisect angles and line segments","Construct perpendiculars and parallels"]},
+        {"name": "Loci", "objectives": ["Identify and describe loci of points","Construct loci satisfying given conditions","Solve problems involving loci and regions"]}
+      ]
+    },
+    {
+      "name": "Coordinate Geometry",
+      "description": "Covers the geometry of lines and curves using coordinates.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Coordinate Geometry of Straight Lines", "objectives": ["Calculate the distance between two points","Find the midpoint of a line segment","Calculate the gradient of a line","Determine the equation of a straight line","Determine conditions for parallelism and perpendicularity"]}
+      ]
+    },
+    {
+      "name": "Trigonometry",
+      "description": "Covers relationships between angles and sides of triangles.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Trigonometric Ratios", "objectives": ["Define sine, cosine, and tangent for angles in right triangles","Use trigonometric tables and calculators","Apply SOHCAHTOA to solve right triangles"]},
+        {"name": "Angles of Elevation and Depression", "objectives": ["Distinguish between angles of elevation and depression","Solve practical problems involving angles of elevation and depression"]},
+        {"name": "Bearings", "objectives": ["Express directions using compass bearings","Calculate distances and directions using bearings","Solve navigation problems using bearings"]},
+        {"name": "Sine and Cosine Rules", "objectives": ["State and apply the sine rule","State and apply the cosine rule","Solve triangles using sine and cosine rules"]}
+      ]
+    },
+    {
+      "name": "Introductory Calculus",
+      "description": "Covers basic concepts of differentiation and integration.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "Differentiation", "objectives": ["Find the derivative of polynomial functions","Apply differentiation to find gradients of curves","Determine turning points (maxima and minima) of functions","Apply differentiation to real-world rate-of-change problems"]},
+        {"name": "Integration", "objectives": ["Find the indefinite integral of polynomial functions","Evaluate definite integrals","Apply integration to find areas under curves"]}
+      ]
+    },
+    {
+      "name": "Statistics and Probability",
+      "description": "Covers data collection, analysis, and probability.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Data Presentation and Analysis", "objectives": ["Collect, tabulate, and present data","Draw and interpret bar charts, pie charts, histograms, and frequency polygons","Calculate measures of central tendency: mean, median, mode","Calculate measures of spread: range, variance, standard deviation"]},
+        {"name": "Cumulative Frequency", "objectives": ["Draw cumulative frequency curves (ogives)","Use ogives to estimate median, quartiles, and percentiles","Calculate interquartile range from an ogive"]},
+        {"name": "Probability", "objectives": ["Define probability and sample space","Calculate probability of simple and compound events","Apply addition and multiplication rules of probability","Solve problems involving independent and mutually exclusive events"]}
+      ]
+    },
+    {
+      "name": "Vectors and Transformations",
+      "description": "Covers vector algebra and geometric transformations.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "Vectors", "objectives": ["Define vectors and scalars","Perform addition, subtraction, and scalar multiplication of vectors","Resolve vectors into components","Apply vectors to solve geometric problems"]},
+        {"name": "Transformations", "objectives": ["Identify and apply reflection, rotation, translation, and enlargement","Find images of points and shapes under transformations","Describe transformations using matrices"]}
+      ]
+    }
+  ]
+}

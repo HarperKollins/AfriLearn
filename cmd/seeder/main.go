@@ -1,91 +1,71 @@
 package main
 
 import (
+	"flag"
 	"log"
+	"os"
+	"path/filepath"
 
 	"github.com/afrilearn/curriculum-api/internal/database"
-	"github.com/afrilearn/curriculum-api/internal/scraper"
+	"github.com/afrilearn/curriculum-api/internal/ingestion"
 	"github.com/joho/godotenv"
 )
 
 func main() {
+	validateOnly := flag.Bool("validate-only", false, "Scan and validate all JSON files without writing to database")
+	flag.Parse()
+
+	// Resolve the data/curricula directory relative to where the binary runs.
+	dataDir := "data/curricula"
+	if _, err := os.Stat(dataDir); os.IsNotExist(err) {
+		dataDir = filepath.Join("..", "..", "data", "curricula")
+	}
+
+	engine := ingestion.NewEngine(dataDir)
+
+	if *validateOnly {
+		log.Println("🔍 Running AfriLearn Curriculum Data Quality & Schema Validation...")
+		count, valErrs, err := engine.ValidateAll()
+		if err != nil {
+			log.Fatalf("❌ Validation error: %v", err)
+		}
+		log.Printf("📊 Scanned %d curriculum JSON files.", count)
+		if len(valErrs) == 0 {
+			log.Println("✨ PERFECT! All curriculum files passed 100% schema & quality checks!")
+			return
+		}
+
+		log.Printf("⚠️  Found %d validation warning(s)/error(s):", len(valErrs))
+		for i, ve := range valErrs {
+			log.Printf("  [%d] File: %s | Field: %s -> %s", i+1, ve.FilePath, ve.Field, ve.Message)
+		}
+		os.Exit(1)
+	}
+
 	// Load environment variables
 	if err := godotenv.Load(); err != nil {
-		log.Println("⚠️  No .env file found")
+		log.Println("⚠️  No .env file found, using environment variables")
 	}
 
 	// Connect to database
 	if err := database.Connect(); err != nil {
-		log.Fatalf("❌ Failed to connect to database: %v\nMake sure PostgreSQL is running and .env is configured.", err)
+		log.Fatalf("❌ Failed to connect to database: %v\nMake sure DATABASE_URL is set in .env", err)
 	}
 	defer database.Close()
 
 	log.Println("╔════════════════════════════════════════════════════════════╗")
 	log.Println("║     AfriLearn — Curriculum Infrastructure Data Engine      ║")
+	log.Println("║     Phase 1: JSON-driven ingestion (no hardcoded Go)       ║")
 	log.Println("╚════════════════════════════════════════════════════════════╝")
 	log.Println()
 
-	engine := scraper.NewEngine()
-
-	scrapers := []scraper.Scraper{
-		// BECE (Junior Secondary JSS1 - JSS3)
-		scraper.NewBECEMathScraper(),
-		scraper.NewBECEBasicScienceScraper(),
-		scraper.NewBECEBasicTechScraper(),
-		scraper.NewBECEEnglishScraper(),
-		scraper.NewBECESocialStudiesScraper(),
-		scraper.NewBECEBusinessStudiesScraper(),
-
-		// WAEC (Senior Secondary SS1 - SS3)
-		scraper.NewWAECMathScraper(),
-		scraper.NewWAECPhysicsScraper(),
-		scraper.NewWAECBiologyScraper(),
-		scraper.NewWAECChemistryScraper(),
-		scraper.NewWAECEconomicsScraper(),
-		scraper.NewWAECGovernmentScraper(),
-		scraper.NewWAECLiteratureScraper(),
-
-		// JAMB (UTME Tertiary Entry)
-		scraper.NewJAMBMathScraper(),
-		scraper.NewJAMBPhysicsScraper(),
-		scraper.NewJAMBChemistryScraper(),
-		scraper.NewJAMBBiologyScraper(),
-		scraper.NewJAMBEconomicsScraper(),
-		scraper.NewJAMBGovernmentScraper(),
-
-		// NUC CCMAS (University National Core Standards - 100L to 500L)
-		scraper.NewNUCComputerScienceScraper(),
-		scraper.NewNUCMedicineScraper(),
-		scraper.NewNUCElectricalEngScraper(),
-		scraper.NewNUCLawScraper(),
-		scraper.NewNUCAccountingScraper(),
-		scraper.NewNUCBusinessAdminScraper(),
-		scraper.NewNUCNursingScraper(),
-		scraper.NewNUCMechanicalEngScraper(),
-		scraper.NewNUCMassCommScraper(),
-
-		// Individual Universities (EBSU, AE-FUNAI, UNEC, UNN, UNILAG, FUTO)
-		scraper.NewEBSUComputerScienceScraper(),
-		scraper.NewFUNAIComputerScienceScraper(),
-		scraper.NewUNECLawScraper(),
-		scraper.NewUNNComputerScienceScraper(),
-		scraper.NewUNILAGComputerScienceScraper(),
-		scraper.NewFUTOPetroleumEngScraper(),
-
-		// NBTE Polytechnics (YABATECH, IMT Enugu)
-		scraper.NewYABATECHComputerEngScraper(),
-		scraper.NewIMTSLTScraper(),
+	if err := engine.Run(); err != nil {
+		log.Fatalf("❌ Ingestion failed: %v", err)
 	}
 
-	for i, s := range scrapers {
-		log.Printf("------------------------------------------------------------ [%d/%d]", i+1, len(scrapers))
-		if err := engine.Execute(s); err != nil {
-			log.Printf("❌ Ingestion error for [%s/%s]: %v\n", s.BoardSlug(), s.SubjectSlug(), err)
-		}
-	}
-
-	log.Println("------------------------------------------------------------")
-	log.Println("✅ All 36 Curricula Ingested Successfully!")
+	log.Println()
+	log.Println("────────────────────────────────────────────────────────────")
+	log.Println("🎉 All curricula ingested! Try a few endpoints:")
 	log.Println()
 	log.Println("   BECE (JSS1-3):")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/bece/mathematics")
@@ -99,21 +79,11 @@ func main() {
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/jamb/mathematics")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/jamb/physics")
 	log.Println()
-	log.Println("   NUC CCMAS National Degrees (100L - 500L):")
+	log.Println("   NUC CCMAS National Degrees:")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/computer-science")
 	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/medicine-and-surgery")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/electrical-engineering")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/nuc/law")
 	log.Println()
-	log.Println("   Individual Universities (EBSU, FUNAI, UNEC, UNN, UNILAG, FUTO):")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/ebsu/computer-science")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/funai/computer-science")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/unec/law")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/unn/computer-science")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/unilag/computer-science")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/futo/petroleum-engineering")
-	log.Println()
-	log.Println("   NBTE Polytechnics (YABATECH, IMT Enugu):")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/yabatech/computer-engineering-tech")
-	log.Println("     curl http://localhost:8080/api/v1/curriculum/imt/science-laboratory-tech")
+	log.Println("   Cross-board match:")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/match/quadratic-equations")
+	log.Println("     curl http://localhost:8080/api/v1/curriculum/match/photosynthesis")
 }

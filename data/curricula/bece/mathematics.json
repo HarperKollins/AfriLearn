@@ -1,0 +1,126 @@
+{
+  "board": "bece",
+  "subject": "mathematics",
+  "level": "junior-secondary",
+  "source_url": "https://nerdc.gov.ng/curriculum/junior-secondary/mathematics",
+  "topics": [
+    {
+      "name": "Number and Numeration (JSS1 - JSS3)",
+      "description": "Whole numbers, place value, prime numbers, LCM, HCF, fractions, decimals, percentages, and binary numbers.",
+      "difficulty": "easy",
+      "subtopics": [
+        {
+          "name": "Whole Numbers, Factors, and Multiples",
+          "objectives": [
+            "Identify place values of whole numbers up to billions",
+            "Find Prime Factors, Highest Common Factor (HCF), and Least Common Multiple (LCM)",
+            "Express numbers in standard form and scientific notation"
+          ]
+        },
+        {
+          "name": "Fractions, Decimals, and Percentages",
+          "objectives": [
+            "Convert between proper/improper fractions, mixed numbers, decimals, and percentages",
+            "Perform addition, subtraction, multiplication, and division of fractions and decimals",
+            "Solve percentage profit, loss, discount, and simple interest problems"
+          ]
+        },
+        {
+          "name": "Binary Numbers (Base 2)",
+          "objectives": [
+            "Convert numbers from base 10 to base 2 and vice versa",
+            "Perform addition and subtraction of binary numbers"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Basic Algebra (JSS1 - JSS3)",
+      "description": "Algebraic simplification, linear equations, substitution, expansion, factorisation, and variation.",
+      "difficulty": "medium",
+      "subtopics": [
+        {
+          "name": "Algebraic Expressions and Substitution",
+          "objectives": [
+            "Translate word problems into algebraic expressions",
+            "Evaluate algebraic expressions by substitution",
+            "Group like terms and simplify algebraic expressions"
+          ]
+        },
+        {
+          "name": "Linear Equations and Inequalities",
+          "objectives": [
+            "Solve linear equations in one variable",
+            "Solve simultaneous linear equations using substitution and elimination",
+            "Represent linear inequalities on a number line"
+          ]
+        },
+        {
+          "name": "Factorisation and Quadratic Expressions",
+          "objectives": [
+            "Factorise algebraic expressions by taking out common factors",
+            "Expand binomial expressions (x + a)(x + b)",
+            "Solve simple quadratic equations of the form x² + bx + c = 0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Geometry and Mensuration (JSS1 - JSS3)",
+      "description": "Plane shapes, angles, triangles, perimeter, area, 3D solids, volume, and scale drawing.",
+      "difficulty": "medium",
+      "subtopics": [
+        {
+          "name": "Angles and Plane Shapes",
+          "objectives": [
+            "Identify acute, right, obtuse, reflex, complementary, and supplementary angles",
+            "Calculate angles on a straight line, parallel lines, and in triangles/quadrilaterals",
+            "Apply Pythagoras' theorem to right-angled triangles"
+          ]
+        },
+        {
+          "name": "Perimeter and Area of 2D Shapes",
+          "objectives": [
+            "Calculate perimeters and areas of rectangles, squares, triangles, parallelograms, and trapeziums",
+            "Calculate circumference and area of circles and sectors"
+          ]
+        },
+        {
+          "name": "Surface Area and Volume of 3D Solids",
+          "objectives": [
+            "Identify properties of cubes, cuboids, cylinders, triangular prisms, and cones",
+            "Calculate surface area and volume of cubes, cuboids, and cylinders"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Statistics and Probability (JSS1 - JSS3)",
+      "description": "Data collection, frequency tables, bar charts, pie charts, mean, median, mode, and simple probability.",
+      "difficulty": "easy",
+      "subtopics": [
+        {
+          "name": "Data Collection and Representation",
+          "objectives": [
+            "Organize raw data into tally marks and frequency distribution tables",
+            "Construct and interpret bar charts, pictograms, and pie charts"
+          ]
+        },
+        {
+          "name": "Measures of Central Tendency",
+          "objectives": [
+            "Calculate mean, median, and mode for ungrouped discrete data",
+            "Identify modal class and range of data sets"
+          ]
+        },
+        {
+          "name": "Simple Probability",
+          "objectives": [
+            "Determine experimental and theoretical probability of single events (coin toss, die roll)",
+            "Express probability as fractions, decimals, and percentages"
+          ]
+        }
+      ]
+    }
+  ]
+}

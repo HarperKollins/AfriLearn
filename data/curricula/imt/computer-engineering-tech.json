@@ -1,0 +1,26 @@
+{
+  "board": "imt",
+  "subject": "computer-engineering-tech",
+  "level": "polytechnic-nd",
+  "source_url": "https://imt.edu.ng/academics/engineering/computer-engineering-technology",
+  "topics": [
+    {
+      "name": "ND I & ND II: Digital Electronics, Computer Hardware & Workshop Practice (IMT)",
+      "description": "CET 111 Digital Logic, CET 121 Computer Hardware, CET 211 Microprocessor Fundamentals.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "CET 111 & CET 121: Digital Logic and Computer Hardware Maintenance at IMT", "objectives": ["Design and test combinational and sequential logic circuits using NAND, NOR, and XOR gates", "Diagnose and repair PC components including motherboards, RAM, storage devices, and power supply units"]},
+        {"name": "CET 211: Microprocessor Architecture and Assembly Programming", "objectives": ["Describe the architecture of 8-bit and 16-bit microprocessors (Intel 8085/8086) and their instruction sets", "Write, assemble, and execute simple assembly language programs for data manipulation and I/O control"]}
+      ]
+    },
+    {
+      "name": "HND I & HND II: Embedded Systems, Networking & IMT Final Project",
+      "description": "CET 311 Embedded Systems, CET 321 Computer Networking, CET 411 Software Development, CET 499 HND Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "CET 311 & CET 321: Embedded Systems and Computer Networking at IMT", "objectives": ["Program Arduino/PIC microcontrollers for real-world control and automation applications", "Configure Local Area Networks (LAN), TCP/IP addressing, and basic network troubleshooting in IMT labs"]},
+        {"name": "CET 499: IMT HND Computer Engineering Technology Final Project", "objectives": ["Design, build, and test a hardware/software system solving a practical engineering or automation problem", "Present technical report and defend HND project before NBTE and IMT Engineering Technology faculty"]}
+      ]
+    }
+  ]
+}

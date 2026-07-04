@@ -1,0 +1,35 @@
+{
+  "board": "funai",
+  "subject": "electrical-engineering",
+  "level": "tertiary-degree",
+  "source_url": "https://funai.edu.ng/academics/engineering/electrical",
+  "topics": [
+    {
+      "name": "100–200 Level: Circuit Theory, Electronics, and Engineering Mathematics",
+      "description": "EEE 101 Circuit Theory I, EEE 201 Electronics I, MTH 211 Engineering Mathematics.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "EEE 101: DC and AC Circuit Analysis", "objectives": ["Apply Kirchhoff's voltage and current laws to solve DC circuit problems", "Analyse AC circuits using phasor notation, impedance, and power factor concepts"]},
+        {"name": "EEE 201: Semiconductor Devices and Basic Electronics", "objectives": ["Explain the operation of diodes, bipolar junction transistors (BJT), and field-effect transistors (FET)", "Design basic rectifier, amplifier, and switching circuits using semiconductor devices"]}
+      ]
+    },
+    {
+      "name": "300 Level: Power Systems, Control Engineering, and Electromagnetic Fields",
+      "description": "EEE 301 Power Systems I, EEE 311 Control Systems, EEE 321 Electromagnetic Fields.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "EEE 301: Power Generation, Transmission, and Distribution", "objectives": ["Describe the components of Nigerian national grid and transmission line parameters", "Calculate power losses, efficiency, and voltage regulation in transmission lines"]},
+        {"name": "EEE 311: Classical Control Theory", "objectives": ["Model dynamic systems using transfer functions and block diagrams", "Analyse stability using Routh-Hurwitz criterion, Bode plots, and root locus methods"]}
+      ]
+    },
+    {
+      "name": "400–500 Level: Power Electronics, Machines, Digital Systems & Final Project",
+      "description": "EEE 401 Power Electronics, EEE 411 Electrical Machines, EEE 499 Final Year Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "EEE 401: Power Electronics and Drive Systems", "objectives": ["Analyse and design thyristor, MOSFET, and IGBT-based converters and inverters", "Design speed control systems for DC and AC motor drives using power electronic converters"]},
+        {"name": "EEE 499: Final Year Engineering Project", "objectives": ["Design, build, and test an electrical or electronic system solving a real engineering problem", "Present engineering design report and defend project before FUNAI Engineering faculty board"]}
+      ]
+    }
+  ]
+}

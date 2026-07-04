@@ -1,0 +1,35 @@
+{
+  "board": "ebsu",
+  "subject": "computer-science",
+  "level": "tertiary-degree",
+  "source_url": "https://ebsu.edu.ng/academics/physical-sciences/computer-science",
+  "topics": [
+    {
+      "name": "100 Level: EBSU Science & Computing Foundation",
+      "description": "CSC 101, CSC 102, MAT 101, PHY 101, and GST 101 courses at EBSU Abakaliki.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "CSC 101: Introduction to Computer Science (EBSU)", "objectives": ["Understand history of computing, computer hardware architectures, and operating systems","Solve basic mathematical and logical problems using Python algorithms"]},
+        {"name": "MAT 101 & PHY 101: Algebra and Physics for Computing", "objectives": ["Apply set theory, matrices, calculus, and electricity/magnetism in computer science"]}
+      ]
+    },
+    {
+      "name": "200 Level: EBSU Core Programming & Digital Logic",
+      "description": "CSC 201 Object-Oriented Programming, Discrete Structures, and Data Structures I.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "CSC 201: OOP using C++ / Java (EBSU)", "objectives": ["Implement OOP encapsulation, inheritance, polymorphism, and exception handling in Java"]},
+        {"name": "CSC 202: Data Structures & Assembly Language", "objectives": ["Implement arrays, linked lists, stacks, queues, and 8086 assembly language"]}
+      ]
+    },
+    {
+      "name": "300 - 400 Level: EBSU Advanced Computing, SIWES, and B.Sc. Project",
+      "description": "DBMS, Software Engineering, Artificial Intelligence, SIWES, and EBSU Thesis.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "CSC 301 & CSC 302: Database Systems and SIWES", "objectives": ["Design relational SQL databases using ER diagrams and normalization","Complete 6 months industrial training at tech hubs/organizations and present defense"]},
+        {"name": "CSC 401 & CSC 499: Artificial Intelligence and B.Sc. Research Project", "objectives": ["Implement machine learning algorithms, computer vision, and defend original EBSU thesis"]}
+      ]
+    }
+  ]
+}

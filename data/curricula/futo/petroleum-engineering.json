@@ -1,0 +1,25 @@
+{
+  "board": "futo",
+  "subject": "petroleum-engineering",
+  "level": "tertiary-degree",
+  "source_url": "https://futo.edu.ng/academics/seet/petroleum-engineering",
+  "topics": [
+    {
+      "name": "100 - 200 Level: FUTO Engineering Foundation & Geology",
+      "description": "ENG 101, ENG 201 Thermodynamics, Fluid Mechanics, Geology for Petroleum Engineers at FUTO.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "PET 201: Introduction to Petroleum Engineering & Geology (FUTO)", "objectives": ["Understand origin of hydrocarbons, sedimentary basins, petroleum reservoir rocks, and fluid dynamics"]}
+      ]
+    },
+    {
+      "name": "300 - 500 Level: Reservoir, Drilling, Production, SIWES, and FUTO B.Eng. Project",
+      "description": "Reservoir Engineering, Drilling Hydraulics, Well Logging, Enhanced Oil Recovery, SIWES, and Thesis.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "PET 301 & PET 401: Drilling Technology, Reservoir Simulation, and Well Logging", "objectives": ["Design rotary drilling bits, mud hydraulics, pressure control, and reservoir fluid phase behavior","Interpret wireline logs (Gamma Ray, Resistivity, Density, Neutron) for hydrocarbon pay zones"]},
+        {"name": "PET 501 & PET 599: Production Engineering, Gas Technology, and B.Eng. Project", "objectives": ["Design artificial lift systems (gas lift, ESP), natural gas processing, and defend FUTO B.Eng. thesis"]}
+      ]
+    }
+  ]
+}

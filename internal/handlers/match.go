@@ -86,26 +86,29 @@ func GetCurriculumMatch(c *gin.Context) {
 		return
 	}
 
-	searchTerm := "%" + strings.ToLower(topicSlug) + "%"
-
-	// Single query: cross-join all boards, find topic matches by name/description
+	// Phase 2 FTS Fix: use plainto_tsquery so GIN indexes are actually used.
+	// This replaces the old LIKE which did a full sequential scan even with GIN indexes.
 	rows, err := database.DB.Query(`
 		SELECT
 			t.id, t.name, t.slug, t.difficulty,
-			eb.slug   AS board_slug,
-			eb.name   AS board_name,
+			eb.slug      AS board_slug,
+			eb.name      AS board_name,
 			eb.full_name AS board_full_name,
 			c.level,
-			s.name    AS subject_name,
-			s.slug    AS subject_slug
+			s.name       AS subject_name,
+			s.slug       AS subject_slug
 		FROM topics t
-		JOIN curricula c  ON t.curriculum_id = c.id
+		JOIN curricula c    ON t.curriculum_id = c.id
 		JOIN exam_boards eb ON c.exam_board_id = eb.id
 		JOIN subjects s     ON c.subject_id = s.id
-		WHERE LOWER(t.name) LIKE $1
-		   OR LOWER(t.description) LIKE $1
-		ORDER BY eb.slug, t.order_index
-	`, searchTerm)
+		WHERE to_tsvector('english', t.name) @@ plainto_tsquery('english', $1)
+		ORDER BY
+			ts_rank(
+				to_tsvector('english', t.name),
+				plainto_tsquery('english', $1)
+			) DESC,
+			eb.slug, t.order_index
+	`, topicSlug)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.APIResponse{

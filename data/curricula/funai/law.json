@@ -1,0 +1,35 @@
+{
+  "board": "funai",
+  "subject": "law",
+  "level": "tertiary-degree",
+  "source_url": "https://funai.edu.ng/academics/law",
+  "topics": [
+    {
+      "name": "100 Level: Introduction to Nigerian Legal System & Legal Methods",
+      "description": "LAW 101 Nigerian Legal System, LAW 102 Legal Methods & Research, General Studies.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "LAW 101: Sources of Nigerian Law", "objectives": ["Identify the primary and secondary sources of Nigerian law including statutes, case law, and customary law", "Distinguish between common law and equity in Nigerian jurisprudence"]},
+        {"name": "LAW 102: Legal Methods, Reasoning, and Research", "objectives": ["Apply legal research methods using law reports, statutes, and online databases", "Write case notes, legal memos, and simple opinions in acceptable legal format"]}
+      ]
+    },
+    {
+      "name": "200 Level: Constitutional Law, Torts & Contract",
+      "description": "LAW 201 Nigerian Constitutional Law I, LAW 202 Law of Torts, LAW 211 Law of Contract.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "LAW 201: Nigerian Constitutional Law — Fundamental Rights", "objectives": ["Explain the structure and supremacy of the 1999 Constitution of the Federal Republic of Nigeria", "Analyse fundamental rights provisions under Chapter IV of the 1999 Constitution"]},
+        {"name": "LAW 211: Law of Contract — Formation and Vitiating Factors", "objectives": ["Identify and explain the essential elements of a valid contract under Nigerian law", "Distinguish vitiating factors such as misrepresentation, mistake, duress, and undue influence"]}
+      ]
+    },
+    {
+      "name": "300–500 Level: Commercial Law, Criminal Law, Evidence & Moot",
+      "description": "Company Law, Criminal Law, Law of Evidence, Family Law, Equity & Trusts, Moot Court.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "LAW 301: Criminal Law — Offences and Defences", "objectives": ["Explain the elements of criminal liability including actus reus and mens rea", "Analyse specific offences and available defences under the Criminal Code and Penal Code"]},
+        {"name": "LAW 499: Moot Court, Law Clinic, and Bar Part I Preparation", "objectives": ["Participate in simulated court proceedings applying rules of evidence and procedure", "Draft legal documents including pleadings, affidavits, and motions"]}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "board": "futo",
+  "subject": "computer-science",
+  "level": "tertiary-degree",
+  "source_url": "https://futo.edu.ng/academics/computing/computer-science",
+  "topics": [
+    {
+      "name": "100–200 Level: Programming, Discrete Mathematics, and Computer Organisation",
+      "description": "COS 101 Introduction to Computing, COS 211 Programming I (C/C++), COS 221 Computer Organisation.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "COS 101 & COS 211: Problem Solving and Structured Programming", "objectives": ["Write, compile, and debug programs in C/C++ implementing basic algorithms and data input/output", "Design algorithms using flowcharts and pseudocode for sorting, searching, and recursion"]},
+        {"name": "COS 221: Digital Logic and Computer Architecture", "objectives": ["Explain binary number systems, Boolean algebra, and logic gate design", "Describe CPU architecture including ALU, registers, instruction cycle, and memory hierarchy"]}
+      ]
+    },
+    {
+      "name": "300 Level: Data Structures, Algorithms, Operating Systems, and Databases",
+      "description": "COS 301 Data Structures, COS 311 Analysis of Algorithms, COS 321 Operating Systems, COS 331 Database Systems.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "COS 301 & COS 311: Data Structures and Algorithm Analysis", "objectives": ["Implement linked lists, stacks, queues, trees, graphs, and hash tables in a high-level language", "Analyse time and space complexity of algorithms using Big-O notation"]},
+        {"name": "COS 321 & COS 331: OS Concepts and Relational Databases", "objectives": ["Explain process scheduling, memory management, and file systems in modern operating systems", "Design relational databases, write SQL queries, and apply normalisation up to BCNF"]}
+      ]
+    },
+    {
+      "name": "400–500 Level: Software Engineering, AI, Networks, and Final Project",
+      "description": "COS 401 Software Engineering, COS 411 Artificial Intelligence, COS 421 Computer Networks, COS 499 Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "COS 401 & COS 411: Software Development Lifecycle and AI Foundations", "objectives": ["Apply SDLC models (Agile, Waterfall, Scrum) to software project planning and management", "Implement search algorithms, knowledge representation, and machine learning basics"]},
+        {"name": "COS 499: FUTO Computer Science Final Year Research Project", "objectives": ["Design and implement a software system or research prototype solving a real-world problem", "Write project documentation and defend before FUTO School of Science academic board"]}
+      ]
+    }
+  ]
+}

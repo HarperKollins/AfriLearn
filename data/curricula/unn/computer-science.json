@@ -1,0 +1,26 @@
+{
+  "board": "unn",
+  "subject": "computer-science",
+  "level": "tertiary-degree",
+  "source_url": "https://unn.edu.ng/academics/faculties/physical-sciences/computer-science",
+  "topics": [
+    {
+      "name": "100 - 200 Level: UNN Science Foundation & Core Programming",
+      "description": "COS 101, COS 102, CSC 201, MTH 101, PHY 101, and General Studies at UNN Nsukka.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "COS 101 & COS 102: Computing Fundamentals & Problem Solving (UNN)", "objectives": ["Study computer architectures, algorithms, flowcharts, and Python programming at UNN"]},
+        {"name": "CSC 201 & CSC 202: OOP with Java and Digital Logic Design", "objectives": ["Master Java object-oriented programming, digital circuits, combinational logic, and assembly"]}
+      ]
+    },
+    {
+      "name": "300 - 400 Level: Advanced Computing, Software Engineering, SIWES, and UNN Project",
+      "description": "Data Structures, Database Management, Software Engineering, AI, and UNN Thesis.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "CSC 301 & CSC 302: Data Structures, DBMS, and SIWES Internship", "objectives": ["Implement data structures, SQL database modeling, and complete 6-month industrial training"]},
+        {"name": "CSC 401 & CSC 499: Artificial Intelligence, Compiler Construction, and Thesis", "objectives": ["Implement neural networks, compiler parsing, and defend original B.Sc. research thesis at UNN"]}
+      ]
+    }
+  ]
+}

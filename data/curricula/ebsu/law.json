@@ -1,0 +1,35 @@
+{
+  "board": "ebsu",
+  "subject": "law",
+  "level": "tertiary-degree",
+  "source_url": "https://ebsu.edu.ng/academics/faculty-of-law",
+  "topics": [
+    {
+      "name": "100 Level: Legal Methods, Nigerian Legal System & General Studies (EBSU)",
+      "description": "LAW 101 Legal Methods, LAW 111 Nigerian Legal System, GST 101 Communication Skills.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "LAW 101 & LAW 111: Legal Methods and Nigerian Legal System at EBSU", "objectives": ["Apply statutory interpretation methods and case analysis techniques as taught at EBSU Faculty of Law", "Trace the development of Nigerian law through customary, Islamic, and English received law traditions"]},
+        {"name": "GST 101: Communication and Critical Thinking for Law Students", "objectives": ["Develop written communication skills for legal essay writing and moot court participation", "Apply critical thinking to evaluate legal arguments and identify logical fallacies"]}
+      ]
+    },
+    {
+      "name": "200–300 Level: Contract, Torts, Constitutional Law & Criminal Law",
+      "description": "LAW 201 Law of Contract, LAW 211 Torts, LAW 301 Constitutional Law, LAW 311 Criminal Law.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "LAW 201 & LAW 211: Contract and Torts at EBSU", "objectives": ["Analyse contractual obligations, remedies for breach, and equitable doctrines under Nigerian contract law", "Explain negligence, nuisance, trespass, and defamation as tortious liability under Nigerian law"]},
+        {"name": "LAW 301 & LAW 311: Constitutional and Criminal Law", "objectives": ["Interpret the fundamental rights provisions in Chapter IV of the 1999 Nigerian Constitution (as amended)", "Analyse criminal offences and defences under the Criminal Code Act and Cybercrime Prohibition Act"]}
+      ]
+    },
+    {
+      "name": "400 Level: Commercial Law, Evidence, ADR, Law Clinic & Dissertation",
+      "description": "LAW 401 Company Law, LAW 411 Evidence, LAW 421 ADR, LAW 499 Clinical Programme & Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "LAW 401 & LAW 411: Company Law and Evidence at EBSU", "objectives": ["Explain company incorporation, directors' duties, and winding-up under CAMA 2020", "Apply rules of admissibility, documentary evidence, and estoppel under the Evidence Act 2011"]},
+        {"name": "LAW 499: EBSU Law Clinic and LLB Research Project", "objectives": ["Represent indigent clients under supervision in EBSU Law Clinic offering pro bono legal services to Ebonyi communities", "Research, write, and defend an LLB dissertation on a Nigerian or international legal issue"]}
+      ]
+    }
+  ]
+}

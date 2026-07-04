@@ -1,0 +1,78 @@
+{
+  "board": "waec",
+  "subject": "physics",
+  "level": "senior-secondary",
+  "source_url": "https://waecsyllabus.com/physics-syllabus/",
+  "topics": [
+    {
+      "name": "Interaction of Matter, Space, and Time",
+      "description": "Fundamental physical quantities, measurements, kinematics, dynamics, and fluid mechanics.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "Fundamental and Derived Quantities", "objectives": ["Identify fundamental and derived quantities and their SI units","Determine dimensions of physical quantities","Use dimensional analysis to verify physical equations"]},
+        {"name": "Position, Distance, and Displacement", "objectives": ["Distinguish between scalar and vector quantities","Calculate resultant of two or more vectors using resolution","Determine position coordinates and displacement vectors"]},
+        {"name": "Motion and Equations of Motion", "objectives": ["Analyze uniform and non-uniform linear motion","Derive and apply equations of uniformly accelerated motion","Interpret velocity-time and displacement-time graphs"]},
+        {"name": "Projectile Motion", "objectives": ["Explain independence of horizontal and vertical motions","Calculate maximum height, time of flight, and horizontal range","Apply projectile principles to practical trajectory problems"]},
+        {"name": "Equilibrium of Forces and Friction", "objectives": ["State conditions for equilibrium of coplanar forces","Calculate moment of a force and apply principle of moments","Distinguish static and dynamic friction and determine coefficient of friction"]},
+        {"name": "Fluids at Rest and Archimedes' Principle", "objectives": ["Calculate pressure in liquids and atmospheric pressure","State and apply Archimedes' principle and law of flotation","Determine relative density of solids and liquids using hydrometers"]}
+      ]
+    },
+    {
+      "name": "Energy",
+      "description": "Work, power, mechanical energy, thermal physics, gas laws, and simple machines.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Work, Energy, and Power", "objectives": ["Calculate work done by constant and variable forces","Apply principle of conservation of mechanical energy","Calculate mechanical power and electrical power output"]},
+        {"name": "Thermal Energy and Temperature", "objectives": ["Distinguish temperature scales and calibrate liquid-in-glass thermometers","Measure specific heat capacity and latent heat using calorimetry","Apply concepts of thermal expansion of solids, liquids, and gases"]},
+        {"name": "Gas Laws", "objectives": ["State and verify Boyle's Law, Charles' Law, and Pressure Law","Apply Ideal Gas Equation PV = nRT to thermodynamic calculations","Explain gas behavior using Kinetic Theory of gases"]},
+        {"name": "Heat Transfer", "objectives": ["Explain thermal conduction, convection, and radiation mechanisms","Apply Leslie's cube and Dewar flask principles","Calculate rate of heat transfer through composite conductors"]},
+        {"name": "Simple Machines", "objectives": ["Define Mechanical Advantage (MA), Velocity Ratio (VR), and Efficiency","Calculate VR for levers, pulleys, inclined planes, wheel and axle, and screw jack","Explain energy losses due to friction in machines"]}
+      ]
+    },
+    {
+      "name": "Waves and Optics",
+      "description": "Mechanical and electromagnetic waves, sound, light reflection, refraction, and optical instruments.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Wave Motion and Properties", "objectives": ["Distinguish transverse and longitudinal progressive waves","State wave equation v = fλ and calculate frequency and period","Demonstrate reflection, refraction, diffraction, and interference of waves"]},
+        {"name": "Sound Waves", "objectives": ["Determine speed of sound in air, liquids, and solids","Explain resonance and stationary waves in stretched strings and pipes","Calculate fundamental frequency and harmonics in musical instruments"]},
+        {"name": "Reflection of Light", "objectives": ["Apply laws of reflection to plane and curved mirrors","Construct ray diagrams for concave and convex spherical mirrors","Apply mirror formula 1/f = 1/u + 1/v to find image position and magnification"]},
+        {"name": "Refraction of Light and Prisms", "objectives": ["Apply Snell's law and determine refractive index of glass and water","Calculate critical angle and total internal reflection applications (optical fibers)","Determine minimum deviation of light passing through a glass prism"]},
+        {"name": "Lenses and Optical Instruments", "objectives": ["Construct ray diagrams for converging and diverging thin lenses","Apply lens formula 1/f = 1/u + 1/v and lens power in dioptres","Describe optical principles of astronomical telescope, compound microscope, and human eye"]}
+      ]
+    },
+    {
+      "name": "Fields and Circuits",
+      "description": "Gravitational fields, electrostatics, capacitors, magnetic fields, electromagnetic induction, and AC circuits.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "Gravitational Field", "objectives": ["State Newton's law of universal gravitation","Calculate gravitational potential, field strength, and escape velocity","Describe Kepler's laws of planetary motion and satellite orbits"]},
+        {"name": "Electrostatics and Capacitors", "objectives": ["Apply Coulomb's Law of electric charges","Calculate capacitance of parallel plate capacitors C = εA/d","Calculate equivalent capacitance for series and parallel arrangements"]},
+        {"name": "Current Electricity and DC Circuits", "objectives": ["State Ohm's Law and calculate resistance in series and parallel","Apply Kirchhoff's laws to solve complex resistor networks","Determine internal resistance and electromotive force (e.m.f.) of cells"]},
+        {"name": "Magnetism and Electromagnetic Field", "objectives": ["Map magnetic fields around straight conductors, solenoids, and bar magnets","Calculate magnetic force on current-carrying conductor F = BIL sin θ","Apply Faraday's and Lenz's laws of electromagnetic induction"]},
+        {"name": "Alternating Current (AC) Circuits", "objectives": ["Distinguish peak voltage/current and root-mean-square (r.m.s.) values","Calculate inductive reactance XL, capacitive reactance XC, and impedance Z","Explain resonance in series R-L-C circuits and transformer power efficiency"]}
+      ]
+    },
+    {
+      "name": "Atomic and Modern Physics",
+      "description": "Atomic structure, wave-particle duality, photoelectric effect, X-rays, and nuclear physics.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "Atomic Models and Energy Levels", "objectives": ["Describe Thomson, Rutherford, and Bohr atomic models","Calculate photon energy E = hf and wavelength during electron transitions","Explain line emission and absorption spectra"]},
+        {"name": "Photoelectric Effect and Wave-Particle Duality", "objectives": ["State Einstein's photoelectric equation hf = W0 + Kmax","Define work function, threshold frequency, and stopping potential","Calculate de Broglie wavelength λ = h/p for moving particles"]},
+        {"name": "X-Rays and Radioactivity", "objectives": ["Describe production, properties, and medical/industrial uses of X-rays","Distinguish alpha, beta, and gamma radiation properties","Calculate radioactive decay, half-life T1/2, and decay constant λ"]},
+        {"name": "Nuclear Reactions and Energy", "objectives": ["Balance nuclear equations for alpha and beta decay","Calculate mass defect and nuclear binding energy using E = mc²","Distinguish nuclear fission and nuclear fusion in power generation"]}
+      ]
+    },
+    {
+      "name": "Introductory Electronics",
+      "description": "Semiconductor physics, p-n junction diodes, rectification, and transistor operations.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "Semiconductors and Diodes", "objectives": ["Distinguish intrinsic and extrinsic (n-type, p-type) semiconductors","Explain p-n junction formation and depletion layer barrier potential","Describe forward and reverse bias characteristics of semiconductor diodes"]},
+        {"name": "Rectification and Power Supplies", "objectives": ["Construct half-wave and full-wave bridge rectifier circuits","Explain smoothing capacitor filter action in DC power supply units"]},
+        {"name": "Transistors and Integrated Circuits", "objectives": ["Describe structure and operation of bipolar junction transistors (n-p-n, p-n-p)","Use transistor as an electronic switch and current amplifier"]}
+      ]
+    }
+  ]
+}

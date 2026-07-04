@@ -1,0 +1,35 @@
+{
+  "board": "unilag",
+  "subject": "accounting",
+  "level": "tertiary-degree",
+  "source_url": "https://unilag.edu.ng/academics/faculty-of-business-administration/accounting",
+  "topics": [
+    {
+      "name": "100 Level: Foundations of Accounting and Business Communication",
+      "description": "ACC 101 Financial Accounting I, BUS 101 Business Communication, ECO 111 Introduction to Economics.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "ACC 101: Bookkeeping and Preparation of Financial Statements", "objectives": ["Record transactions using double-entry bookkeeping in journals and ledger accounts", "Prepare and interpret trial balance, income statement, and statement of financial position"]},
+        {"name": "ECO 111: Fundamentals of Micro and Macroeconomics for Accounting", "objectives": ["Explain supply, demand, market equilibrium, and pricing theory for business decision making", "Identify macroeconomic indicators — GDP, inflation, interest rates — and their effect on accounting"]}
+      ]
+    },
+    {
+      "name": "200–300 Level: Cost Accounting, Taxation, and Management Accounting",
+      "description": "ACC 201 Cost Accounting, ACC 211 Taxation, ACC 301 Management Accounting, ACC 311 Auditing I.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "ACC 201 & ACC 301: Cost and Management Accounting", "objectives": ["Calculate job, process, activity-based, and marginal costs for manufacturing and service firms", "Prepare budgets, variance analyses, and performance reports for management decision-making"]},
+        {"name": "ACC 211 & ACC 311: Taxation and Auditing", "objectives": ["Calculate personal income tax, companies income tax, and value added tax (VAT) liabilities", "Plan and execute audit engagements using risk-based auditing standards (ISAs and FRC Nigeria)"]}
+      ]
+    },
+    {
+      "name": "400 Level: Advanced Financial Reporting, Finance, and Research Project",
+      "description": "ACC 401 Advanced Financial Reporting (IFRS), FIN 411 Corporate Finance, ACC 499 Research Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "ACC 401: IFRS Compliant Financial Reporting", "objectives": ["Prepare consolidated financial statements for groups of companies under IFRS 3 and IFRS 10", "Account for leases, financial instruments, and deferred tax in accordance with IFRS 16 and IAS 12"]},
+        {"name": "ACC 499: Undergraduate Research Dissertation", "objectives": ["Conduct empirical or theoretical accounting research with proper literature review and methodology", "Present and defend original research before UNILAG Faculty of Business Administration examiners"]}
+      ]
+    }
+  ]
+}

@@ -156,7 +156,59 @@ func main() {
 			CREATE INDEX IF NOT EXISTS idx_query_cache_hash         ON query_cache(query_hash);
 			CREATE INDEX IF NOT EXISTS idx_query_cache_hits         ON query_cache(hit_count DESC);
 			CREATE INDEX IF NOT EXISTS idx_topics_name_search       ON topics USING gin(to_tsvector('english', name));
-			CREATE INDEX IF NOT EXISTS idx_subtopics_name_search    ON subtopics USING gin(to_tsvector('english', name))`},
+			CREATE INDEX IF NOT EXISTS idx_subtopics_name_search    ON subtopics USING gin(to_tsvector('english', name));
+			CREATE INDEX IF NOT EXISTS idx_objectives_subtopic_desc ON learning_objectives(subtopic_id, description)`},
+
+		// ── Seed Reference Data ─────────────────────────────────────────────────
+		{"Seed exam_boards", `
+			INSERT INTO exam_boards (slug, name, full_name, country, description, website) VALUES
+				('bece',     'BECE',     'Basic Education Certificate Examination',                         'Nigeria', 'Junior Secondary School (JSS1-JSS3) national examinations board.',          'https://waec.org.ng'),
+				('waec',     'WAEC',     'West African Examinations Council',                               'Nigeria', 'Senior Secondary Certificate Examination (SSCE) for SS1-SS3.',               'https://waec.org.ng'),
+				('jamb',     'JAMB',     'Joint Admissions and Matriculation Board',                        'Nigeria', 'Unified Tertiary Matriculation Examination (UTME) for university entry.',    'https://jamb.gov.ng'),
+				('neco',     'NECO',     'National Examinations Council',                                   'Nigeria', 'National SSCE alternative to WAEC for Senior Secondary students.',           'https://neco.gov.ng'),
+				('nuc',      'NUC',      'National Universities Commission',                                'Nigeria', 'CCMAS minimum academic standards for Nigerian university degree programmes.', 'https://nuc.edu.ng'),
+				('nbte',     'NBTE',     'National Board for Technical Education',                          'Nigeria', 'Polytechnic ND/HND minimum standards for technical and vocational education.','https://nbte.gov.ng'),
+				('yabatech', 'YABATECH', 'Yaba College of Technology',                                      'Nigeria', 'Premier polytechnic in Lagos offering ND and HND programmes.',              'https://yabatech.edu.ng'),
+				('imt',      'IMT',      'Institute of Management and Technology Enugu',                    'Nigeria', 'State polytechnic in Enugu offering ND and HND programmes.',                'https://imt.edu.ng'),
+				('unilag',   'UNILAG',   'University of Lagos',                                             'Nigeria', 'Federal university in Lagos, one of Nigeria''s foremost research universities.','https://unilag.edu.ng'),
+				('unn',      'UNN',      'University of Nigeria Nsukka',                                    'Nigeria', 'Premier South-Eastern federal university founded by Nnamdi Azikiwe.',        'https://unn.edu.ng'),
+				('unec',     'UNEC',     'University of Nigeria Enugu Campus',                              'Nigeria', 'Enugu campus of University of Nigeria, specialising in law and medical sciences.','https://unn.edu.ng'),
+				('ebsu',     'EBSU',     'Ebonyi State University',                                         'Nigeria', 'State university in Abakaliki, Ebonyi State.',                              'https://ebsu.edu.ng'),
+				('funai',    'FUNAI',    'Federal University Ndufu-Alike Ikwo',                             'Nigeria', 'Federal university in Ebonyi State (AE-FUNAI).',                            'https://funai.edu.ng'),
+				('futo',     'FUTO',     'Federal University of Technology Owerri',                         'Nigeria', 'Technology-focused federal university in Imo State.',                       'https://futo.edu.ng')
+			ON CONFLICT (slug) DO NOTHING`},
+
+		{"Seed subjects", `
+			INSERT INTO subjects (slug, name, description, category) VALUES
+				-- Secondary & UTME subjects
+				('mathematics',          'Mathematics',                    'Pure and applied mathematics from arithmetic to calculus.',                    'science'),
+				('physics',              'Physics',                        'Study of matter, energy, mechanics, waves, and modern physics.',               'science'),
+				('chemistry',            'Chemistry',                      'Study of elements, compounds, reactions, and organic chemistry.',               'science'),
+				('biology',              'Biology',                        'Study of living organisms, ecology, genetics, and physiology.',                 'science'),
+				('economics',            'Economics',                      'Microeconomics, macroeconomics, market theory, and national development.',       'social-science'),
+				('government',           'Government',                     'Nigerian government, constitution, democracy, and political science.',           'social-science'),
+				('english-language',     'English Language',               'Reading, writing, comprehension, and grammar for JSS and primary levels.',      'arts'),
+				('english-studies',      'English Studies',                'Advanced English language, literature, and communication skills.',               'arts'),
+				('literature',           'Literature in English',          'Prose, drama, poetry, and African literary works for secondary students.',       'arts'),
+				('social-studies',       'Social Studies',                 'Citizenship, society, environment, and civic education for JSS.',                'social-science'),
+				('basic-science',        'Basic Science',                  'Integrated science introducing physics, chemistry, and biology at JSS level.',   'science'),
+				('basic-technology',     'Basic Technology',               'Technology fundamentals, workshop practice, and technical drawing at JSS.',      'technology'),
+				('business-studies',     'Business Studies',               'Commerce, bookkeeping, and office practice at junior secondary level.',          'business'),
+				-- University degree subjects (NUC CCMAS)
+				('computer-science',         'Computer Science',                'Algorithms, data structures, software engineering, AI, and networking.',       'technology'),
+				('law',                      'Law',                             'Nigerian and international law, jurisprudence, constitutional law.',           'law'),
+				('accounting',               'Accounting',                      'Financial accounting, auditing, taxation, and management accounting.',         'business'),
+				('business-administration',  'Business Administration',         'Management, marketing, entrepreneurship, and organisational behaviour.',       'business'),
+				('nursing-science',          'Nursing Science',                 'Clinical nursing, anatomy, pharmacology, and community health care.',          'health'),
+				('medicine-and-surgery',     'Medicine and Surgery',            'MBBS programme: anatomy, physiology, pathology, clinical rotations.',          'health'),
+				('mechanical-engineering',   'Mechanical Engineering',          'Thermodynamics, fluid mechanics, manufacturing, and machine design.',          'engineering'),
+				('electrical-engineering',   'Electrical Engineering',          'Circuit theory, power systems, electronics, and control engineering.',         'engineering'),
+				('petroleum-engineering',    'Petroleum Engineering',           'Reservoir engineering, drilling, production, and petroleum economics.',        'engineering'),
+				('mass-communication',       'Mass Communication',              'Journalism, broadcasting, advertising, PR, and digital media.',                'arts'),
+				-- Polytechnic / vocational subjects
+				('computer-engineering-tech',  'Computer Engineering Technology', 'Digital electronics, microprocessors, hardware maintenance, and networks.',    'technology'),
+				('science-laboratory-tech',    'Science Laboratory Technology',   'Analytical chemistry, microbiology, laboratory instrumentation, and QA.',     'science')
+			ON CONFLICT (slug) DO NOTHING`},
 	}
 
 	for _, stmt := range statements {

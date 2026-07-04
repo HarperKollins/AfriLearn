@@ -1,0 +1,47 @@
+{
+  "board": "waec",
+  "subject": "chemistry",
+  "level": "senior-secondary",
+  "source_url": "https://waecsyllabus.com/chemistry-syllabus/",
+  "topics": [
+    {
+      "name": "Atomic Structure, Periodic Table, and Bonding",
+      "description": "Subatomic particles, isotopes, electron configuration, periodic trends, electrovalent, covalent, metallic, and hydrogen bonding.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "Atomic Structure and Isotopy", "objectives": ["Identify protons, neutrons, electrons, atomic number Z, and mass number A","Write s, p, d electron configurations for elements 1 to 30","Calculate relative atomic mass RAM from isotopic abundances"]},
+        {"name": "Periodic Table and Periodic Trends", "objectives": ["Classify elements into Groups I-VIII and Periods 1-4","Explain periodic trends: atomic radius, ionization energy, electronegativity, electron affinity"]},
+        {"name": "Chemical Bonding", "objectives": ["Compare electrovalent (ionic), covalent, co-ordinate (dative), metallic, and hydrogen bonds","Relate bond type to physical properties (melting point, solubility, electrical conductivity)"]}
+      ]
+    },
+    {
+      "name": "Stoichiometry, Gas Laws, and Solutions",
+      "description": "Mole concept, chemical equations, gas laws, solutions, solubility, and volumetric analysis.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Mole Concept and Chemical Equations", "objectives": ["Calculate molar mass, empirical formula, molecular formula, and percentage composition","Balance chemical equations and perform stoichiometric calculations"]},
+        {"name": "Gas Laws and Kinetic Theory", "objectives": ["Apply Boyle's Law, Charles' Law, Graham's Law of Diffusion, and Dalton's Law of Partial Pressures","Calculate gas volume at standard temperature and pressure (STP = 22.4 dm³/mol)"]},
+        {"name": "Solubility and Volumetric Analysis", "objectives": ["Define solute, solvent, saturated, unsaturated, and supersaturated solutions","Plot and interpret solubility curves","Perform acid-base titration calculations (molarity, concentration in g/dm³, purity)"]}
+      ]
+    },
+    {
+      "name": "Acids, Bases, Salts, and Electrochemistry",
+      "description": "Acids, bases, pH scale, salt preparation, oxidation-reduction (redox) reactions, and electrolysis.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "Acids, Bases, and Salts", "objectives": ["Compare Arrhenius, Bronsted-Lowry, and Lewis concepts of acids and bases","Calculate pH = -log[H+] and pOH of solutions","Classify salts (normal, acid, basic, double, complex) and describe preparation methods"]},
+        {"name": "Redox Reactions and Electrochemistry", "objectives": ["Assign oxidation numbers and identify oxidizing and reducing agents","Balance redox equations using half-reaction method","State Faraday's 1st and 2nd Laws of Electrolysis and calculate mass deposited m = Q M / (z F)"]}
+      ]
+    },
+    {
+      "name": "Organic Chemistry and Macromolecules",
+      "description": "Hydrocarbons, alkanols, alkanoic acids, esters, fats, oils, polymers, and synthetic materials.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "Hydrocarbons: Alkanes, Alkenes, Alkynes, and Benzene", "objectives": ["Name organic compounds using IUPAC nomenclature","Describe fractional distillation of crude oil and cracking of petroleum fractions","Compare structural isomerism and chemical reactions of alkanes, alkenes, alkynes, and benzene"]},
+        {"name": "Alkanols, Alkanoic Acids, and Esters", "objectives": ["Describe preparation, properties, and reactions of primary, secondary, and tertiary alkanols","Explain esterification reaction and saponification of fats and oils to produce soap"]},
+        {"name": "Polymers and Synthetic Materials", "objectives": ["Distinguish addition polymerization (polyethene, PVC) and condensation polymerization (nylon, terylene)","Describe structure and properties of carbohydrates, proteins, and synthetic polymers"]}
+      ]
+    }
+  ]
+}

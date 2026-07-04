@@ -1,0 +1,35 @@
+{
+  "board": "futo",
+  "subject": "mechanical-engineering",
+  "level": "tertiary-degree",
+  "source_url": "https://futo.edu.ng/academics/engineering/mechanical",
+  "topics": [
+    {
+      "name": "100–200 Level: Engineering Mathematics, Mechanics, and Materials Science",
+      "description": "ENG 101 Engineering Drawing, MEE 211 Engineering Mechanics, MEE 221 Materials Science.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "MEE 211: Statics and Dynamics", "objectives": ["Resolve forces, moments, and couples in 2D and 3D static equilibrium problems", "Apply Newton's laws to dynamics problems including kinematics, kinetics, and impulse-momentum"]},
+        {"name": "MEE 221: Properties and Selection of Engineering Materials", "objectives": ["Classify metals, polymers, ceramics, and composites by structure and mechanical properties", "Select appropriate engineering materials based on strength, ductility, hardness, and cost criteria"]}
+      ]
+    },
+    {
+      "name": "300 Level: Thermodynamics, Fluid Mechanics, and Manufacturing",
+      "description": "MEE 301 Engineering Thermodynamics, MEE 311 Fluid Mechanics, MEE 321 Manufacturing Processes.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "MEE 301: Thermodynamic Cycles and Heat Engines", "objectives": ["Analyse Carnot, Rankine, and Otto cycles for power plant and IC engine applications", "Apply first and second laws of thermodynamics to open and closed system analysis"]},
+        {"name": "MEE 321: Casting, Forming, and Machining Operations", "objectives": ["Describe sand casting, die casting, forging, and rolling manufacturing processes", "Select appropriate cutting tools, speeds, feeds, and coolants for machining operations"]}
+      ]
+    },
+    {
+      "name": "400–500 Level: Machine Design, Vibration, Control & Final Project",
+      "description": "MEE 401 Machine Design, MEE 411 Mechanical Vibrations, MEE 499 Final Year Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "MEE 401: Design of Machine Elements", "objectives": ["Design shafts, keys, couplings, gears, belts, and bearings under static and fatigue loading", "Apply factor of safety, stress concentration, and failure theories to machine element design"]},
+        {"name": "MEE 499: FUTO Final Year Engineering Design Project", "objectives": ["Design and fabricate a mechanical system or component addressing a real industrial problem", "Prepare comprehensive engineering design report and defend before FUTO School of Engineering"]}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "board": "unec",
+  "subject": "accounting",
+  "level": "tertiary-degree",
+  "source_url": "https://unn.edu.ng/academics/faculty-of-business-administration/accounting",
+  "topics": [
+    {
+      "name": "100 Level: Principles of Accounting & Introduction to Business (UNEC)",
+      "description": "ACC 101 Principles of Accounting I, BUS 101 Introduction to Business, ECO 101 Economics I.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "ACC 101: Bookkeeping and Financial Statements at UNEC Enugu", "objectives": ["Apply the accounting equation and double-entry system to record business transactions", "Prepare final accounts for sole traders and partnerships including adjustments for depreciation and accruals"]},
+        {"name": "ECO 101: Microeconomic Principles for Accounting Students", "objectives": ["Explain demand, supply, and equilibrium price in product and factor markets", "Describe business cost structures and profit maximisation relevant to managerial accounting"]}
+      ]
+    },
+    {
+      "name": "200–300 Level: Intermediate Accounting, Cost Accounting & Nigerian Tax",
+      "description": "ACC 201 Intermediate Accounting, ACC 211 Cost Accounting, ACC 301 Nigerian Taxation.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "ACC 201 & ACC 211: Intermediate Financial and Cost Accounting", "objectives": ["Prepare company accounts including cash flow statements under IAS 7 and profit or loss per IAS 1", "Calculate job costs, process costs, and apply standard costing and variance analysis techniques"]},
+        {"name": "ACC 301: Nigerian Tax Law and Practice", "objectives": ["Compute personal income tax, companies income tax, petroleum profits tax, and capital gains tax", "Understand tax planning strategies and compliance obligations under FIRS regulations"]}
+      ]
+    },
+    {
+      "name": "400 Level: Advanced Financial Accounting, Auditing & Research (UNEC)",
+      "description": "ACC 401 Advanced Financial Reporting, ACC 411 Auditing, ACC 499 Research Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "ACC 401 & ACC 411: IFRS Reporting and Auditing Standards", "objectives": ["Apply IFRS standards (IFRS 15, 16, IAS 36, 37) to prepare complex financial statements", "Design audit programmes, test internal controls, and issue audit opinions under ISAs adopted by FRC Nigeria"]},
+        {"name": "ACC 499: UNN (UNEC) Accounting Research Dissertation", "objectives": ["Identify and investigate an original accounting or finance problem using quantitative or qualitative research methods", "Submit and defend a full research dissertation before the UNN (Enugu Campus) accounting faculty"]}
+      ]
+    }
+  ]
+}

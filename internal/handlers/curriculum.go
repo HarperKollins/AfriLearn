@@ -2,8 +2,10 @@ package handlers
 
 import (
 	"database/sql"
+	"fmt"
 	"net/http"
 
+	"github.com/afrilearn/curriculum-api/internal/cache"
 	"github.com/afrilearn/curriculum-api/internal/database"
 	"github.com/afrilearn/curriculum-api/internal/models"
 	"github.com/gin-gonic/gin"
@@ -113,6 +115,14 @@ func GetAllExamBoards(c *gin.Context) {
 func GetCurriculum(c *gin.Context) {
 	boardSlug := c.Param("board")
 	subjectSlug := c.Param("subject")
+
+	cacheKey := fmt.Sprintf("curr:%s:%s", boardSlug, subjectSlug)
+	if cachedVal, found := cache.GetCache().Get(cacheKey); found {
+		if resp, ok := cachedVal.(models.APIResponse); ok {
+			c.JSON(http.StatusOK, resp)
+			return
+		}
+	}
 
 	// 1. Fetch curriculum metadata
 	var curr models.Curriculum
@@ -232,10 +242,12 @@ func GetCurriculum(c *gin.Context) {
 		}
 	}
 
-	// Reassemble subtopics into topics
+	// Reassemble subtopics into topics in strict order_index order
 	topicSubtopicMap := make(map[string][]models.Subtopic)
-	for _, stPtr := range subtopicMap {
-		topicSubtopicMap[stPtr.TopicID] = append(topicSubtopicMap[stPtr.TopicID], *stPtr)
+	for _, subID := range subtopicIDs {
+		if stPtr, ok := subtopicMap[subID]; ok {
+			topicSubtopicMap[stPtr.TopicID] = append(topicSubtopicMap[stPtr.TopicID], *stPtr)
+		}
 	}
 
 	for i := range topics {
@@ -249,14 +261,17 @@ func GetCurriculum(c *gin.Context) {
 
 	curr.Topics = topics
 
-	c.JSON(http.StatusOK, models.APIResponse{
+	apiResp := models.APIResponse{
 		Success: true,
 		Data:    curr,
 		Meta: &models.Meta{
 			Source:  curr.SourceURL,
 			Version: "v1",
 		},
-	})
+	}
+
+	cache.GetCache().Set(cacheKey, apiResp, 0)
+	c.JSON(http.StatusOK, apiResp)
 }
 
 // SearchTopics searches across topics and subtopics
@@ -271,7 +286,6 @@ func SearchTopics(c *gin.Context) {
 		return
 	}
 
-	searchTerm := "%" + query + "%"
 
 	rows, err := database.DB.Query(`
 		SELECT 
@@ -282,10 +296,10 @@ func SearchTopics(c *gin.Context) {
 		JOIN curricula c ON t.curriculum_id = c.id
 		JOIN exam_boards eb ON c.exam_board_id = eb.id
 		JOIN subjects s ON c.subject_id = s.id
-		WHERE LOWER(t.name) LIKE LOWER($1) OR LOWER(t.description) LIKE LOWER($1)
-		ORDER BY t.name
+		WHERE to_tsvector('english', t.name) @@ plainto_tsquery('english', $1)
+		ORDER BY ts_rank(to_tsvector('english', t.name), plainto_tsquery('english', $1)) DESC
 		LIMIT 50
-	`, searchTerm)
+	`, query)
 
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.APIResponse{

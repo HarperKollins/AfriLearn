@@ -1,0 +1,54 @@
+{
+  "board": "jamb",
+  "subject": "physics",
+  "level": "tertiary-entry",
+  "source_url": "https://ibass.jamb.gov.ng/syllabus/physics",
+  "topics": [
+    {
+      "name": "Measurement and Mechanics",
+      "description": "JAMB UTME Section 1: Units, vectors, kinematics, Newton's laws, gravitation, work/energy, and simple machines.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "Units and Dimensions", "objectives": ["Identify SI base units and derived units","Determine dimensions of physical quantities and test equation consistency"]},
+        {"name": "Scalars, Vectors, and Kinematics", "objectives": ["Resolve vectors into rectangular components and calculate resultant","Analyze linear motion, projectile motion, and uniform circular motion (centripetal force)"]},
+        {"name": "Newton's Laws of Motion and Momentum", "objectives": ["Apply Newton's three laws of motion to real-world mechanical systems","Calculate impulse and linear momentum conservation in elastic and inelastic collisions"]},
+        {"name": "Forces, Equilibrium, and Friction", "objectives": ["Calculate gravitational force using Newton's law of universal gravitation","State conditions for equilibrium of rigid bodies and calculate moments","Determine static and kinetic friction coefficients on horizontal and inclined planes"]},
+        {"name": "Work, Energy, Power, and Simple Machines", "objectives": ["Apply conservation of mechanical energy principle (PE + KE = constant)","Calculate efficiency, Mechanical Advantage (MA), and Velocity Ratio (VR) of machines"]}
+      ]
+    },
+    {
+      "name": "Matter, Heat, and Waves",
+      "description": "JAMB UTME Section 2: Fluid pressure, thermal expansion, gas laws, SHM, wave properties, sound, and geometrical optics.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Elasticity and Fluid Mechanics", "objectives": ["State Hooke's Law and calculate Young's modulus E = (F/A)/(ΔL/L)","Calculate fluid pressure P = hρg and apply Pascal's and Archimedes' principles"]},
+        {"name": "Thermal Physics and Gas Laws", "objectives": ["Convert between Celsius, Fahrenheit, and Kelvin temperature scales","Measure specific heat capacity and latent heat using method of mixtures","Apply Boyle's Law, Charles' Law, Pressure Law, and Ideal Gas Law PV = nRT"]},
+        {"name": "Simple Harmonic Motion (SHM) and Waves", "objectives": ["Analyze SHM in simple pendulums and mass-spring systems T = 2π√(m/k)","Apply wave equation v = fλ to transverse, longitudinal, and electromagnetic waves","Explain interference, diffraction, polarization, and stationary wave resonance"]},
+        {"name": "Sound Waves and Acoustics", "objectives": ["Determine velocity of sound in gases, liquids, and solids","Calculate pitch, loudness, intensity, echo, and Doppler effect frequencies"]},
+        {"name": "Geometrical Optics and Instruments", "objectives": ["Apply reflection and refraction laws at plane and curved spherical surfaces","Calculate critical angle and total internal reflection applications","Apply mirror/lens formulas 1/f = 1/u + 1/v to microscopes, telescopes, and eye defects"]}
+      ]
+    },
+    {
+      "name": "Electricity and Magnetism",
+      "description": "JAMB UTME Section 3: Electrostatics, capacitors, DC circuits, magnetic fields, induction, and AC circuits.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "Electrostatics and Capacitance", "objectives": ["Calculate electrostatic force using Coulomb's Law F = kq1q2/r²","Calculate electric field intensity, potential, and energy stored in capacitors E = ½CV²"]},
+        {"name": "Current Electricity and DC Circuits", "objectives": ["State Ohm's Law and calculate equivalent resistance in series and parallel networks","Apply Kirchhoff's Current Law and Voltage Law to electrical circuits","Calculate electrical energy, power P = IV = I²R, and internal resistance of cells"]},
+        {"name": "Magnetism and Electromagnetic Induction", "objectives": ["Map magnetic fields around solenoids, straight wires, and earth's magnetic field","Calculate magnetic force on moving charge F = qvB sin θ and current-carrying wire F = BIL sin θ","State Faraday's and Lenz's laws and explain transformer voltage step-up/step-down Vp/Vs = Np/Ns"]},
+        {"name": "AC Circuits", "objectives": ["Distinguish peak voltage V0 and root-mean-square Vrms = V0/√2","Calculate inductive reactance XL, capacitive reactance XC, and impedance Z in RLC circuits"]}
+      ]
+    },
+    {
+      "name": "Atomic and Modern Physics",
+      "description": "JAMB UTME Section 4: Conduction in gases, photoelectric effect, atomic models, X-rays, radioactivity, and semiconductors.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "Conduction in Gases and Cathode Rays", "objectives": ["Describe discharge tube phenomena and properties of cathode rays","Explain thermionic emission and cathode ray oscilloscope (CRO) applications"]},
+        {"name": "Photoelectric Effect and Wave-Particle Duality", "objectives": ["Apply Einstein's photoelectric equation hf = hf0 + ½mv²","Calculate photon energy E = hf and de Broglie wavelength λ = h/p"]},
+        {"name": "Atomic Models and X-Rays", "objectives": ["Describe Thomson, Rutherford, and Bohr atomic spectral models","Explain X-ray production in Coolidge tube, hard vs soft X-rays, and medical safety"]},
+        {"name": "Radioactivity, Nuclear Reactions, and Electronics", "objectives": ["Calculate radioactive decay, half-life T½ = 0.693/λ, and mass defect energy E = Δmc²","Distinguish intrinsic vs extrinsic p-type and n-type semiconductors and p-n junction diode rectification"]}
+      ]
+    }
+  ]
+}

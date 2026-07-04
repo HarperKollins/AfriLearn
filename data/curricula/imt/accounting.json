@@ -1,0 +1,26 @@
+{
+  "board": "imt",
+  "subject": "accounting",
+  "level": "polytechnic-nd",
+  "source_url": "https://imt.edu.ng/academics/business/accountancy",
+  "topics": [
+    {
+      "name": "ND I & ND II: Bookkeeping, Financial Accounting & Business Communication (IMT)",
+      "description": "ACC 111 Financial Accounting I, ACC 121 Principles of Business, BUS 111 Business Communication.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "ACC 111 & ACC 121: Bookkeeping and Principles of Business at IMT Enugu", "objectives": ["Record business transactions using double-entry principles in cash books, journals, and ledgers", "Prepare final accounts for sole traders including income statements and balance sheets with adjustments"]},
+        {"name": "BUS 111: Business Communication and Office Procedures", "objectives": ["Write business letters, memos, reports, and emails in correct format for Nigerian business environments", "Describe office organisation, filing systems, and business communication channels used in Enugu State enterprises"]}
+      ]
+    },
+    {
+      "name": "HND I & HND II: Management Accounting, Taxation, Auditing & IMT Project",
+      "description": "ACC 311 Cost & Management Accounting, ACC 321 Nigerian Taxation, ACC 411 Auditing, ACC 499 HND Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "ACC 311 & ACC 321: Management Accounting and Taxation at IMT", "objectives": ["Prepare budgets, standard cost statements, and variance analyses for manufacturing and trading businesses", "Calculate personal income tax, companies income tax, and VAT for Nigerian small and medium enterprises"]},
+        {"name": "ACC 499: IMT Accountancy HND Final Year Project", "objectives": ["Conduct an accounting-based case study or empirical research on a business in Enugu or South-East Nigeria", "Present and defend HND project report before the NBTE and IMT School of Business & Management Technology"]}
+      ]
+    }
+  ]
+}

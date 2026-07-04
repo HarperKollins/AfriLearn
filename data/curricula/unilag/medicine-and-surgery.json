@@ -1,0 +1,35 @@
+{
+  "board": "unilag",
+  "subject": "medicine-and-surgery",
+  "level": "tertiary-degree",
+  "source_url": "https://unilag.edu.ng/academics/college-of-medicine",
+  "topics": [
+    {
+      "name": "100–200 Level: Pre-clinical Sciences — Anatomy, Physiology, and Biochemistry",
+      "description": "ANA 101 Gross Anatomy, PHS 211 Physiology I, BCH 211 Medical Biochemistry.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "ANA 101 & ANA 211: Human Gross and Microscopic Anatomy (CMUL)", "objectives": ["Identify and describe the structures of musculoskeletal, cardiovascular, respiratory, and neurological systems", "Interpret histological slides of major organ systems in practicals at College of Medicine UNILAG (CMUL)"]},
+        {"name": "PHS 211 & BCH 211: Physiology and Medical Biochemistry", "objectives": ["Explain homeostatic mechanisms regulating cardiovascular, renal, and endocrine function", "Describe metabolic pathways including glycolysis, Krebs cycle, beta-oxidation, and amino acid catabolism"]}
+      ]
+    },
+    {
+      "name": "300 Level: Pathology, Microbiology, Pharmacology, and Clinical Introduction",
+      "description": "PATH 301 General Pathology, MIC 311 Medical Microbiology, PHAR 321 Pharmacology I, CL 331 Clinical Introduction.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "PATH 301 & MIC 311: Pathology and Medical Microbiology", "objectives": ["Describe mechanisms of cell injury, inflammation, neoplasia, and common tropical diseases", "Identify bacterial, viral, fungal, and parasitic pathogens of clinical importance in Nigeria"]},
+        {"name": "PHAR 321 & CL 331: Pharmacology and Introduction to Clinical Skills", "objectives": ["Explain pharmacokinetics, pharmacodynamics, and adverse drug reactions for essential medicines", "Take a structured clinical history and perform basic physical examination in CMUL clinical skills lab"]}
+      ]
+    },
+    {
+      "name": "400–600 Level: Clinical Rotations — Medicine, Surgery, Paediatrics, O&G, and Electives",
+      "description": "CL 401 Medicine, CL 411 Surgery, CL 421 Paediatrics, CL 431 Obs & Gynae, CL 599 Final MBBS.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "CL 401 & CL 411: Internal Medicine and Surgery Rotations at LUTH", "objectives": ["Diagnose and manage common medical conditions including malaria, diabetes, hypertension, and HIV/AIDS", "Assist in surgical procedures, wound management, and post-operative care at Lagos University Teaching Hospital (LUTH)"]},
+        {"name": "CL 599: Final MBBS Professional Examinations", "objectives": ["Pass written, OSCE, and oral professional examinations in medicine, surgery, paediatrics, and O&G", "Demonstrate clinical competence required for provisional registration with the Medical and Dental Council of Nigeria (MDCN)"]}
+      ]
+    }
+  ]
+}

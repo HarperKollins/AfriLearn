@@ -1,0 +1,26 @@
+{
+  "board": "unilag",
+  "subject": "computer-science",
+  "level": "tertiary-degree",
+  "source_url": "https://unilag.edu.ng/academics/science/computer-science",
+  "topics": [
+    {
+      "name": "100 - 200 Level: UNILAG Foundation Sciences & Programming",
+      "description": "CSC 101, CSC 102, CSC 201 Object-Oriented Programming, MAT 101, and General Studies at UNILAG.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "CSC 101 & CSC 102: Introduction to Computer Science (UNILAG)", "objectives": ["Master computing fundamentals, Python programming, logic design, and Linux CLI at UNILAG Yaba"]},
+        {"name": "CSC 201 & CSC 202: OOP with Java & Discrete Mathematics", "objectives": ["Implement data structures, OOP design patterns, Boolean algebra, graph theory, and automata"]}
+      ]
+    },
+    {
+      "name": "300 - 400 Level: UNILAG Systems, Cloud, AI, SIWES, and B.Sc. Thesis",
+      "description": "Operating Systems, DBMS, Software Engineering, Cloud Computing, AI, SIWES, and UNILAG Thesis.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "CSC 301 & CSC 302: Operating Systems, Databases, and SIWES", "objectives": ["Analyze process scheduling, memory virtualization, SQL database design, and complete 6-month Yaba Tech Hub SIWES"]},
+        {"name": "CSC 401 & CSC 499: Artificial Intelligence & B.Sc. Research Project", "objectives": ["Develop deep learning models, cloud backend systems, and defend UNILAG B.Sc. research project"]}
+      ]
+    }
+  ]
+}

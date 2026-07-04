@@ -1,0 +1,49 @@
+{
+  "board": "nuc",
+  "subject": "computer-science",
+  "level": "tertiary-degree",
+  "source_url": "https://nuc.edu.ng/ccmas/computing/computer-science",
+  "topics": [
+    {
+      "name": "100 Level: Foundation Computing and Natural Sciences",
+      "description": "COS 101, COS 102, General Studies, Mathematics, and Physics foundation courses.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "COS 101: Introduction to Computing Sciences", "objectives": ["Trace history of computing, computer generations, and classification of computers","Identify computer hardware components, central processing unit CPU, and peripheral devices","Distinguish system software, operating systems, and application software"]},
+        {"name": "COS 102: Problem Solving and Programming I", "objectives": ["Formulate algorithms using flowcharts and pseudocode","Understand variables, data types, control structures (if-else, loops), and functions","Write basic programs in Python/C++ to solve computational problems"]},
+        {"name": "MTH 101 & PHY 101: Mathematics and Physics for Computing", "objectives": ["Apply algebra, trigonometry, coordinate geometry, and differential calculus","Understand mechanics, heat, electricity, magnetism, and wave motion principles"]}
+      ]
+    },
+    {
+      "name": "200 Level: Core Computer Science Fundamentals",
+      "description": "CSC 201 Programming II, Discrete Structures, Digital Logic, and Computer Architecture.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "CSC 201: Computer Programming II", "objectives": ["Implement object-oriented programming concepts: classes, objects, encapsulation, inheritance, polymorphism","Handle file I/O operations, exceptions, and recursion in C++/Java"]},
+        {"name": "CSC 203: Discrete Structures and Logic", "objectives": ["Apply set theory, mathematical logic, truth tables, and proof techniques","Analyze relations, functions, graph theory, trees, and combinatorics in computing"]},
+        {"name": "CSC 204: Digital Logic Design and Assembly Language", "objectives": ["Design logic gates (AND, OR, NOT, NAND, NOR, XOR) and Boolean algebra simplification","Construct combinational circuits (adders, multiplexers) and sequential circuits (flip-flops, counters)","Understand computer organization, instruction set architecture (ISA), and assembly language programming"]}
+      ]
+    },
+    {
+      "name": "300 Level: Data Structures, Software Engineering, and SIWES",
+      "description": "CSC 301 Data Structures, Database Systems, Software Engineering, Operating Systems, and SIWES Training.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "CSC 301: Data Structures and Algorithms", "objectives": ["Implement arrays, linked lists, stacks, queues, trees, binary search trees, and graphs","Analyze algorithm complexity using Big-O notation for searching (binary search) and sorting (quicksort, mergesort)"]},
+        {"name": "CSC 302: Database Management Systems (DBMS)", "objectives": ["Design relational databases using Entity-Relationship (ER) modeling and 1NF, 2NF, 3NF normalization","Write SQL queries for Data Definition Language (DDL) and Data Manipulation Language (DML)","Explain transaction processing, ACID properties, indexing, and database security"]},
+        {"name": "CSC 304: Software Engineering & Operating Systems", "objectives": ["Apply Agile and Waterfall software development life cycle (SDLC) methodologies","Understand process scheduling, memory management (virtual memory, paging), file systems, and concurrency/deadlocks"]},
+        {"name": "CSC 399: SIWES (Students Industrial Work Experience Scheme)", "objectives": ["Gain 6 months real-world software development and IT industry internship experience","Write technical industrial training report and defend work before departmental board"]}
+      ]
+    },
+    {
+      "name": "400 Level: Advanced Specializations and Final Year Project",
+      "description": "Artificial Intelligence, Computer Networks, Cybersecurity, Compiler Construction, and Research Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "CSC 401: Artificial Intelligence and Machine Learning", "objectives": ["Implement search algorithms (A* search, minimax) and knowledge representation","Understand supervised learning, unsupervised learning, neural networks, and deep learning basics"]},
+        {"name": "CSC 402: Computer Networks and Cybersecurity", "objectives": ["Explain OSI 7-layer model and TCP/IP protocol suite (IP routing, DNS, HTTP, TLS)","Understand network security threats, symmetric/asymmetrical cryptography (RSA, AES), and firewalls"]},
+        {"name": "CSC 499: Final Year Research Project", "objectives": ["Conduct independent original software development or theoretical computer science research","Write formal undergraduate thesis and present defense before external examiner"]}
+      ]
+    }
+  ]
+}

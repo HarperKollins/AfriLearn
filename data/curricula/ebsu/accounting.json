@@ -1,0 +1,35 @@
+{
+  "board": "ebsu",
+  "subject": "accounting",
+  "level": "tertiary-degree",
+  "source_url": "https://ebsu.edu.ng/academics/faculty-of-management-sciences/accounting",
+  "topics": [
+    {
+      "name": "100 Level: Introduction to Accounting & Business (EBSU)",
+      "description": "ACC 101 Financial Accounting I, BUS 111 Business Organisation, ECO 101 Economics for Management.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "ACC 101: Accounting Fundamentals at EBSU", "objectives": ["Record financial transactions in the journal and post to the general ledger using double-entry principles", "Prepare trial balance and basic financial statements for sole traders and small businesses in Ebonyi State context"]},
+        {"name": "ECO 101: Basic Economics for Management Sciences", "objectives": ["Explain demand, supply, and price elasticity concepts relevant to business decision-making", "Identify macroeconomic challenges such as inflation and unemployment facing South-East Nigerian businesses"]}
+      ]
+    },
+    {
+      "name": "200–300 Level: Intermediate Financial Accounting, Cost & Taxation",
+      "description": "ACC 201 Intermediate Financial Accounting, ACC 211 Cost Accounting, ACC 301 Taxation.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "ACC 201 & ACC 211: Financial and Cost Accounting at EBSU", "objectives": ["Prepare partnership accounts, company accounts, and cash flow statements per Nigerian GAAP and IFRS", "Compute product costs using job costing, process costing, and activity-based costing systems"]},
+        {"name": "ACC 301: Nigerian Tax System", "objectives": ["Calculate personal income tax under the Personal Income Tax Act for Ebonyi State residents", "Compute companies income tax, education tax, and VAT for businesses operating in South-East Nigeria"]}
+      ]
+    },
+    {
+      "name": "400 Level: Auditing, Advanced Financial Reporting & Research Project",
+      "description": "ACC 401 Auditing, ACC 411 Advanced Financial Reporting, ACC 499 Final Year Research Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "ACC 401 & ACC 411: Auditing and Advanced Reporting", "objectives": ["Plan statutory audits and evaluate internal control systems using risk-based audit methodology", "Apply IFRS 15, 16, IAS 12, and IAS 36 to complex financial reporting scenarios"]},
+        {"name": "ACC 499: EBSU Accounting Research Dissertation", "objectives": ["Conduct original accounting research on a topic relevant to South-East Nigerian business and finance", "Present and defend dissertation findings before EBSU Faculty of Management Sciences board"]}
+      ]
+    }
+  ]
+}

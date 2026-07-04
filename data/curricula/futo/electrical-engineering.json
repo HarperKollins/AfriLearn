@@ -1,0 +1,35 @@
+{
+  "board": "futo",
+  "subject": "electrical-engineering",
+  "level": "tertiary-degree",
+  "source_url": "https://futo.edu.ng/academics/engineering/electrical",
+  "topics": [
+    {
+      "name": "100–200 Level: Circuit Theory, Electronics, and Engineering Mathematics",
+      "description": "EEE 101 Circuit Theory, EEE 201 Electronics I, MTH 211 Engineering Mathematics.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "EEE 101: DC and AC Circuit Analysis at FUTO", "objectives": ["Apply Kirchhoff's laws, Thevenin's and Norton's theorems to analyse electrical circuits", "Solve AC circuits using phasors, admittance, and power factor correction methods"]},
+        {"name": "EEE 201: Analog and Digital Electronics", "objectives": ["Explain operation of diodes, BJTs, FETs, and op-amps in analog circuits", "Design combinational and sequential logic circuits using standard IC families"]}
+      ]
+    },
+    {
+      "name": "300 Level: Power Systems, Electromagnetic Theory, and Instrumentation",
+      "description": "EEE 301 Power Systems, EEE 311 Electromagnetic Fields, EEE 321 Electrical Measurements.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "EEE 301: Power Systems Analysis at FUTO", "objectives": ["Model single-phase and three-phase power systems including transformers and generators", "Perform load flow analysis and fault level calculations for Nigerian power network scenarios"]},
+        {"name": "EEE 321: Electronic Instrumentation and Measurements", "objectives": ["Calibrate and operate oscilloscopes, multimeters, function generators, and spectrum analysers", "Apply signal conditioning, transducer interfacing, and data acquisition to industrial measurement"]}
+      ]
+    },
+    {
+      "name": "400–500 Level: Power Electronics, Renewable Energy, Control & Project",
+      "description": "EEE 401 Power Electronics, EEE 411 Renewable Energy Systems, EEE 499 Final Year Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "EEE 401 & EEE 411: Power Electronics and Solar PV Systems", "objectives": ["Design DC-DC converters, inverters, and rectifiers for industrial power conversion", "Size and design solar PV, wind, and mini-hydro systems for off-grid Nigerian communities"]},
+        {"name": "EEE 499: FUTO Electrical Engineering Final Year Project", "objectives": ["Design, build, and test an electrical engineering solution addressing an industrial or community need", "Document and defend project with technical report before FUTO School of Engineering board"]}
+      ]
+    }
+  ]
+}

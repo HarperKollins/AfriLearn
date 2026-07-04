@@ -1,0 +1,34 @@
+{
+  "board": "nuc",
+  "subject": "business-administration",
+  "level": "tertiary-degree",
+  "source_url": "https://nuc.edu.ng/ccmas/administration/business-administration",
+  "topics": [
+    {
+      "name": "100 - 200 Level: Principles of Management and Business Environment",
+      "description": "BUS 101 Introduction to Business, BUS 201 Principles of Management, and Business Environment.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "BUS 101 & BUS 201: Fundamentals of Business and Management", "objectives": ["Understand evolution of management thought (Taylor, Fayol, Weber) and management functions","Analyze political, economic, socio-cultural, and technological (PEST) business environment in Nigeria"]}
+      ]
+    },
+    {
+      "name": "300 Level: Organizational Behavior, Marketing, and Human Resource Management",
+      "description": "BUS 301 Organizational Behavior, Marketing Management, and Human Resource Management.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "BUS 301 & MKT 301: Organizational Behavior and Marketing", "objectives": ["Analyze individual behavior, group dynamics, motivation theories (Maslow, Herzberg), and leadership styles","Apply 4 Ps of marketing mix (Product, Price, Place, Promotion) and market segmentation"]},
+        {"name": "HRM 301: Human Resource Management", "objectives": ["Execute manpower planning, recruitment, selection, performance appraisal, and industrial relations"]}
+      ]
+    },
+    {
+      "name": "400 Level: Strategic Management, Corporate Governance, and B.Sc. Project",
+      "description": "BUS 401 Strategic Management, Business Policy, International Business, and Thesis.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "BUS 401: Strategic Management and Business Policy", "objectives": ["Perform SWOT analysis, Porter's Five Forces analysis, and formulate corporate strategies","Understand corporate governance, business ethics, and corporate social responsibility (CSR)"]},
+        {"name": "BUS 499: Final Year Business Research Project", "objectives": ["Conduct empirical business research and present undergraduate research defense"]}
+      ]
+    }
+  ]
+}

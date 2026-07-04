@@ -1,0 +1,35 @@
+{
+  "board": "jamb",
+  "subject": "economics",
+  "level": "tertiary-entry",
+  "source_url": "https://ibass.jamb.gov.ng/syllabus/economics",
+  "topics": [
+    {
+      "name": "Economics Fundamentals and Production",
+      "description": "JAMB UTME Section I: Economic methodology, scarcity, choice, opportunity cost, and production systems.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "Economic Concepts and Methodology", "objectives": ["Explain basic economic tools: tables, graphs, charts, measures of central tendency","Analyze scarcity, choice, scale of preference, opportunity cost, and economic systems (capitalist, socialist, mixed)"]},
+        {"name": "Production and Business Units", "objectives": ["Explain factors of production, division of labor, specialization, and production functions","Compare sole proprietorships, partnerships, joint-stock companies, and public corporations"]}
+      ]
+    },
+    {
+      "name": "Microeconomics: Demand, Supply, Prices, and Markets",
+      "description": "JAMB UTME Section II: Demand, supply, price determination, elasticities, utility, and market structures.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Demand, Supply, and Price Equilibrium", "objectives": ["Calculate market equilibrium price and quantity algebraically and graphically","Calculate Price Elasticity of Demand (PED), Supply (PES), Income (YED), and Cross Elasticity (XED)"]},
+        {"name": "Utility Theory and Market Structures", "objectives": ["Apply Cardinal Utility (Law of Diminishing Marginal Utility) and Ordinal Utility (indifference curves)","Compare price and output determination in Perfect Competition, Monopoly, Monopolistic Competition, and Oligopoly"]}
+      ]
+    },
+    {
+      "name": "Macroeconomics: Money, Public Finance, and International Trade",
+      "description": "JAMB UTME Section III & IV: National income, inflation, money, banking, public finance, population, and trade.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "Money, Banking, and Inflation", "objectives": ["Explain functions of money, commercial bank credit creation, and central bank monetary policy tools","Analyze causes, effects, and fiscal/monetary solutions for inflation and deflation"]},
+        {"name": "National Income, Public Finance, and Trade", "objectives": ["Calculate GDP, GNP, NNP, and Per Capita Income using Output, Income, and Expenditure approaches","Analyze government budget, taxation canons, balance of payments, and international trade barriers/agreements"]}
+      ]
+    }
+  ]
+}

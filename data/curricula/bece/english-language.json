@@ -1,0 +1,96 @@
+{
+  "board": "bece",
+  "subject": "english-language",
+  "level": "junior-secondary",
+  "source_url": "https://nerdc.gov.ng/curriculum/junior-secondary/english-studies",
+  "topics": [
+    {
+      "name": "Reading Comprehension and Summary (JSS1 - JSS3)",
+      "description": "Reading strategies, main idea extraction, vocabulary development, and summary writing skills.",
+      "difficulty": "easy",
+      "subtopics": [
+        {
+          "name": "Reading Comprehension Skills",
+          "objectives": [
+            "Identify main ideas and supporting details in narrative, expository, and descriptive passages",
+            "Infer word meanings from contextual clues in reading passages",
+            "Answer factual, inferential, and evaluative comprehension questions"
+          ]
+        },
+        {
+          "name": "Summary Writing Techniques",
+          "objectives": [
+            "Extract essential points from passages and eliminate redundant information",
+            "Write concise summary sentences using own words"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Grammar, Mechanics, and Vocabulary (JSS1 - JSS3)",
+      "description": "Parts of speech, sentence types, tenses, subject-verb agreement, punctuation, and vocabulary.",
+      "difficulty": "medium",
+      "subtopics": [
+        {
+          "name": "Parts of Speech and Sentence Structure",
+          "objectives": [
+            "Identify and use nouns, pronouns, verbs, adjectives, adverbs, prepositions, conjunctions",
+            "Apply subject-verb agreement (concord) rules in sentences",
+            "Distinguish simple, compound, and complex sentences"
+          ]
+        },
+        {
+          "name": "Tenses, Voice, and Punctuation",
+          "objectives": [
+            "Use present, past, future, perfect, and continuous tenses correctly",
+            "Convert sentences between active voice and passive voice",
+            "Use capital letters, full stops, commas, question marks, quotation marks, and apostrophes correctly"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Composition and Essay Writing (JSS1 - JSS3)",
+      "description": "Formal and informal letters, narrative, descriptive, argumentative, and expository essays.",
+      "difficulty": "medium",
+      "subtopics": [
+        {
+          "name": "Letter Writing",
+          "objectives": [
+            "Write informal letters to friends and family with proper layout and tone",
+            "Write formal letters (applications, complaints, requests) with formal layout and language"
+          ]
+        },
+        {
+          "name": "Essay and Narrative Writing",
+          "objectives": [
+            "Write narrative essays recounting personal experiences and events chronologically",
+            "Write descriptive essays describing persons, places, events, and objects vividly",
+            "Write argumentative essays presenting logical arguments for or against a motion"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Literature in English and Oracy (JSS1 - JSS3)",
+      "description": "Prose, poetry, drama, literary terms, figures of speech, and oral English phonetics.",
+      "difficulty": "medium",
+      "subtopics": [
+        {
+          "name": "Literature Genres and Figures of Speech",
+          "objectives": [
+            "Analyze plot, themes, characterization, and setting in prose, drama, and poetry texts",
+            "Identify figures of speech: simile, metaphor, personification, hyperbole, alliteration, assonance"
+          ]
+        },
+        {
+          "name": "Oral English and Phonetics",
+          "objectives": [
+            "Identify and pronounce English vowel sounds (monophthongs, diphthongs) and consonant sounds",
+            "Identify stress patterns in words and intonation patterns in sentences"
+          ]
+        }
+      ]
+    }
+  ]
+}

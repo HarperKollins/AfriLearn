@@ -1,0 +1,35 @@
+{
+  "board": "ebsu",
+  "subject": "nursing-science",
+  "level": "tertiary-degree",
+  "source_url": "https://ebsu.edu.ng/academics/faculty-of-health-sciences/nursing",
+  "topics": [
+    {
+      "name": "100–200 Level: Anatomy, Physiology, Nutrition & Foundation Nursing (EBSU)",
+      "description": "NUR 101 Anatomy & Physiology, NUR 111 Nutrition & Dietetics, NUR 201 Foundation of Nursing.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "NUR 101 & NUR 111: Human Anatomy, Physiology, and Nutrition at EBSU", "objectives": ["Identify the anatomy and physiology of all major body systems relevant to nursing practice", "Explain nutritional requirements across the life cycle and manage malnutrition in clinical settings"]},
+        {"name": "NUR 201: Foundations of Nursing Practice and Ethics", "objectives": ["Describe the history, philosophy, and scope of nursing as a profession in Nigeria", "Apply the nursing process (assessment, diagnosis, planning, implementation, evaluation) to patient care"]}
+      ]
+    },
+    {
+      "name": "300 Level: Medical-Surgical Nursing, Pharmacology & Community Health",
+      "description": "NUR 301 Medical-Surgical Nursing, NUR 311 Pharmacology, NUR 321 Community Health Nursing.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "NUR 301 & NUR 311: Medical-Surgical Nursing and Pharmacology", "objectives": ["Plan and implement nursing care for patients with common medical-surgical conditions in Ebonyi State hospitals", "Calculate drug dosages, administer medications safely, and monitor for adverse effects"]},
+        {"name": "NUR 321: Community Health Nursing and Primary Health Care", "objectives": ["Apply primary health care principles to community nursing practice in rural Ebonyi communities", "Plan immunisation outreach, maternal and child health (MCH) programmes, and health education sessions"]}
+      ]
+    },
+    {
+      "name": "400 Level: Midwifery, Mental Health Nursing, Leadership & Research Project",
+      "description": "NUR 401 Midwifery & Obs Nursing, NUR 411 Mental Health Nursing, NUR 421 Leadership, NUR 499 Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "NUR 401 & NUR 411: Midwifery and Mental Health Nursing", "objectives": ["Provide skilled birth attendance, postnatal care, and newborn care in EBSU Teaching Hospital settings", "Assess and manage patients with mental health disorders using therapeutic communication and psychosocial interventions"]},
+        {"name": "NUR 499: EBSU Nursing Science Research Project", "objectives": ["Conduct evidence-based nursing research addressing a clinical or community health problem in Ebonyi State", "Present and defend research findings to qualify for NMCN licensure and EBSU BSc Nursing graduation"]}
+      ]
+    }
+  ]
+}

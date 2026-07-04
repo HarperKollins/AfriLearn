@@ -1,0 +1,35 @@
+{
+  "board": "waec",
+  "subject": "literature",
+  "level": "senior-secondary",
+  "source_url": "https://waecsyllabus.com/literature-in-english-syllabus/",
+  "topics": [
+    {
+      "name": "Introduction to Literature and Literary Appreciation",
+      "description": "Literary genres, literary devices, figures of speech, poetic devices, and analytical techniques.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "Literary Genres and Concepts", "objectives": ["Distinguish Prose, Poetry, and Drama genres and sub-genres","Identify plot, theme, characterization, setting, point of view, and atmosphere"]},
+        {"name": "Figures of Speech and Poetic Devices", "objectives": ["Identify and interpret simile, metaphor, personification, irony, oxymoron, hyperbole, paradox, symbolism","Analyze rhyme scheme, rhythm, meter, stanza, alliteration, assonance, and imagery in poetry"]}
+      ]
+    },
+    {
+      "name": "African and Non-African Prose",
+      "description": "Critical analysis of set African and Non-African novels, themes, characters, and stylistic devices.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "African Prose Analysis", "objectives": ["Analyze plot summary, character roles, socio-cultural background, and themes in prescribed African novels","Evaluate narrative techniques, symbolism, and linguistic style in African prose"]},
+        {"name": "Non-African Prose Analysis", "objectives": ["Analyze plot, themes, characterization, and historical context in prescribed Non-African novels"]}
+      ]
+    },
+    {
+      "name": "African and Non-African Drama and Poetry",
+      "description": "Critical analysis of set African/Non-African plays (tragedy, comedy) and prescribed poems.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "African and Non-African Drama", "objectives": ["Analyze dramatic structure, acts, scenes, conflict, dialogue, monologue, soliloquy, and dramatic irony in prescribed plays"]},
+        {"name": "African and Non-African Poetry", "objectives": ["Analyze theme, tone, mood, structure, imagery, and poetic devices in prescribed African and Non-African poems"]}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "board": "nuc",
+  "subject": "electrical-engineering",
+  "level": "tertiary-degree",
+  "source_url": "https://nuc.edu.ng/ccmas/engineering/electrical-engineering",
+  "topics": [
+    {
+      "name": "100 - 200 Level: Engineering Mathematics and Circuit Fundamentals",
+      "description": "Engineering Mathematics, Applied Mechanics, Workshop Practice, and Circuit Theory I.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "ENG 101 & MTH 201: Engineering Mathematics and Mechanics", "objectives": ["Apply differential equations, vector calculus, linear algebra, and complex numbers to engineering problems","Analyze statics, dynamics, stress-strain relations, and engineering workshop practice"]},
+        {"name": "EEE 201: Circuit Theory I and Physical Electronics", "objectives": ["Apply Kirchhoff's laws, Thevenin's, Norton's, and Superposition theorems to DC and AC circuits","Understand semiconductor physics, p-n junction diodes, and bipolar junction transistors (BJT)"]}
+      ]
+    },
+    {
+      "name": "300 Level: Electromagnetic Fields, Signals, Analog Electronics, and SIWES",
+      "description": "EEE 301 Circuit Theory II, Electromagnetic Fields, Analog Electronics, Digital Systems, and SIWES.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "EEE 301 & EEE 302: Electromagnetic Fields and Signal Analysis", "objectives": ["State Maxwell's equations and analyze electromagnetic wave propagation in waveguides and transmission lines","Apply Laplace transforms, Fourier series, and Z-transforms to continuous and discrete signals"]},
+        {"name": "EEE 303 & EEE 304: Analog Electronics and Microprocessors", "objectives": ["Design operational amplifier (Op-Amp) circuits, active filters, and power amplifiers","Program 8086/ARM microprocessors and microcontrollers (Arduino/PIC) for embedded control"]}
+      ]
+    },
+    {
+      "name": "400 - 500 Level: Power Systems, Control Engineering, Telecommunications, and B.Eng. Project",
+      "description": "Power Systems Analysis, Control Theory, Telecommunications, High Voltage, and Final Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "EEE 401 & EEE 402: Power Systems and Control Engineering", "objectives": ["Analyze power generation, transmission line parameters, fault calculations, and grid stability","Apply root locus, Bode plots, and state-space analysis to feedback control systems"]},
+        {"name": "EEE 501: Telecommunications Engineering and Power Electronics", "objectives": ["Analyze AM, FM, digital modulations (QPSK, QAM), cellular networks (4G/5G), and fiber optics","Design power electronic converters (rectifiers, inverters, choppers) for renewable energy integration"]},
+        {"name": "EEE 599: Final Year Engineering Design Project", "objectives": ["Design, fabricate, test, and document an original electrical/electronic engineering device or system","Defend design project before COREN and NSE professional engineering accreditation panels"]}
+      ]
+    }
+  ]
+}

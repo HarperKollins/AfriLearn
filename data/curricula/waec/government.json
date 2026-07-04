@@ -1,0 +1,35 @@
+{
+  "board": "waec",
+  "subject": "government",
+  "level": "senior-secondary",
+  "source_url": "https://waecsyllabus.com/government-syllabus/",
+  "topics": [
+    {
+      "name": "Basic Concepts and Political Ideologies",
+      "description": "Definition of government, state, nation, sovereignty, power, authority, legitimacy, democracy, capitalism, socialism.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "Fundamental Concepts of Government", "objectives": ["Define government as an institution of state, process of governing, and academic field","Distinguish state, nation, society, and government","Analyze concepts of sovereignty, power, authority, legitimacy, and political culture"]},
+        {"name": "Political Ideologies and Systems of Government", "objectives": ["Compare capitalism, socialism, communism, communalism, fascism, and feudalism","Compare presidential system, parliamentary system, unitary system, federal system, and confederal system"]}
+      ]
+    },
+    {
+      "name": "Organs of Government and Rule of Law",
+      "description": "Legislature, Executive, Judiciary, Separation of Powers, Checks and Balances, Rule of Law, and Citizenship.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Organs of Government", "objectives": ["Describe composition, functions, and types (unicameral, bicameral) of Legislature","Describe composition, types, and functions of Executive and Judiciary","Analyze Separation of Powers and Checks and Balances in governance"]},
+        {"name": "Rule of Law, Constitutionalism, and Citizenship", "objectives": ["Explain principles of Rule of Law and factors limiting Rule of Law","Describe types and characteristics of Constitutions (written, unwritten, rigid, flexible)","Explain rights, duties, and obligations of citizens"]}
+      ]
+    },
+    {
+      "name": "Constitutional Development and Politics in Nigeria",
+      "description": "Pre-colonial political systems, colonial administration, nationalist movements, constitutional history (1922-1999), and Federalism.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "Pre-Colonial Administration and Colonial Rule", "objectives": ["Compare Hausa/Fulani emirate system, Yoruba Oyo kingdom system, and Igbo decentralized political system","Analyze British Indirect Rule system in Northern, Western, and Eastern Nigeria"]},
+        {"name": "Constitutional History and Nigerian Federalism", "objectives": ["Analyze Clifford (1922), Richards (1946), Macpherson (1951), Lyttelton (1954), Independence (1960), Republican (1963), and 1979/1999 Constitutions","Trace development of Nigerian Federalism, state creation, and revenue allocation formulas"]}
+      ]
+    }
+  ]
+}

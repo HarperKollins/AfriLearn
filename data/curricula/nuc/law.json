@@ -1,0 +1,35 @@
+{
+  "board": "nuc",
+  "subject": "law",
+  "level": "tertiary-degree",
+  "source_url": "https://nuc.edu.ng/ccmas/law/bachelor-of-laws",
+  "topics": [
+    {
+      "name": "100 - 200 Level: Legal Foundations, Constitutional Law, and Contracts",
+      "description": "Nigerian Legal System, Legal Methods, Constitutional Law, Law of Contract, and Customary Law.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "PUL 101 & PUL 102: Nigerian Legal System and Legal Methods", "objectives": ["Trace sources of Nigerian law: English law, customary law, Islamic law, statutes, judicial precedents","Analyze hierarchy of courts in Nigeria: Supreme Court, Court of Appeal, Federal/State High Courts","Master legal reasoning, case analysis, statutory interpretation, and legal citation"]},
+        {"name": "PUL 201 & BUL 201: Constitutional Law and Law of Contract", "objectives": ["Analyze fundamental rights, separation of powers, judicial review, and executive emergency powers","Study elements of valid contract: offer, acceptance, consideration, intention to create legal relations, capacity","Analyze remedies for breach of contract: damages, specific performance, injunctions"]}
+      ]
+    },
+    {
+      "name": "300 Level: Criminal Law, Torts, and Commercial Law",
+      "description": "Criminal Law, Law of Torts, Commercial Law, and Land Law.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "PUL 301 & BUL 301: Criminal Law and Law of Torts", "objectives": ["Analyze actus reus, mens rea, general defenses, murder, manslaughter, stealing, fraud, and armed robbery","Study torts of negligence, nuisance, defamation, trespass to person, and trespass to land"]},
+        {"name": "PUL 302 & BUL 302: Land Law and Commercial Law", "objectives": ["Analyze Land Use Act 1978, customary land tenure, Certificate of Occupancy (C of O), and mortgages","Study agency law, sale of goods, hire purchase, and negotiable instruments"]}
+      ]
+    },
+    {
+      "name": "400 - 500 Level: Equity, Evidence, Jurisprudence, Company Law, and LL.B. Thesis",
+      "description": "Equity & Trusts, Law of Evidence, Jurisprudence & Legal Theory, Company Law, and Thesis.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "PUL 401 & BUL 401: Equity & Trusts and Law of Evidence", "objectives": ["Apply maxims of equity, equitable remedies, and express, implied, and constructive trusts","Study Evidence Act 2011: admissibility of evidence, burden of proof, hearsay, and electronic evidence"]},
+        {"name": "PUL 501 & BUL 501: Jurisprudence, Company Law, and LL.B. Thesis", "objectives": ["Analyze natural law, positivism, historical, sociological, and realist legal philosophies","Study Companies and Allied Matters Act (CAMA 2020): incorporation, corporate governance, shares, and winding up","Write and defend independent LL.B. legal research project thesis before Faculty Board"]}
+      ]
+    }
+  ]
+}

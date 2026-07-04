@@ -1,0 +1,35 @@
+{
+  "board": "unn",
+  "subject": "law",
+  "level": "tertiary-degree",
+  "source_url": "https://unn.edu.ng/academics/faculty-of-law",
+  "topics": [
+    {
+      "name": "100 Level: Legal Methods, Constitutional Law Foundations & Nigerian Legal System",
+      "description": "LAW 101 Legal Methods (UNN), LAW 111 Nigerian Legal System, GST 101 Communication in English.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "LAW 101: UNN Legal Methods and Case Analysis", "objectives": ["Identify and apply rules of statutory interpretation as used by Nigerian courts", "Brief decided cases and write structured legal arguments in the UNN Faculty of Law format"]},
+        {"name": "LAW 111: Sources of Nigerian Law and Court Structure", "objectives": ["Trace the historical development of Nigerian law through customary, Islamic, and received English law", "Map the hierarchy of Nigerian courts and describe the jurisdiction and composition of each court tier"]}
+      ]
+    },
+    {
+      "name": "200–300 Level: Contract, Torts, Criminal Law, Constitutional Law & Land Law",
+      "description": "LAW 201 Law of Contract, LAW 211 Law of Torts, LAW 301 Criminal Law, LAW 311 Land Law Nigeria.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "LAW 201 & LAW 211: Contract and Torts at UNN", "objectives": ["Identify elements of contract formation, performance, breach, and available remedies under Nigerian law", "Explain duty of care, negligence, strict liability, and occupiers' liability under Nigerian tort law"]},
+        {"name": "LAW 301 & LAW 311: Criminal Law and Land Law", "objectives": ["Analyse criminal offences under the Criminal Code (South), Penal Code (North), and EFCC/ICPC Acts", "Apply the Land Use Act 1978 to resolve disputes over statutory rights of occupancy and customary tenure"]}
+      ]
+    },
+    {
+      "name": "400–500 Level: Commercial Law, Evidence, ADR, Law Clinic & Research Project",
+      "description": "LAW 401 Company Law, LAW 411 Evidence, LAW 421 ADR, LAW 501 Law Clinic, LAW 599 Research.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "LAW 401 & LAW 411: Company Law and Evidence", "objectives": ["Explain corporate formation, governance, and winding-up under CAMA 2020", "Apply admissibility rules, hearsay exceptions, and electronic evidence under the Evidence Act 2011"]},
+        {"name": "LAW 501 & LAW 599: Clinical Programme and LLB Research Dissertation", "objectives": ["Represent clients under supervision in UNN Law Clinic, draft agreements, letters of demand, and affidavits", "Submit and orally defend a 10,000-word research dissertation before the UNN Faculty of Law board"]}
+      ]
+    }
+  ]
+}

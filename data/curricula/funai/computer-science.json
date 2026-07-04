@@ -1,0 +1,26 @@
+{
+  "board": "funai",
+  "subject": "computer-science",
+  "level": "tertiary-degree",
+  "source_url": "https://funai.edu.ng/academics/science/computer-science",
+  "topics": [
+    {
+      "name": "100 - 200 Level: AE-FUNAI Science Foundation & Programming",
+      "description": "COS 101, COS 102, CSC 201, MTH 101, and General Studies at AE-FUNAI Ikwo.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "COS 101 & COS 102: Introduction to Computing Sciences (FUNAI)", "objectives": ["Understand computing history, operating systems, and basic problem solving in Python"]},
+        {"name": "CSC 201 & CSC 202: Object-Oriented Programming & Discrete Structures", "objectives": ["Master OOP principles in Java/C++, discrete mathematics, logic gates, and Boolean algebra"]}
+      ]
+    },
+    {
+      "name": "300 - 400 Level: Advanced Systems, Cybersecurity, SIWES, and Project",
+      "description": "Data Structures, Database Systems, Computer Networks, Cybersecurity, and FUNAI Thesis.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "CSC 301 & CSC 302: Data Structures and Industrial Training", "objectives": ["Implement advanced trees, graphs, sorting algorithms, and complete 6-month SIWES internship"]},
+        {"name": "CSC 401 & CSC 499: Cybersecurity, Machine Learning, and Research Project", "objectives": ["Study network security, cryptography, machine learning, and defend final year FUNAI B.Sc. thesis"]}
+      ]
+    }
+  ]
+}

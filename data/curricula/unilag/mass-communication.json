@@ -1,0 +1,35 @@
+{
+  "board": "unilag",
+  "subject": "mass-communication",
+  "level": "tertiary-degree",
+  "source_url": "https://unilag.edu.ng/academics/faculty-of-social-sciences/mass-communication",
+  "topics": [
+    {
+      "name": "100 Level: Introduction to Mass Communication and Media Writing",
+      "description": "MAC 101 Introduction to Mass Communication, MAC 111 Media Writing, ENG 101 Use of English.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "MAC 101: Theories and Functions of Mass Communication", "objectives": ["Define mass communication and identify its key functions: informing, educating, entertaining, and persuading", "Explain major communication models — Shannon-Weaver, Berlo, Osgood-Schramm — and their limitations"]},
+        {"name": "MAC 111: News Writing and Editing", "objectives": ["Write news stories using the inverted pyramid structure with proper attribution and objectivity", "Apply AP and NUJ style guide rules in editing copy for print and online platforms"]}
+      ]
+    },
+    {
+      "name": "200–300 Level: Broadcast, Print Journalism, Advertising, PR, and Media Law",
+      "description": "MAC 201 Broadcast Journalism, MAC 211 Advertising, MAC 221 Public Relations, MAC 301 Media Law & Ethics.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "MAC 201 & MAC 211: Broadcast Production and Advertising Strategy", "objectives": ["Produce radio and television news packages, features, and programmes using broadcast equipment", "Develop advertising campaigns including target audience analysis, creative brief, and media plan"]},
+        {"name": "MAC 301: Nigerian Media Law, Ethics, and Freedom of the Press", "objectives": ["Explain defamation law, right to privacy, copyright, and contempt of court as they apply to journalists", "Analyse ethical frameworks — objectivity, truth, fairness, minimising harm — using Nigerian media case studies"]}
+      ]
+    },
+    {
+      "name": "400 Level: Digital Media, Research Methods, and Professional Project",
+      "description": "MAC 401 Digital Media & Online Journalism, MAC 411 Research Methods, MAC 499 Final Year Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "MAC 401: Online Journalism, Social Media, and Data Journalism", "objectives": ["Produce multimedia news packages integrating video, audio, text, and infographics for online platforms", "Apply data journalism techniques using spreadsheets and visualisation tools for investigative reporting"]},
+        {"name": "MAC 499: Mass Communication Research Project", "objectives": ["Conduct a scholarly communication study using quantitative (survey) or qualitative (interview/content analysis) methods", "Present findings in research report format and defend before UNILAG Social Sciences Faculty board"]}
+      ]
+    }
+  ]
+}

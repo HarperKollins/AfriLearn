@@ -1,0 +1,38 @@
+{
+  "board": "waec",
+  "subject": "economics",
+  "level": "senior-secondary",
+  "source_url": "https://waecsyllabus.com/economics-syllabus/",
+  "topics": [
+    {
+      "name": "Basic Economic Concepts and Production",
+      "description": "Scarcity, choice, scale of preference, opportunity cost, production, division of labor, and business units.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "Fundamental Economic Concepts", "objectives": ["Explain basic economic concepts: wants, scarcity, choice, scale of preference, opportunity cost","Distinguish microeconomics and macroeconomics"]},
+        {"name": "Production and Factors of Production", "objectives": ["Describe primary, secondary, and tertiary production stages","Analyze land, labor, capital, and entrepreneurship as factors of production and their rewards","Explain division of labor, specialization, and localization of industries"]},
+        {"name": "Business Organizations", "objectives": ["Compare sole proprietorships, partnerships, joint-stock companies, co-operatives, and public enterprises"]}
+      ]
+    },
+    {
+      "name": "Microeconomics: Demand, Supply, and Markets",
+      "description": "Laws of demand and supply, price equilibrium, elasticity, consumer behavior, and market structures.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "Demand and Supply", "objectives": ["State laws of demand and supply and construct demand and supply schedules/curves","Calculate equilibrium price and equilibrium quantity algebraically and graphically","Distinguish changes in demand/supply vs. changes in quantity demanded/supplied"]},
+        {"name": "Elasticity of Demand and Supply", "objectives": ["Calculate Price Elasticity of Demand (PED), Income Elasticity (YED), and Cross Elasticity (XED)","Calculate Price Elasticity of Supply (PES) and explain factors affecting elasticity"]},
+        {"name": "Market Structures", "objectives": ["Compare perfect competition, monopoly, monopolistic competition, and oligopoly price/output determination"]}
+      ]
+    },
+    {
+      "name": "Macroeconomics, Money, and Public Finance",
+      "description": "National income accounting, money, banking, inflation, public finance, taxation, and fiscal policy.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "National Income Accounting", "objectives": ["Define Gross Domestic Product (GDP), Gross National Product (GNP), Net National Product (NNP), and Per Capita Income","Calculate national income using Output, Income, and Expenditure methods"]},
+        {"name": "Money, Banking, and Inflation", "objectives": ["Explain functions of money, commercial banks, and central bank monetary policy tools","Analyze causes, effects, and control of inflation and deflation"]},
+        {"name": "Public Finance and Taxation", "objectives": ["Explain government revenue sources, recurrent/capital expenditure, and budget types (balanced, surplus, deficit)","Distinguish direct taxation and indirect taxation and principles of taxation (canons of taxation)"]}
+      ]
+    }
+  ]
+}

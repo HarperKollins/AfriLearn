@@ -1,0 +1,35 @@
+{
+  "board": "funai",
+  "subject": "accounting",
+  "level": "tertiary-degree",
+  "source_url": "https://funai.edu.ng/academics/accounting",
+  "topics": [
+    {
+      "name": "100 Level: Principles of Accounting & Business Mathematics",
+      "description": "ACC 101 Principles of Accounting, BUS 102 Business Mathematics, and General Studies.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "ACC 101: Double Entry and Financial Statements", "objectives": ["Apply double-entry principles to record business transactions in journals and ledgers", "Prepare trial balance, income statement, and balance sheet for sole traders"]},
+        {"name": "BUS 102: Business Mathematics and Statistics", "objectives": ["Solve interest, depreciation, and ratio problems relevant to business accounting", "Apply basic statistical methods such as mean, median, and standard deviation to business data"]}
+      ]
+    },
+    {
+      "name": "200–300 Level: Intermediate Accounting, Cost, and Tax",
+      "description": "ACC 201 Intermediate Financial Accounting, ACC 211 Cost Accounting, ACC 301 Taxation.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "ACC 201: Partnership Accounts and Company Accounts", "objectives": ["Prepare partnership accounts including goodwill, admission, and dissolution", "Prepare company financial statements complying with IFRS requirements"]},
+        {"name": "ACC 301: Nigerian Taxation — Personal and Company Tax", "objectives": ["Calculate personal income tax under the Personal Income Tax Act (PITA)", "Compute company income tax and education tax under the Companies Income Tax Act (CITA)"]}
+      ]
+    },
+    {
+      "name": "400 Level: Auditing, Advanced Financial Accounting & Research",
+      "description": "ACC 401 Auditing, ACC 411 Advanced Financial Accounting, ACC 499 Research Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "ACC 401: Auditing Principles and Practice", "objectives": ["Explain the objectives, types, and ethical principles governing external and internal auditing", "Plan and execute an audit engagement including internal control evaluation and sampling"]},
+        {"name": "ACC 499: Research Project", "objectives": ["Conduct original accounting or finance research using scientific methodology", "Present findings in a professionally formatted dissertation and defend before FUNAI examiners"]}
+      ]
+    }
+  ]
+}

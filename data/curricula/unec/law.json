@@ -1,0 +1,26 @@
+{
+  "board": "unec",
+  "subject": "law",
+  "level": "tertiary-degree",
+  "source_url": "https://unn.edu.ng/academics/faculties/law-enugu-campus",
+  "topics": [
+    {
+      "name": "100 - 200 Level: UNEC Legal System, Constitutional Law & Contracts",
+      "description": "Nigerian Legal System, Legal Methods, Constitutional Law I & II, and Law of Contract at UNEC Enugu.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "LAW 101: Nigerian Legal System and Legal Methods (UNEC)", "objectives": ["Analyze sources of Nigerian law, judicial precedents, and law court structures at UNEC Enugu Campus"]},
+        {"name": "LAW 201 & LAW 202: Constitutional Law and Law of Contract", "objectives": ["Study 1999 Nigerian Constitution, human rights enforcement, contract formation, and breach remedies"]}
+      ]
+    },
+    {
+      "name": "300 - 500 Level: Criminal Law, Land Law, Evidence, Jurisprudence, and UNEC Thesis",
+      "description": "Criminal Law, Land Law, Law of Torts, Equity & Trusts, CAMA 2020, and LL.B. Thesis.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "LAW 301 & LAW 401: Criminal Law, Torts, Land Law, and Evidence", "objectives": ["Analyze Criminal Code/Penal Code offenses, Land Use Act 1978, torts of negligence, and Evidence Act 2011"]},
+        {"name": "LAW 501 & LAW 599: Equity, CAMA 2020, Jurisprudence, and LL.B. Project", "objectives": ["Master corporate law, jurisprudence theories, and defend legal thesis before UNEC Faculty Board"]}
+      ]
+    }
+  ]
+}

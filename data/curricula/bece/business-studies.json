@@ -1,0 +1,50 @@
+{
+  "board": "bece",
+  "subject": "business-studies",
+  "level": "junior-secondary",
+  "source_url": "https://nerdc.gov.ng/curriculum/junior-secondary/business-studies",
+  "topics": [
+    {
+      "name": "Office Practice and Commerce (JSS1 - JSS3)",
+      "description": "Office organization, clerical staff duties, filing systems, correspondence, commerce, and trade.",
+      "difficulty": "easy",
+      "subtopics": [
+        {
+          "name": "Office Organization and Clerical Duties",
+          "objectives": [
+            "Identify administrative departments and duties of a receptionist and clerk",
+            "Explain filing systems (alphabetical, numerical, subject) and office equipment"
+          ]
+        },
+        {
+          "name": "Commerce and Trade",
+          "objectives": [
+            "Distinguish home trade (wholesale, retail) and foreign trade (import, export)",
+            "Describe roles of commercial banks, central bank, insurance, and advertising in trade"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Bookkeeping and Financial Records (JSS1 - JSS3)",
+      "description": "Source documents, cash book, ledgers, trial balance, and double-entry bookkeeping system.",
+      "difficulty": "medium",
+      "subtopics": [
+        {
+          "name": "Source Documents and Journals",
+          "objectives": [
+            "Identify invoice, receipt, voucher, debit note, and credit note",
+            "Record transactions in Sales Journal, Purchases Journal, and Petty Cash Book"
+          ]
+        },
+        {
+          "name": "Double-Entry Bookkeeping and Trial Balance",
+          "objectives": [
+            "Apply double-entry bookkeeping principle (debit receiver, credit giver)",
+            "Post transactions to ledger accounts and extract a Trial Balance"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -28,6 +28,9 @@ func main() {
 	}
 	defer database.Close()
 
+	// Start rate limiter background batch worker
+	middleware.InitRateLimiter()
+
 	// Set Gin mode
 	if os.Getenv("APP_ENV") == "production" {
 		gin.SetMode(gin.ReleaseMode)
@@ -50,10 +53,11 @@ func main() {
 		c.Next()
 	})
 
-	// ── Public Web Routes (Root, Health, Portal Dashboard, Swagger Docs) ──────
+	// ── Public Web Routes (Root, Health, Portal Dashboard, Admin, Playground, Swagger Docs) ──────
 	router.GET("/", handlers.ServeDeveloperPortal)
 	router.GET("/health", handlers.HealthCheck)
 	router.GET("/portal", handlers.ServeDeveloperPortal)
+	router.GET("/admin", handlers.ServeAdminDashboard)
 	router.GET("/playground", handlers.ServePlayground)
 	router.GET("/docs", handlers.ServeSwaggerUI)
 	router.GET("/swagger", handlers.ServeSwaggerUI)
@@ -64,6 +68,12 @@ func main() {
 	{
 		// Unprotected API Key generation for self-service portal
 		v1.POST("/keys/generate", handlers.GenerateAPIKey)
+
+		// Admin management operations
+		v1.GET("/admin/cache/stats", handlers.GetCacheStats)
+		v1.POST("/admin/cache/purge", handlers.PurgeCache)
+		v1.POST("/admin/reingest", handlers.TriggerReIngestion)
+		v1.GET("/admin/validate", handlers.ValidateCurriculaDatasets)
 	}
 
 	// Protected API v1 endpoints (Require/validate X-API-Key)

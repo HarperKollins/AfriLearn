@@ -1,0 +1,26 @@
+{
+  "board": "yabatech",
+  "subject": "computer-engineering-tech",
+  "level": "polytechnic-nd",
+  "source_url": "https://yabatech.edu.ng/academics/engineering/computer-engineering",
+  "topics": [
+    {
+      "name": "ND I & ND II: YABATECH Computer Hardware, Electronics, and Workshop",
+      "description": "CTE 111, CTE 121 Digital Logic, Electronic Devices, Computer Hardware Maintenance, and Workshop Practice.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "CTE 111 & CTE 121: Digital Electronics and Logic Design (YABATECH)", "objectives": ["Study logic gates, flip-flops, counters, registers, and Boolean algebraic simplification","Assemble and troubleshoot digital logic circuits on breadboards in YABATECH labs"]},
+        {"name": "CTE 211: Computer Hardware System Maintenance & Assembly", "objectives": ["Diagnose PC motherboard components, power supply units, RAM, storage, and peripheral installation","Perform computer system troubleshooting, OS formatting, and network cabling (RJ45 crimping)"]}
+      ]
+    },
+    {
+      "name": "HND I & HND II: Microprocessors, Embedded Systems, and YABATECH Project",
+      "description": "Microcomputer Systems, Embedded C/Assembly, Interfacing, and Final HND Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "CTE 311 & CTE 411: Microprocessor Architecture & Embedded Systems", "objectives": ["Program 8086/ARM microprocessors and microcontrollers (Arduino/PIC) for industrial automation","Interface analog-to-digital converters (ADC), sensors, motors, and LCD displays"]},
+        {"name": "CTE 499: Final Year HND Hardware Engineering Project", "objectives": ["Design, solder, test, and defend hardware project prototype before NBTE and YABATECH academic board"]}
+      ]
+    }
+  ]
+}

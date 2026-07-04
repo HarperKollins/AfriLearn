@@ -1,0 +1,35 @@
+{
+  "board": "unn",
+  "subject": "mechanical-engineering",
+  "level": "tertiary-degree",
+  "source_url": "https://unn.edu.ng/academics/faculty-of-engineering/mechanical",
+  "topics": [
+    {
+      "name": "100–200 Level: Engineering Drawing, Mechanics, and Materials",
+      "description": "ENG 101 Engineering Drawing, MEE 211 Engineering Mechanics, MEE 221 Strength of Materials.",
+      "difficulty": "easy",
+      "subtopics": [
+        {"name": "MEE 211: Applied Mechanics — Statics and Dynamics (UNN)", "objectives": ["Analyse 2D and 3D force systems using equilibrium equations and free body diagrams", "Solve dynamics problems using Newton's laws, work-energy, and impulse-momentum theorems"]},
+        {"name": "MEE 221: Strength of Materials and Mechanical Behaviour", "objectives": ["Calculate stress, strain, and deflection in beams, shafts, and pressure vessels", "Determine factor of safety under tensile, compressive, torsional, and combined loading"]}
+      ]
+    },
+    {
+      "name": "300 Level: Thermodynamics, Fluid Mechanics, Machine Design",
+      "description": "MEE 301 Thermodynamics, MEE 311 Fluid Mechanics, MEE 321 Machine Design.",
+      "difficulty": "medium",
+      "subtopics": [
+        {"name": "MEE 301 & MEE 311: Applied Thermodynamics and Fluid Mechanics at UNN", "objectives": ["Analyse gas power cycles (Otto, Diesel, Brayton) and vapour power cycles (Rankine) for Nigerian power plants", "Apply Bernoulli, continuity, and momentum equations to pipe flow, pumps, and turbine problems"]},
+        {"name": "MEE 321: Machine Design — Fasteners, Gears, and Bearings", "objectives": ["Design mechanical joints, gears, belt drives, and chain drives under given load conditions", "Select rolling element bearings based on load rating and L10 life calculations"]}
+      ]
+    },
+    {
+      "name": "400–500 Level: Manufacturing, Heat Transfer, Vibrations & Final Project (UNN)",
+      "description": "MEE 401 Manufacturing Technology, MEE 411 Heat Transfer, MEE 421 Vibrations, MEE 499 Project.",
+      "difficulty": "hard",
+      "subtopics": [
+        {"name": "MEE 401 & MEE 411: Manufacturing Processes and Heat Transfer", "objectives": ["Describe and compare CNC machining, welding, casting, and additive manufacturing in Nigerian industrial context", "Solve heat transfer problems using conduction, convection, and radiation in heat exchanger design"]},
+        {"name": "MEE 499: UNN Final Year Engineering Design Project", "objectives": ["Design, fabricate, test, and document a complete mechanical system addressing a real engineering need", "Defend project before UNN Faculty of Engineering and Physical Sciences board"]}
+      ]
+    }
+  ]
+}
