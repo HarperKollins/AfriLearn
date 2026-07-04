@@ -11,6 +11,7 @@ All raw curriculum datasets in `data/curricula/` are **100% open-source under th
 
 - **Datasets Location**: [`data/curricula/`](./data/curricula/) (56 JSON files covering 14 institutions & exam boards)
 - **Contribution Guide**: [`CONTRIBUTING.md`](./CONTRIBUTING.md) — schema rules, validation CLI, and PR workflow
+- **Agentic Evaluation Report**: [`questionstest.md`](./questionstest.md) — 6-level parallel comparative test (Baseline LLM vs AfriLearn Activated)
 - **Technical Roadmap**: [`ROADMAP.md`](./ROADMAP.md) — 6-phase engineering plan (embeddings, progress tracking, adaptive pathways)
 
 ---
@@ -233,6 +234,19 @@ go run cmd/loadtest/main.go -url http://localhost:8080 -c 10 -n 200
    Throughput: 142.30 req/sec (Total Time: 1.40s)
    Latency:    Min: 12.4ms | p50: 58.1ms | p90: 112.4ms | p99: 185.0ms | Max: 210.3ms
 ```
+
+---
+
+## 🤖 Agentic LLM Evaluation & System Activation Benchmark
+
+AfriLearn includes an automated comparative evaluation tool in `cmd/agentic_eval/main.go` that runs parallel tests comparing **Mode A (Unassisted General LLM Baseline)** against **Mode B (AfriLearn System Activated)** across 6 curriculum levels (BECE, WAEC, JAMB, UNILAG Law, FUTO Engineering, NUC Computer Science).
+
+```bash
+# Run the agentic evaluation suite against the live database
+go run cmd/agentic_eval/main.go
+```
+
+The tool queries live system directives from the database, runs comparative evaluation, and generates the complete audit report in [`questionstest.md`](./questionstest.md).
 
 ---
 
