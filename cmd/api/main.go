@@ -140,6 +140,14 @@ func main() {
 		// Search & Native PGVector Cosine Search
 		v1Protected.GET("/search", handlers.SearchTopics)
 		v1Protected.POST("/search/vector", handlers.HandleVectorSearch)
+
+		// ── HK AI Bridge Layer ───────────────────────────────────────────────
+		// Single integration point for external EdTech platforms.
+		// POST /api/v1/bridge/enrich  — send conversation messages, get back
+		//   a ready-to-inject LLM system prompt + topic tree + search hits.
+		// GET  /api/v1/bridge/boards  — list all boards + subjects for a UI picker.
+		v1Protected.POST("/bridge/enrich", handlers.HandleBridgeEnrich)
+		v1Protected.GET("/bridge/boards", handlers.HandleBridgeBoards)
 	}
 
 	// Get port
